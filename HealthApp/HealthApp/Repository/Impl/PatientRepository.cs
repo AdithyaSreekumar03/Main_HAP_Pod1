@@ -1,4 +1,5 @@
 ﻿using HealthApp.Databases;
+using HealthApp.Exceptions;
 using HealthApp.Models;
 using HealthApp.Repository.Interface;
 using System;
