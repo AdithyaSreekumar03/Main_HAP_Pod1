@@ -45,7 +45,6 @@ namespace HealthApp.Service.Impl
         {
             return _repo.GetDoctorsBySpecialisation(specialisation);
         }
-
         public string GetDoctorScheduleSummary(int doctorId)
         {
             return _repo.GetDoctorScheduleSummary(doctorId);

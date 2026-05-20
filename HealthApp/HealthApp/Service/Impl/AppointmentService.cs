@@ -44,8 +44,6 @@ namespace HealthApp.Service.Impl
                     "Invalid slot.");
             }
 
-            // prevent expired slot booking
-
             if (date.Date == DateTime.Today)
             {
                 DateTime slotTime =

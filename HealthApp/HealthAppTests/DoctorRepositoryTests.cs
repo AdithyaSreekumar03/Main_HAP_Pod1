@@ -96,14 +96,11 @@ namespace HealthAppTests
         public void GetDoctorScheduleSummary_ValidDoctor_ReturnsSummary()
         {
             var result = _repo.GetDoctorScheduleSummary(1);
-
             Assert.NotNull(result);
             Assert.Equal("Dr. Vimal has 3 upcoming Appointments", result);
         }
 
         [Fact]
-
-
         public void IsDoctorAvailable_ActiveWeekday_ReturnsTrue()
         {
             var doctor = new Doctor
@@ -111,11 +108,8 @@ namespace HealthAppTests
                 FullName = "Dr. Vimal",
                 IsActive = true
             };
-
             var date = new DateTime(2026, 5, 18);
-
             var result = doctor.IsAvailable(date);
-
             Assert.True(result);
         }
 
@@ -133,9 +127,7 @@ namespace HealthAppTests
             };
 
             var result = _repo.UpdateDoctor(1, updatedDoctor);
-
             var doctor = _repo.GetDoctorById(1);
-
             Assert.Equal("Doctor updated successfully", result);
             Assert.Equal("Dr. Updated", doctor.FullName);
             Assert.Equal("Neurologist", doctor.Specialisation);
@@ -153,9 +145,7 @@ namespace HealthAppTests
         public void UpdateDoctor_DoctorNotFound_ThrowsException()
         {
             var updatedDoctor = new Doctor { FullName = "Dr. Test" };
-
-            Assert.Throws<DoctorNotFoundException>(() =>
-                _repo.UpdateDoctor(9, updatedDoctor));
+            Assert.Throws<DoctorNotFoundException>(() => _repo.UpdateDoctor(9, updatedDoctor));
         }
     }
 }
