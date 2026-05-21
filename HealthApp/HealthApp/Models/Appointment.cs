@@ -7,10 +7,11 @@ namespace HealthApp.Models
     public enum AppointmentStatus
     {
         Pending,
-        Cancelled,
         Confirmed,
+        Cancelled,
         Completed
     }
+
     public class Appointment
     {
         public int AppointmentId { get; set; }
@@ -18,50 +19,43 @@ namespace HealthApp.Models
         public Doctor Doctor { get; set; } = default!;
         public DateTime ScheduledDate { get; set; }
         public string TimeSlot { get; set; } = string.Empty;
-        public string? CancellationReason { get; private set; }
-        public AppointmentStatus Status { get; private set; } = AppointmentStatus.Confirmed;
+        public AppointmentStatus Status { get; private set; }
+            = AppointmentStatus.Pending;
 
+        public string? CancellationReason { get; private set; }
         public void Confirm()
         {
-            if (Status == AppointmentStatus.Cancelled)
+            if (Status != AppointmentStatus.Cancelled)
             {
-                Console.WriteLine("Cannot Confirm a Cancelled Appointment");
-                return;
+                Status = AppointmentStatus.Confirmed;
             }
-            Status = AppointmentStatus.Confirmed;
         }
-
         public void Cancel(string reason)
         {
-            if (Status == AppointmentStatus.Completed)
+            if (Status != AppointmentStatus.Completed)
             {
-                Console.WriteLine("Cannot Cancel a Completed Appointment");
-                return;
+                Status = AppointmentStatus.Cancelled;
+
+                CancellationReason = reason;
             }
-            Status = AppointmentStatus.Cancelled;
-            CancellationReason = reason;
-
         }
-
         public void Complete()
         {
-            if (Status == AppointmentStatus.Cancelled || Status == AppointmentStatus.Pending)
+            if (Status != AppointmentStatus.Cancelled)
             {
-                Console.WriteLine("Cannot Complete Cancelled or Pending Appointments");
-                return;
+                Status = AppointmentStatus.Completed;
             }
-            Status = AppointmentStatus.Completed;
         }
         public string GetDetails()
         {
-            return($"Appointment ID: {AppointmentId}\n" +
-                $"Patient Name: {Patient.FullName}\n" +
-                $"Doctor Name:Dr.{Doctor.FullName} ({Doctor.Specialisation})\n" +
+            return
+                $"Appointment ID: {AppointmentId}\n" +
+                $"Patient: {Patient.FullName}\n" +
+                $"Doctor: Dr. {Doctor.FullName}\n" +
                 $"Date: {ScheduledDate:dd-MM-yyyy}\n" +
-                $"TimeSlot: {TimeSlot}\n" +
+                $"Slot: {TimeSlot}\n" +
                 $"Status: {Status}\n" +
-                $"Cancellation Reason:{CancellationReason ?? "N/A"}");
-
+                $"Cancellation Reason: {CancellationReason ?? "N/A"}";
         }
     }
 }

@@ -12,48 +12,53 @@ namespace HealthApp.Databases
             new Patient
             {
                 PatientId = 1,
-                FullName = "Mark",
-                DateOfBirth = new DateTime(2001, 5, 10), 
-                Gender = "Male",
-                Age = 23,
-                PhoneNumber = 3456789,
-                Email = "david@gmail.com",
+                FullName = "Mark David",
+                DateOfBirth = new DateTime(2001, 5, 10),
+                Gender = GenderType.Male,
+                PhoneNumber = "9876543210",
+                Email = "mark.david@gmail.com",
                 InsuranceId = "INS1005"
             },
             new Patient
             {
                 PatientId = 2,
-                FullName = "Sara",
-                DateOfBirth = new DateTime(1991, 3, 15), 
-                Gender = "Female",
-                Age = 33,
-                PhoneNumber = 23456789,
-                Email = "anita@gmail.com",
+                FullName = "Sara Thomas",
+                DateOfBirth = new DateTime(1991, 3, 15),
+                Gender = GenderType.Female,
+                PhoneNumber = "9123456780",
+                Email = "sara.thomas@gmail.com",
                 InsuranceId = "INS1006"
             },
             new Patient
             {
                 PatientId = 3,
-                FullName = "John",
-                DateOfBirth = new DateTime(1996, 8, 20), 
-                Gender = "Male",
-                Age = 28,
-                PhoneNumber = 23456789,
-                Email = "rahul@gmail.com",
+                FullName = "John Mathew",
+                DateOfBirth = new DateTime(1996, 8, 20),
+                Gender = GenderType.Male,
+                PhoneNumber = "9988776655",
+                Email = "john.mathew@gmail.com",
                 InsuranceId = "INS1007"
             },
             new Patient
             {
                 PatientId = 4,
-                FullName = "Shilpa",
-                DateOfBirth = new DateTime(1999, 11, 5), 
-                Gender = "Female",
-                Age = 25,
-                PhoneNumber = 3456789,
-                Email = "neha@gmail.com",
+                FullName = "Shilpa Nair",
+                DateOfBirth = new DateTime(1999, 11, 5),
+                Gender = GenderType.Female,
+                PhoneNumber = "9012345678",
+                Email = "shilpa.nair@gmail.com",
                 InsuranceId = "INS1008"
+            },
+            new Patient
+            {
+                PatientId = 5,
+                FullName = "Alex Joseph",
+                DateOfBirth = new DateTime(2000, 2, 25),
+                Gender = GenderType.Other,
+                PhoneNumber = "9090909090",
+                Email = "alex.joseph@gmail.com",
+                InsuranceId = "INS1009"
             }
         };
-
     }
 }

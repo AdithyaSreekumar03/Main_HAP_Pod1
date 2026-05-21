@@ -1,35 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HealthApp.Models
 {
+    public enum SpecialisationType
+    {
+        GeneralPhysician,
+        Cardiologist,
+        Dermatologist,
+        Neurologist,
+        Orthopedic,
+        Pediatrician,
+        Psychiatrist,
+        ENT,
+        Gynecologist
+    }
     public class Doctor
     {
         public int DoctorId { get; set; }
-        public string FullName { get; set; }
-        public string Specialisation { get; set; }
+
+        public string FullName { get; set; } = string.Empty;
+
+        public SpecialisationType Specialisation { get; set; }
+        public string DoctorPhoneNo { get; set; } = string.Empty;
+        public string DoctorEmail { get; set; } = string.Empty;
+
         public int YearsOfExperience { get; set; }
+
         public decimal ConsultationFee { get; set; }
+
         public bool IsActive { get; set; }
 
-        public bool IsAvailable(DateTime date)
+        public string GetDoctorDetailsSummary()
         {
-            int Appointments = 3;
-            if (IsActive && date.DayOfWeek != DayOfWeek.Sunday && Appointments < 5)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            Console.WriteLine();
+            Console.WriteLine($"Doctor Name: {FullName}");
+            Console.WriteLine($"Doctor Specialisation: {Specialisation}");
+            Console.WriteLine($"Doctor Phone Number: {DoctorPhoneNo}");
+            Console.WriteLine($"Doctor Email: {DoctorEmail}");
+            Console.WriteLine($"Doctor Years of Experience: {YearsOfExperience}");
+            Console.WriteLine($"Doctor Consultation Fees: {ConsultationFee}");
+            Console.WriteLine();
+            return "Doctor Registered Successfully";
         }
-
-        public string GetScheduleSummary()
+        public bool IsValidEmail()
         {
-            int upcomingAppointments = 3;
-            return FullName + " has " + upcomingAppointments + " upcoming Appointments";
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(DoctorEmail, pattern);
+        }
+        public bool IsValidPhoneNumber()
+        {
+            string pattern = @"^[0-9]{10}$";
+            return Regex.IsMatch(DoctorPhoneNo, pattern);
+        }
+        public bool IsValidName()
+        {
+            if (string.IsNullOrWhiteSpace(FullName))
+                return false;
+
+            string pattern = @"^[a-zA-Z\s\.\-]{3,50}$";
+            return Regex.IsMatch(FullName, pattern);
         }
     }
 }

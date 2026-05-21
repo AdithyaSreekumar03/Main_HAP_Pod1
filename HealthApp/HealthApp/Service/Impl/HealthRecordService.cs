@@ -10,45 +10,24 @@ namespace HealthApp.Service.Impl
     public class HealthRecordService : IHealthRecordService
     {
         private readonly IHealthRecordRepository _repo;
-
-        public HealthRecordService(IHealthRecordRepository repo)
+        public HealthRecordService(
+            IHealthRecordRepository repo)
         {
             _repo = repo;
         }
 
-        public void AddRecord(HealthRecords record)
+        public void AddRecord(HealthRecord record)
         {
+            record.RecordId =
+                _repo.GetAll().Count + 1;
+
             _repo.Add(record);
         }
-
-        public void UpdateRecord(int id, HealthRecords record)
+        public List<HealthRecord>
+            GetPatientRecords(int patientId)
         {
-            _repo.Update(id, record);
-        }
-
-        public List<HealthRecords> GetAllRecords()
-        {
-            return _repo.GetAll();
-        }
-
-        public List<HealthRecords> GetRecordsByPatient(string patient)
-        {
-            var list = _repo.GetByPatient(patient);
-
-            if (list.Count == 0)
-                throw new Exception("No records found for patient");
-
-            return list;
-        }
-
-        public List<HealthRecords> GetRecordsByDoctor(string doctor)
-        {
-            var list = _repo.GetByDoctor(doctor);
-
-            if (list.Count == 0)
-                throw new Exception("No records found for doctor");
-
-            return list;
+            return _repo.GetAll()
+                .Where(r =>r.Patient.PatientId == patientId).ToList();
         }
     }
 }

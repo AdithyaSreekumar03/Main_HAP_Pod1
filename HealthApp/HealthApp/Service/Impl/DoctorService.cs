@@ -1,4 +1,5 @@
-﻿using HealthApp.Models;
+﻿using HealthApp.Exceptions;
+using HealthApp.Models;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
@@ -16,48 +17,55 @@ namespace HealthApp.Service.Impl
             _repo = repo;
         }
 
-        public string AddDoctor(Doctor doctor)
+        public void AddDoctor(Doctor doctor)
         {
-            return _repo.AddDoctor(doctor);
-        }
 
-        public string DeleteDoctor(int doctorId)
-        {
-            return _repo.DeleteDoctor(doctorId);
+            if (_repo.GetAll().Any())
+            {
+                doctor.DoctorId =
+                _repo.GetAll().Max(d => d.DoctorId) + 1;
+            }
+            else
+            {
+                doctor.DoctorId = 1;
+            }
+
+            doctor.IsActive = true;
+
+            _repo.Add(doctor);
         }
 
         public List<Doctor> GetAllDoctors()
         {
-            return _repo.GetAllDoctors();
+            var result = _repo.GetAll();
+
+            if (result == null)
+            {
+                throw new NoPatientsRegisteredException("There are no Doctors registered");
+            }
+            return result;
         }
 
-        public List<Doctor> GetAvailableDoctors()
+        public Doctor? GetDoctorById(int id)
         {
-            return _repo.GetAvailableDoctors();
+            return _repo.GetById(id);
         }
 
-        public Doctor GetDoctorById(int doctorId)
+        public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
         {
-            return _repo.GetDoctorById(doctorId);
+            return _repo.GetAll()
+                .Where(d => d.Specialisation == specialisation)
+                .ToList();
         }
+        public string DeleteDoctorById(int id)
+        {
+            return _repo.DeleteDoctorById(id);
+        }
+        public string UpdateDoctorById(int id, Doctor doctor)
+        {
 
-        public List<Doctor> GetDoctorsBySpecialisation(string specialisation)
-        {
-            return _repo.GetDoctorsBySpecialisation(specialisation);
-        }
-        public string GetDoctorScheduleSummary(int doctorId)
-        {
-            return _repo.GetDoctorScheduleSummary(doctorId);
-        }
 
-        public bool IsDoctorAvailable(int doctorId, DateTime date)
-        {
-            return _repo.IsDoctorAvailable(doctorId, date);
-        }
-
-        public string UpdateDoctor(int id, Doctor doctor)
-        {
-            return _repo.UpdateDoctor(id, doctor);
+            return _repo.UpdateDoctorById(id, doctor);
         }
     }
 }

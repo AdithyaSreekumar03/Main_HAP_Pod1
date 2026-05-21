@@ -5,25 +5,23 @@ using System.Text;
 
 namespace HealthApp.Models
 {
-    public class HealthRecords
+    public class HealthRecord
     {
         public int RecordId { get; set; }
-        public string Patient { get; set; }
-        public string Doctor { get; set; }
+        public Patient Patient { get; set; } = default!;
+        public Doctor Doctor { get; set; } = default!;
         public DateTime VisitDate { get; set; }
-        public string Diagnosis { get; set; }
-        public string Prescription { get; set; }
-        public string Notes { get; set; }
-        public string GetSummary() {
+        public string Diagnosis { get; set; } = string.Empty;
+        public string Prescription { get; set; } = string.Empty;
+        public string Notes { get; set; } = string.Empty;
 
-            return $"Record ID: {RecordId}\n" +
-                           $"Patient: {Patient}\n" +
-                           $"Doctor: {Doctor}\n" +
-                           $"Visit Date: {VisitDate:dd-MM-yyyy}\n" +
-                           $"Diagnosis: {Diagnosis}\n" +
-                           $"Prescription: {Prescription}\n" +
-                           $"Notes: {Notes}\n";
-
+        public string GetSummary()
+        {
+            return
+                $"Record #{RecordId} | " +
+                $"Patient: {Patient.FullName} | " +
+                $"Doctor: Dr. {Doctor.FullName} | " +
+                $"Diagnosis: {Diagnosis}";
         }
     }
 }

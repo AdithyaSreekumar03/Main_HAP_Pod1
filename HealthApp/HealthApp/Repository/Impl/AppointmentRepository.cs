@@ -15,10 +15,8 @@ namespace HealthApp.Repository.Impl
         {
             _appointmentDb = appointmentDb;
         }
-
         public void Add(Appointment appointment)
         {
-            appointment.AppointmentId= _appointmentDb.Appointments.Count == 0 ? 1 : _appointmentDb.Appointments.Max(p => p.AppointmentId) + 1;
             _appointmentDb.Appointments.Add(appointment);
         }
 

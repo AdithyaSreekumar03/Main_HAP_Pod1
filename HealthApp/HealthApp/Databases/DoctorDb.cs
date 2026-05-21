@@ -7,12 +7,52 @@ namespace HealthApp.Databases
 {
     public class DoctorDb
     {
-        public readonly List<Doctor> doctorDb = new List<Doctor>
+        public readonly List<Doctor> doctors = new List<Doctor>
         {
-            new Doctor{DoctorId = 1, FullName = "Dr. Vimal", Specialisation = "Cardiologist", YearsOfExperience = 12, ConsultationFee = 800m, IsActive = true},
-            new Doctor{DoctorId = 2, FullName = "Dr. Rahul", Specialisation = "Dermatologist", YearsOfExperience = 8, ConsultationFee = 600m, IsActive = false},
-            new Doctor{DoctorId = 3, FullName = "Dr. Kumar", Specialisation = "Orthopedic", YearsOfExperience = 15, ConsultationFee = 1000m, IsActive = true},
-            new Doctor{DoctorId = 4, FullName = "Dr. Muthu", Specialisation = "Pediatrician", YearsOfExperience = 6, ConsultationFee = 500m, IsActive = true}
+            new Doctor
+            {
+                DoctorId = 1,
+                FullName = "Dr. Vimal",
+                Specialisation = SpecialisationType.Cardiologist,
+                DoctorPhoneNo = "9876543210",
+                DoctorEmail = "vimal@gmail.com",
+                YearsOfExperience = 12,
+                ConsultationFee = 800m,
+                IsActive = true
+            },
+            new Doctor
+            {
+                DoctorId = 2,
+                FullName = "Dr. Rahul",
+                Specialisation = SpecialisationType.Dermatologist,
+                DoctorPhoneNo = "9123456780",
+                DoctorEmail = "rahul@gmail.com",
+                YearsOfExperience = 8,
+                ConsultationFee = 600m,
+                IsActive = false
+            },
+            new Doctor
+            {
+                DoctorId = 3,
+                FullName = "Dr. Kumar",
+                Specialisation = SpecialisationType.Orthopedic,
+                DoctorPhoneNo = "9988776655",
+                DoctorEmail = "kumar@gmail.com",
+                YearsOfExperience = 15,
+                ConsultationFee = 1000m,
+                IsActive = true
+            },
+            new Doctor
+            {
+                DoctorId = 4,
+                FullName = "Dr. Muthu",
+                Specialisation = SpecialisationType.Pediatrician,
+                DoctorPhoneNo = "9012345678",
+                DoctorEmail = "muthu@gmail.com",
+                YearsOfExperience = 6,
+                ConsultationFee = 500m,
+                IsActive = true
+            }
         };
     }
 }

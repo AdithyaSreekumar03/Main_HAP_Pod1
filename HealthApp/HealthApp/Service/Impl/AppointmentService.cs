@@ -44,6 +44,9 @@ namespace HealthApp.Service.Impl
                     "Invalid slot.");
             }
 
+
+
+
             if (date.Date == DateTime.Today)
             {
                 DateTime slotTime =
@@ -80,6 +83,8 @@ namespace HealthApp.Service.Impl
 
             Appointment appointment = new()
             {
+                AppointmentId =
+                    _repo.GetAll().Count + 1,
 
                 Patient = patient,
 

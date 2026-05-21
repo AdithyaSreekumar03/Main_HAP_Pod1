@@ -9,35 +9,41 @@ namespace HealthApp.Service.Impl
 {
     public class PatientService : IPatientService
     {
-        private readonly IPatientRepository _rep;
-        public PatientService(IPatientRepository rep)
+        private readonly IPatientRepository _repo;
+
+        public PatientService(IPatientRepository repo)
         {
-            this._rep = rep;
+            _repo = repo;
         }
 
-        public string AddPatient(Patient patient)
+        public void RegisterPatient(Patient patient)
         {
-            return _rep.AddPatient(patient);
+            if (_repo.GetAll().Any())
+            {
+                patient.PatientId = _repo.GetAll().Max(p => p.PatientId) + 1;
+            }
+            else
+            {
+                patient.PatientId = 1;
+            }
+            _repo.Add(patient);
+        }
+        public List<Patient> GetAllPatients()
+        {
+            return _repo.GetAll();
         }
 
-        public string UpdatePatient(int id, Patient patient)
+        public Patient? GetPatientById(int id)
         {
-            return _rep.UpdatePatient(id, patient);
+            return _repo.GetById(id);
         }
-
-        public string DeletePatient(int id)
+        public string DeletePatientById(int id)
         {
-            return _rep.DeletePatient(id);
+            return _repo.DeletePatient(id);
         }
-
-        public List<Patient> GetAll()
+        public string UpdatePatientById(int id, Patient patient)
         {
-            return _rep.GetAll();
-        }
-
-        public Patient GetById(int id)
-        {
-            return _rep.GetById(id);
+            return _repo.UpdatePatient(id, patient);
         }
     }
 }

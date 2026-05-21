@@ -11,96 +11,57 @@ namespace HealthApp.Repository.Impl
     public class DoctorRepository : IDoctorRepository
     {
         private readonly DoctorDb _doctorDb;
-
-        public DoctorRepository(DoctorDb db)
+        public DoctorRepository(DoctorDb doctorDb)
         {
-            _doctorDb = db;
-        }
-        public string AddDoctor(Doctor doctor)
-        {
-            doctor.DoctorId = _doctorDb.doctorDb.Count == 0 ? 1 : _doctorDb.doctorDb.Max(p => p.DoctorId) + 1;
-            _doctorDb.doctorDb.Add(doctor);
-            return "Doctor added successfully";
-
+            _doctorDb = doctorDb;
         }
 
-        public string DeleteDoctor(int doctorId)
+        public void Add(Doctor doctor)
         {
+            _doctorDb.doctors.Add(doctor);
+        }
 
-            var doctor = _doctorDb.doctorDb.FirstOrDefault(d => d.DoctorId == doctorId);
+        public List<Doctor> GetAll()
+        {
+            return _doctorDb.doctors;
+        }
 
+        public Doctor? GetById(int id)
+        {
+            var doctor = _doctorDb.doctors
+                .FirstOrDefault(d => d.DoctorId == id);
             if (doctor == null)
-                throw new DoctorNotFoundException($"Doctor with id {doctorId} not found");
-
-            _doctorDb.doctorDb.Remove(doctor);
-            return "Doctor deleted successfully";
-
-        }
-
-        public List<Doctor> GetAllDoctors()
-        {
-            return _doctorDb.doctorDb;
-        }
-
-        public List<Doctor> GetAvailableDoctors()
-        {
-            return _doctorDb.doctorDb.Where(d => d.IsActive).ToList();
-        }
-
-        public Doctor GetDoctorById(int doctorId)
-        {
-            var result = _doctorDb.doctorDb.Find(d => d.DoctorId == doctorId);
-            if (result == null)
-                throw new DoctorNotFoundException($"Doctor with id {doctorId} not found");
-            return result;
-        }
-
-        public List<Doctor> GetDoctorsBySpecialisation(string specialisation)
-        {
-
-            return (_doctorDb.doctorDb
-                    .Where(d => d.Specialisation.Equals(specialisation, StringComparison.OrdinalIgnoreCase))
-                    .ToList());
-        }
-
-        public string GetDoctorScheduleSummary(int doctorId)
-        {
-
-            var doctor = GetDoctorById(doctorId);
-
-            //if (doctor == null)
-            //    throw new DoctorNotFoundException($"Doctor with id {doctorId} not found");
-
-            return doctor.GetScheduleSummary();
-        }
-
-        public bool IsDoctorAvailable(int doctorId, DateTime date)
-        {
-            var doctor = GetDoctorById(doctorId);
-
-            if (doctor == null)
-                throw new DoctorNotFoundException($"Doctor with id {doctorId} not found");
-
-            return doctor.IsAvailable(date);
-
-        }
-
-        public string UpdateDoctor(int id, Doctor doctor)
-        {
-
-            var existing = _doctorDb.doctorDb.FirstOrDefault(d => d.DoctorId == id);
-
-            if (existing == null)
+            {
                 throw new DoctorNotFoundException($"Doctor with id {id} not found");
 
-            existing.FullName = doctor.FullName;
-            existing.Specialisation = doctor.Specialisation;
-            existing.YearsOfExperience = doctor.YearsOfExperience;
-            existing.ConsultationFee = doctor.ConsultationFee;
-            existing.IsActive = doctor.IsActive;
+            }
+            return doctor;
+        }
+        public string DeleteDoctorById(int id)
+        {
 
-            return "Doctor updated successfully";
-
+            var doctor = _doctorDb.doctors.FirstOrDefault(p => p.DoctorId == id);
+            if (doctor == null)
+            {
+                throw new Exceptions.DoctorNotFoundException($"Doctor with {id} not found");
+            }
+            _doctorDb.doctors.Remove(doctor);
+            return $"Doctor with id {id} deleted successfully";
+        }
+        public string UpdateDoctorById(int id, Doctor doctor)
+        {
+            var doc = _doctorDb.doctors.FirstOrDefault(dc => dc.DoctorId == id);
+            if (doc == null)
+            {
+                throw new DoctorNotFoundException($"Doctor with id {id} not found");
+            }
+            doc.FullName = doctor.FullName;
+            doc.Specialisation = doctor.Specialisation;
+            doc.DoctorPhoneNo = doctor.DoctorPhoneNo;
+            doc.DoctorEmail = doctor.DoctorEmail;
+            doc.YearsOfExperience = doctor.YearsOfExperience;
+            doc.ConsultationFee = doctor.ConsultationFee;
+            return $"Doctor with id {id} updated successfully";
         }
     }
 }

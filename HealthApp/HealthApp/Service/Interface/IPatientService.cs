@@ -7,10 +7,10 @@ namespace HealthApp.Service.Interface
 {
     public interface IPatientService
     {
-        string AddPatient(Patient patient);
-        string UpdatePatient(int id, Patient patients);
-        string DeletePatient(int id);
-        List<Patient> GetAll();
-        Patient GetById(int id);
+        void RegisterPatient(Patient patient);
+        List<Patient> GetAllPatients();
+        Patient? GetPatientById(int id);
+        string DeletePatientById(int id);
+        string UpdatePatientById(int id, Patient patient);
     }
 }
