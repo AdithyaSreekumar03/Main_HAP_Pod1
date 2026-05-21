@@ -1,0 +1,96 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F3798451-4776-408C-9D48-6072A8BD2207}|Health_Care\\HealthApp.csproj|c:\\users\\310208\\source\\repos\\main_hap_pod1\\health_care\\health_care\\models\\healthrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3798451-4776-408C-9D48-6072A8BD2207}|Health_Care\\HealthApp.csproj|solutionrelative:health_care\\models\\healthrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3798451-4776-408C-9D48-6072A8BD2207}|Health_Care\\HealthApp.csproj|c:\\users\\310208\\source\\repos\\main_hap_pod1\\health_care\\health_care\\service\\impl\\healthrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3798451-4776-408C-9D48-6072A8BD2207}|Health_Care\\HealthApp.csproj|solutionrelative:health_care\\service\\impl\\healthrecordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3798451-4776-408C-9D48-6072A8BD2207}|Health_Care\\HealthApp.csproj|c:\\users\\310208\\source\\repos\\main_hap_pod1\\health_care\\health_care\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3798451-4776-408C-9D48-6072A8BD2207}|Health_Care\\HealthApp.csproj|solutionrelative:health_care\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3798451-4776-408C-9D48-6072A8BD2207}|Health_Care\\HealthApp.csproj|c:\\users\\310208\\source\\repos\\main_hap_pod1\\health_care\\health_care\\repositories\\impl\\healthrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3798451-4776-408C-9D48-6072A8BD2207}|Health_Care\\HealthApp.csproj|solutionrelative:health_care\\repositories\\impl\\healthrecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HealthRecord.cs",
+              "DocumentMoniker": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\Health_Care\\Models\\HealthRecord.cs",
+              "RelativeDocumentMoniker": "Health_Care\\Models\\HealthRecord.cs",
+              "ToolTip": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\Health_Care\\Models\\HealthRecord.cs",
+              "RelativeToolTip": "Health_Care\\Models\\HealthRecord.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAgwBQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T06:39:07.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HealthRecordRepository.cs",
+              "DocumentMoniker": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\Health_Care\\Repositories\\impl\\HealthRecordRepository.cs",
+              "RelativeDocumentMoniker": "Health_Care\\Repositories\\impl\\HealthRecordRepository.cs",
+              "ToolTip": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\Health_Care\\Repositories\\impl\\HealthRecordRepository.cs",
+              "RelativeToolTip": "Health_Care\\Repositories\\impl\\HealthRecordRepository.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAgwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T06:33:23.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HealthRecordService.cs",
+              "DocumentMoniker": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\Health_Care\\Service\\impl\\HealthRecordService.cs",
+              "RelativeDocumentMoniker": "Health_Care\\Service\\impl\\HealthRecordService.cs",
+              "ToolTip": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\Health_Care\\Service\\impl\\HealthRecordService.cs",
+              "RelativeToolTip": "Health_Care\\Service\\impl\\HealthRecordService.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwB8AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T06:32:38.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\Health_Care\\Program.cs",
+              "RelativeDocumentMoniker": "Health_Care\\Program.cs",
+              "ToolTip": "C:\\Users\\310208\\source\\repos\\Main_HAP_Pod1\\Health_Care\\Health_Care\\Program.cs",
+              "RelativeToolTip": "Health_Care\\Program.cs",
+              "ViewState": "AgIAAMsAAAAAAAAAAAAAANYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T05:57:39.964Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
