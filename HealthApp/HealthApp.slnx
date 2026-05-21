@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="HealthApp/HealthApp.csproj" />
+  <Project Path="HealthAppTests/HealthAppTests.csproj" Id="353d473d-6f8b-41c3-9592-b75055954148" />
+</Solution>
