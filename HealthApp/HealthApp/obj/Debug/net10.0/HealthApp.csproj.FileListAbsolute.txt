@@ -1,0 +1,6 @@
+C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\HealthApp.csproj.AssemblyReference.cache
+C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\HealthApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\HealthApp.AssemblyInfoInputs.cache
+C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\HealthApp.AssemblyInfo.cs
+C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\HealthApp.csproj.CoreCompileInputs.cache
+C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\HealthApp.sourcelink.json
