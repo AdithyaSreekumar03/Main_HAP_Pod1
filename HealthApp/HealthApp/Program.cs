@@ -82,11 +82,27 @@ while (true)
                 }
 
 
-                Console.Write("DOB (dd-mm-yyyy): ");
-                patient.DateOfBirth =
-                    DateTime.Parse(
-                        Console.ReadLine()!);
+                while (true)
+                {
+                    Console.Write("DOB (dd-mm-yyyy): ");
 
+                    string dobInput = Console.ReadLine()!;
+
+                    if (!DateTime.TryParse(dobInput, out DateTime dob))
+                    {
+                        Console.WriteLine("Invalid Date Format.");
+                        continue;
+                    }
+
+                    if (dob > DateTime.Today)
+                    {
+                        Console.WriteLine("DOB cannot be a future date.");
+                        continue;
+                    }
+
+                    patient.DateOfBirth = dob;
+                    break;
+                }
                 Console.Write("Gender (Male/Female/Other): ");
 
                 string genderInput = Console.ReadLine()!;
@@ -178,12 +194,39 @@ while (true)
 
                 Patient updatedPatient = new Patient();
 
-                Console.Write("Name: ");
-                updatedPatient.FullName = Console.ReadLine()!;
+                while (true)
+                {
+                    Console.Write("Name: ");
+                    updatedPatient.FullName =
+                        Console.ReadLine()!;
+                    if (updatedPatient.IsValidName())
+                    {
+                        break;
+                    }
+                    Console.WriteLine("The Name is Invalid.");
+                }
 
-                Console.Write("DOB (dd-mm-yyyy): ");
-                updatedPatient.DateOfBirth =
-                    DateTime.Parse(Console.ReadLine()!);
+                while (true)
+                {
+                    Console.Write("DOB (dd-mm-yyyy): ");
+
+                    string dobInput = Console.ReadLine()!;
+
+                    if (!DateTime.TryParse(dobInput, out DateTime dob))
+                    {
+                        Console.WriteLine("Invalid Date Format.");
+                        continue;
+                    }
+
+                    if (dob > DateTime.Today)
+                    {
+                        Console.WriteLine("DOB cannot be a future date.");
+                        continue;
+                    }
+
+                    updatedPatient.DateOfBirth = dob;
+                    break;
+                }
 
                 Console.Write("Gender (Male/Female/Other): ");
 
@@ -200,13 +243,31 @@ while (true)
                     break;
                 }
 
-                Console.Write("Phone: ");
-                updatedPatient.PhoneNumber =
-                    Console.ReadLine()!;
+                while (true)
+                {
+                    Console.Write("Phone: ");
+                    updatedPatient.PhoneNumber =
+                        Console.ReadLine()!;
 
-                Console.Write("Email: ");
-                updatedPatient.Email =
-                    Console.ReadLine()!;
+                    if (updatedPatient.IsValidPhoneNumber())
+                    {
+                        break;
+                    }
+                    Console.WriteLine("Inavlid Phone number.");
+                }
+
+                while (true)
+                {
+                    Console.Write("Email: ");
+                    updatedPatient.Email =
+                        Console.ReadLine()!;
+
+                    if (updatedPatient.IsValidEmail())
+                    {
+                        break;
+                    }
+                    Console.WriteLine("Invalid Email Format.");
+                }
 
                 Console.Write("Insurance ID: ");
                 updatedPatient.InsuranceId =

@@ -62,6 +62,22 @@ namespace HealthApp.Service.Impl
                 }
             }
 
+            bool patientAlreadyBooked =
+   _repo.GetAll().Any(a =>
+       a.Patient.PatientId == patient.PatientId
+       &&
+       a.Doctor.DoctorId == doctor.DoctorId
+       &&
+       a.ScheduledDate.Date == date.Date
+       &&
+       a.Status != AppointmentStatus.Cancelled);
+
+            if (patientAlreadyBooked)
+            {
+                throw new AppointmentConflictException(
+                    "You already booked an appointment with this doctor today. Cancel the existing appointment to book another slot.");
+            }
+
             bool alreadyBooked =
                 _repo.GetAll().Any(a =>
                     a.Doctor.DoctorId ==
@@ -108,6 +124,22 @@ namespace HealthApp.Service.Impl
         {
             var appointment =
                 _repo.GetById(appointmentId);
+
+            if (appointment == null)
+            {
+                throw new AppointmentNotFoundException($"The appointment with id {appointmentId} not found");
+            }
+
+            if (appointment.Status == AppointmentStatus.Cancelled)
+            {
+
+                throw new AppointmentAlreadyCancelledException("Completed appointments cannot be cancelled.");
+            }
+
+            if (appointment.Status == AppointmentStatus.Completed)
+            {
+                throw new AppointmentAlreadyCompletedException("Completed appointments cannot be cancelled.");
+            }
 
             if (appointment != null)
             {
