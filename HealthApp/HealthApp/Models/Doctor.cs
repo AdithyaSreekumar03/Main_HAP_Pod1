@@ -10,7 +10,7 @@ namespace HealthApp.Models
         public string FullName { get; set; }
         public string Specialisation { get; set; }
         public int YearsOfExperience { get; set; }
-        public int ConsultationFee { get; set; }
+        public decimal ConsultationFee { get; set; }
         public bool IsActive { get; set; }
 
         public bool IsAvailable(DateTime date)

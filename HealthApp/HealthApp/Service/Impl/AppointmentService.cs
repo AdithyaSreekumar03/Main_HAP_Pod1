@@ -80,8 +80,6 @@ namespace HealthApp.Service.Impl
 
             Appointment appointment = new()
             {
-                AppointmentId =
-                    _repo.GetAll().Count + 1,
 
                 Patient = patient,
 

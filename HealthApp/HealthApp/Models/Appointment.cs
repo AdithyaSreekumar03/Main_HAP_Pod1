@@ -19,7 +19,7 @@ namespace HealthApp.Models
         public DateTime ScheduledDate { get; set; }
         public string TimeSlot { get; set; } = string.Empty;
         public string? CancellationReason { get; private set; }
-        public AppointmentStatus Status { get; private set; } = AppointmentStatus.Pending;
+        public AppointmentStatus Status { get; private set; } = AppointmentStatus.Confirmed;
 
         public void Confirm()
         {
@@ -52,9 +52,9 @@ namespace HealthApp.Models
             }
             Status = AppointmentStatus.Completed;
         }
-        public void GetDetails()
+        public string GetDetails()
         {
-            Console.WriteLine($"Appointment ID: {AppointmentId}\n" +
+            return($"Appointment ID: {AppointmentId}\n" +
                 $"Patient Name: {Patient.FullName}\n" +
                 $"Doctor Name:Dr.{Doctor.FullName} ({Doctor.Specialisation})\n" +
                 $"Date: {ScheduledDate:dd-MM-yyyy}\n" +

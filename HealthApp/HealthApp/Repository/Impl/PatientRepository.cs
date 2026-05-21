@@ -28,11 +28,20 @@ namespace HealthApp.Repository.Impl
         public string UpdatePatient(int id, Patient patient)
         {
             var existing = _db.patients.Find(p => p.PatientId == id);
+
             if (existing != null)
             {
                 existing.FullName = patient.FullName;
-                return "Patient updated";
+                existing.DateOfBirth = patient.DateOfBirth;
+                existing.Gender = patient.Gender;
+                existing.PhoneNumber = patient.PhoneNumber;
+                existing.Email = patient.Email;
+                existing.InsuranceId = patient.InsuranceId;
+                existing.Age = CalculateAge(patient.DateOfBirth);
+
+                return "Patient updated successfully";
             }
+
             throw new PatientNotFoundException("Patient not found");
         }
         public string DeletePatient(int id)

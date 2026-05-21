@@ -28,7 +28,7 @@ namespace HealthAppTests
             Assert.NotNull(patients);
             Assert.Equal(4, patients.Count);
 
-            var patient = patients.FirstOrDefault(p => p.PatientId == 100);
+            var patient = patients.FirstOrDefault(p => p.PatientId == 1);
             Assert.NotNull(patient);
             Assert.Equal("Mark", patient.FullName);
         }
@@ -37,7 +37,7 @@ namespace HealthAppTests
         [Fact]
         public void GetById_ValidId_ReturnsPatient()
         {
-            var patient = _repository.GetById(200);
+            var patient = _repository.GetById(2);
 
             Assert.NotNull(patient);
             Assert.Equal("Sara", patient.FullName);
@@ -83,11 +83,11 @@ namespace HealthAppTests
                 FullName = "Updated Name"
             };
 
-            var result = _repository.UpdatePatient(200, updated);
+            var result = _repository.UpdatePatient(2, updated);
 
-            Assert.Equal("Patient updated", result);
+            Assert.Equal("Patient updated successfully", result);
 
-            var patient = _repository.GetById(200);
+            var patient = _repository.GetById(2);
             Assert.Equal("Updated Name", patient.FullName);
             Assert.Equal("INS1006", patient.InsuranceId);
         }
@@ -104,12 +104,12 @@ namespace HealthAppTests
         [Fact]
         public void DeletePatient_ValidId_DeletesPatient()
         {
-            var result = _repository.DeletePatient(300);
+            var result = _repository.DeletePatient(3);
 
             Assert.Equal("Deleted successfully", result);
 
             Assert.Throws<PatientNotFoundException>(() =>
-                _repository.GetById(300));
+                _repository.GetById(3));
         }
 
 

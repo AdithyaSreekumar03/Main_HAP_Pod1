@@ -45,10 +45,11 @@ namespace HealthApp.Repository.Impl
 
         public List<HealthRecords> GetByPatient(string patient)
         {
+
             return _db.Records
-                .Where(r => r.Patient == patient)
-                .OrderByDescending(r => r.VisitDate)
-                .ToList();
+                    .Where(r => r.Patient == patient)
+                    .OrderByDescending(r => r.VisitDate)
+                    .ToList();
         }
 
         public List<HealthRecords> GetByDoctor(string doctor)
