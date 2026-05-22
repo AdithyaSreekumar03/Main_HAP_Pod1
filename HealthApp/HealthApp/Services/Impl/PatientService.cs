@@ -1,42 +1,58 @@
-﻿using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
-using POD1_NET_ConsoleApp.Repositories.Interfaces;
-using POD1_NET_ConsoleApp.Service.Interfaces;
+﻿using HealthApp.Model;
+using HealthApp.Repository.Interface;
+using HealthApp.Service.Interface;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Service.Impl
+namespace HealthApp.Service.Impl
 {
     public class PatientService : IPatientService
     {
-        private readonly IPatientRepository _rep;
+        private readonly IPatientRepository _repo;
 
-        public PatientService(IPatientRepository rep)
+        public PatientService(IPatientRepository repo)
         {
-            _rep = rep;
+            _repo = repo;
         }
 
-        public string AddPatient(Patient patient)
+        public void RegisterPatient(Patient patient)
         {
-            return _rep.AddPatient(patient);
+
+
+            if (_repo.GetAll().Any())
+            {
+                patient.PatientId =
+                _repo.GetAll().Max(p => p.PatientId) + 1;
+            }
+            else
+            {
+                patient.PatientId = 1;
+            }
+
+
+            _repo.Add(patient);
         }
 
-        public string UpdatePatient(int id, Patient patient)
+        public List<Patient> GetAllPatients()
         {
-            return _rep.UpdatePatient(id, patient);
+            return _repo.GetAll();
         }
 
-        public string DeletePatient(int id)
+        public Patient? GetPatientById(int id)
         {
-            return _rep.DeletePatient(id);
+            return _repo.GetById(id);
         }
-
-        public List<Patient> GetAll()
+        public string DeletePatientById(int id)
         {
-            return _rep.GetAll();
+            return _repo.DeletePatient(id);
         }
-
-        public Patient GetById(int id)
+        public string UpdatePatientById(int id, Patient patient)
         {
-            return _rep.GetById(id);
+
+
+            return _repo.UpdatePatient(id, patient);
+
         }
     }
 }

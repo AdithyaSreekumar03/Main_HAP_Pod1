@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
+using HealthApp.Model;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Database
+namespace HealthApp.Database
 {
     public class AppointmentDb
     {
-        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public List<Appointment> Appointments { get; set; } = [];
     }
 }

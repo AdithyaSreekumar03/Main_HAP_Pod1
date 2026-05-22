@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
+﻿using HealthApp.Model;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Service.Interfaces
+namespace HealthApp.Service.Interface
 {
     public interface IPatientService
     {
-        string AddPatient(Patient patient);
-        string UpdatePatient(int id, Patient patient);
-        string DeletePatient(int id);
+        void RegisterPatient(Patient patient);
 
-        List<Patient> GetAll();
-        Patient GetById(int id);
+        List<Patient> GetAllPatients();
+
+        Patient? GetPatientById(int id);
+
+        string DeletePatientById(int id);
+
+        string UpdatePatientById(int id, Patient patient);
     }
 }

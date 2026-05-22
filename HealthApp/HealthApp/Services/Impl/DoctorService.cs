@@ -1,10 +1,12 @@
-﻿using System;
+﻿using HealthApp.Exceptions;
+using HealthApp.Model;
+using HealthApp.Repository.Interface;
+using HealthApp.Service.Interface;
+using System;
 using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
-using POD1_NET_ConsoleApp.Repositories.Interfaces;
-using POD1_NET_ConsoleApp.Service.Interfaces;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Service.Impl
+namespace HealthApp.Service.Impl
 {
     public class DoctorService : IDoctorService
     {
@@ -15,46 +17,56 @@ namespace POD1_NET_ConsoleApp.Service.Impl
             _repo = repo;
         }
 
-        // ✅ ADD
-        public string AddDoctor(Doctor doctor)
+        public void AddDoctor(Doctor doctor)
         {
-            return _repo.AddDoctor(doctor);
+
+            if (_repo.GetAll().Any())
+            {
+                doctor.DoctorId =
+                _repo.GetAll().Max(d => d.DoctorId) + 1;
+            }
+            else
+            {
+                doctor.DoctorId = 1;
+            }
+
+            doctor.IsActive = true;
+
+            _repo.Add(doctor);
         }
 
-        // ✅ DELETE
-        public string DeleteDoctor(int doctorId)
-        {
-            return _repo.DeleteDoctor(doctorId);
-        }
-
-        // ✅ GET ALL
         public List<Doctor> GetAllDoctors()
         {
-            return _repo.GetAllDoctors();
+            var result = _repo.GetAll();
+
+            if (result == null)
+            {
+                throw new NoPatientsRegisteredException("There are no Doctors registered");
+            }
+            return result;
         }
 
-        // ✅ AVAILABLE DOCTORS
-        public List<Doctor> GetAvailableDoctors()
+        public Doctor? GetDoctorById(int id)
         {
-            return _repo.GetAvailableDoctors();
+            return _repo.GetById(id);
         }
 
-        // ✅ GET BY ID
-        public Doctor GetDoctorById(int doctorId)
+        public List<Doctor> SearchBySpecialisation(
+     SpecialisationType specialisation)
         {
-            return _repo.GetDoctorById(doctorId);
+            return _repo.GetAll()
+                .Where(d => d.Specialisation == specialisation)
+                .ToList();
         }
-
-        // ✅ SEARCH BY SPECIALISATION
-        public List<Doctor> GetDoctorsBySpecialisation(string specialisation)
+        public string DeleteDoctorById(int id)
         {
-            return _repo.GetDoctorsBySpecialisation(specialisation);
+            return _repo.DeleteDoctorById(id);
         }
-
-        // ✅ UPDATE
-        public string UpdateDoctor(int id, Doctor doctor)
+        public string UpdateDoctorById(int id, Doctor doctor)
         {
-            return _repo.UpdateDoctor(id, doctor);
+
+
+            return _repo.UpdateDoctorById(id, doctor);
         }
     }
 }

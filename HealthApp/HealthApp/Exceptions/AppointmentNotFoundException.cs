@@ -1,4 +1,11 @@
-﻿public class AppointmentNotFoundException : Exception
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace HealthApp.Exceptions
 {
-    public AppointmentNotFoundException(string msg) : base(msg) { }
+    public class AppointmentNotFoundException : Exception
+    {
+        public AppointmentNotFoundException(string message) : base(message) { }
+    }
 }

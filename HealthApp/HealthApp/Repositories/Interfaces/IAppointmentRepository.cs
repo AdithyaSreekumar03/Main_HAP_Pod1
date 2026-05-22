@@ -1,15 +1,16 @@
-﻿using System;
+﻿using HealthApp.Model;
+using System;
 using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Repository.Interfaces
+namespace HealthApp.Repository.Interface
 {
     public interface IAppointmentRepository
     {
-        string BookAppointment(Appointment appointment);
-        List<Appointment> GetAppointmentsByPatient(int patientId);
-        List<Appointment> GetAppointmentsByDoctor(int doctorId);
-        string ConfirmAppointment(int id);
-        string CancelAppointment(int id);
+        void Add(Appointment appointment);
+
+        List<Appointment> GetAll();
+
+        Appointment? GetById(int id);
     }
 }

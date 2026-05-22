@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
+using HealthApp.Model;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Database
+namespace HealthApp.Database
 {
     public class PatientDb
     {
-        public List<Patient> Patients { get; set; } = new List<Patient>();
+        public List<Patient> Patients { get; set; } = [];
     }
 }

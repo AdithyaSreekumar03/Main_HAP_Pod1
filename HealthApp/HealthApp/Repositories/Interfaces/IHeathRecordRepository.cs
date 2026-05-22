@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
+﻿using HealthApp.Model;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Repository.Interfaces
+namespace HealthApp.Repository.Interface
 {
     public interface IHealthRecordRepository
     {
-        void AddRecord(HealthRecords record);
-        void UpdateRecord(int id, HealthRecords record);
+        void Add(HealthRecord record);
 
-        List<HealthRecords> GetAllRecords();
-
-        List<HealthRecords> GetRecordsByPatient(string patient);
-        List<HealthRecords> GetRecordsByDoctor(string doctor);
+        List<HealthRecord> GetAll();
     }
 }

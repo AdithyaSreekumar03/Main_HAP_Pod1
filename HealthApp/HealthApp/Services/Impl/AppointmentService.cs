@@ -1,42 +1,177 @@
-﻿using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
-using POD1_NET_ConsoleApp.Repository.Interfaces;
-using POD1_NET_ConsoleApp.Services.Interfaces;
+﻿using HealthApp.Constant;
+using HealthApp.Exceptions;
+using HealthApp.Model;
+using HealthApp.Repository.Interface;
+using HealthApp.Service.Interface;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Services.Impl
+namespace HealthApp.Service.Impl
 {
-    public class AppointmentService : IAppointmentService
+    public class AppointmentService
+        : IAppointmentService
     {
         private readonly IAppointmentRepository _repo;
 
-        public AppointmentService(IAppointmentRepository repo)
+        public AppointmentService(
+            IAppointmentRepository repo)
         {
             _repo = repo;
         }
 
-        public string BookAppointment(Appointment appointment)
+        public Appointment BookAppointment(
+            Patient patient,
+            Doctor doctor,
+            DateTime date,
+            string slot)
         {
-            return _repo.BookAppointment(appointment);
+            if (date.Date < DateTime.Today)
+            {
+                throw new PastDateException(
+                    "Cannot book past date.");
+            }
+
+            if (!doctor.IsActive)
+            {
+                throw new DoctorUnavailableException(
+                    "Doctor unavailable.");
+            }
+
+            if (!TimeSlots.Slots.Contains(slot))
+            {
+                throw new Exception(
+                    "Invalid slot.");
+            }
+
+
+
+
+            if (date.Date == DateTime.Today)
+            {
+                DateTime slotTime =
+                    DateTime.Parse(slot);
+
+                DateTime finalTime =
+                    date.Date + slotTime.TimeOfDay;
+
+                if (finalTime < DateTime.Now)
+                {
+                    throw new SlotAlreadyOverException(
+                        "Slot already over.");
+                }
+            }
+
+            bool patientAlreadyBooked =
+   _repo.GetAll().Any(a =>
+       a.Patient.PatientId == patient.PatientId
+       &&
+       a.Doctor.DoctorId == doctor.DoctorId
+       &&
+       a.ScheduledDate.Date == date.Date
+       &&
+       a.Status != AppointmentStatus.Cancelled);
+
+            if (patientAlreadyBooked)
+            {
+                throw new AppointmentConflictException(
+                    "You already booked an appointment with this doctor today. Cancel the existing appointment to book another slot.");
+            }
+
+            bool alreadyBooked =
+                _repo.GetAll().Any(a =>
+                    a.Doctor.DoctorId ==
+                    doctor.DoctorId
+                    &&
+                    a.ScheduledDate.Date ==
+                    date.Date
+                    &&
+                    a.TimeSlot == slot
+                    &&
+                    a.Status !=
+                    AppointmentStatus.Cancelled);
+
+            if (alreadyBooked)
+            {
+                throw new AppointmentConflictException(
+                    "Slot already booked.");
+            }
+
+            Appointment appointment = new()
+            {
+                AppointmentId =
+                    _repo.GetAll().Count + 1,
+
+                Patient = patient,
+
+                Doctor = doctor,
+
+                ScheduledDate = date,
+
+                TimeSlot = slot
+            };
+
+            appointment.Confirm();
+
+            _repo.Add(appointment);
+
+            return appointment;
         }
 
-        public List<Appointment> GetAppointmentsByPatient(int patientId)
+        public void CancelAppointment(
+            int appointmentId,
+            string reason)
         {
-            return _repo.GetAppointmentsByPatient(patientId);
+            var appointment =
+                _repo.GetById(appointmentId);
+
+            if (appointment == null)
+            {
+                throw new AppointmentNotFoundException($"The appointment with id {appointmentId} not found");
+            }
+
+            if (appointment.Status == AppointmentStatus.Cancelled)
+            {
+
+                throw new AppointmentAlreadyCancelledException("Completed appointments cannot be cancelled.");
+            }
+
+            if (appointment.Status == AppointmentStatus.Completed)
+            {
+                throw new AppointmentAlreadyCompletedException("Completed appointments cannot be cancelled.");
+            }
+
+            if (appointment != null)
+            {
+                appointment.Cancel(reason);
+            }
         }
 
+        public Appointment? GetAppointmentById(
+            int id)
+        {
+            return _repo.GetById(id);
+        }
+
+        public List<Appointment>
+            GetAllAppointments()
+        {
+            return _repo.GetAll();
+        }
+
+        public List<Appointment>
+            GetAppointmentsByPatient(
+                int patientId)
+        {
+            return _repo.GetAll()
+                .Where(a =>
+                    a.Patient.PatientId ==
+                    patientId)
+                .ToList();
+        }
         public List<Appointment> GetAppointmentsByDoctor(int doctorId)
         {
-            return _repo.GetAppointmentsByDoctor(doctorId);
-        }
-
-        public string ConfirmAppointment(int id)
-        {
-            return _repo.ConfirmAppointment(id);
-        }
-
-        public string CancelAppointment(int id)
-        {
-            return _repo.CancelAppointment(id);
+            return _repo.GetAll().Where(a => a.Doctor.DoctorId == doctorId).ToList();
         }
     }
 }

@@ -1,75 +1,35 @@
-﻿using System;
-using System.Linq;
+﻿using HealthApp.Database;
+using HealthApp.Model;
+using HealthApp.Repository.Interface;
+using System;
 using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
-using POD1_NET_ConsoleApp.Database;
-using POD1_NET_ConsoleApp.Repository.Interfaces;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Repository.Impl
+namespace HealthApp.Repository.Impl
 {
-    public class AppointmentRepository : IAppointmentRepository
+    public class AppointmentRepository
+          : IAppointmentRepository
     {
-        private readonly AppointmentDb _db;
-
-        public AppointmentRepository(AppointmentDb db)
+        private readonly AppointmentDb _appointmentDb;
+        public AppointmentRepository(AppointmentDb appointmentDb)
         {
-            _db = db;
+            _appointmentDb = appointmentDb;
         }
 
-        //  BOOK
-        public string BookAppointment(Appointment appointment)
+        public void Add(Appointment appointment)
         {
-            appointment.AppointmentId = _db.Appointments.Count == 0
-                ? 1
-                : _db.Appointments.Max(a => a.AppointmentId) + 1;
-
-            appointment.Status = "Booked";
-
-            _db.Appointments.Add(appointment);
-
-            return "Appointment booked successfully";
+            _appointmentDb.Appointments.Add(appointment);
         }
 
-        // GET BY PATIENT
-        public List<Appointment> GetAppointmentsByPatient(int patientId)
+        public List<Appointment> GetAll()
         {
-            return _db.Appointments
-                .Where(a => a.PatientId == patientId)
-                .ToList();
+            return _appointmentDb.Appointments;
         }
 
-        //  GET BY DOCTOR
-        public List<Appointment> GetAppointmentsByDoctor(int doctorId)
+        public Appointment? GetById(int id)
         {
-            return _db.Appointments
-                .Where(a => a.DoctorId == doctorId)
-                .ToList();
-        }
-
-        //  CONFIRM
-        public string ConfirmAppointment(int id)
-        {
-            var app = _db.Appointments.FirstOrDefault(a => a.AppointmentId == id);
-
-            if (app == null)
-                return "Appointment not found";
-
-            app.Status = "Confirmed";
-
-            return " Appointment Confirmed";
-        }
-
-        //  CANCEL 
-        public string CancelAppointment(int id)
-        {
-            var app = _db.Appointments.FirstOrDefault(a => a.AppointmentId == id);
-
-            if (app == null)
-                return "Appointment not found";
-
-            app.Status = "Cancelled";
-
-            return " Appointment Cancelled";
+            return _appointmentDb.Appointments
+                .FirstOrDefault(a => a.AppointmentId == id);
         }
     }
 }

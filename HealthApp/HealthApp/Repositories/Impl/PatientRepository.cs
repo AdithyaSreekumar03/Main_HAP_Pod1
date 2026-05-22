@@ -1,73 +1,66 @@
-﻿using System;
-using System.Linq;
+﻿using HealthApp.Database;
+using HealthApp.Exceptions;
+using HealthApp.Model;
+using HealthApp.Repository.Interface;
+using System;
 using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
-using POD1_NET_ConsoleApp.Database;
-using POD1_NET_ConsoleApp.Exceptions;
-using POD1_NET_ConsoleApp.Repositories.Interfaces;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Repositories.Impl
+namespace HealthApp.Repository.Impl
 {
     public class PatientRepository : IPatientRepository
     {
-        private readonly PatientDb _db;
-
-        public PatientRepository(PatientDb db)
+        private readonly PatientDb _patientDb;
+        public PatientRepository(PatientDb patientDb)
         {
-            _db = db;
+            _patientDb = patientDb;
         }
-
-        public string AddPatient(Patient patient)
+        public void Add(Patient patient)
         {
-            patient.Age = CalculateAge(patient.DateOfBirth);
-            _db.Patients.Add(patient);
-            return "Patient added successfully";
-        }
-
-        public string UpdatePatient(int id, Patient patient)
-        {
-            var existing = _db.Patients.FirstOrDefault(p => p.PatientId == id);
-
-            if (existing == null)
-                throw new PatientNotFoundException("Patient not found");
-
-            existing.FullName = patient.FullName;
-            return "Patient updated successfully";
-        }
-
-        public string DeletePatient(int id)
-        {
-            var patient = _db.Patients.FirstOrDefault(p => p.PatientId == id);
-
-            if (patient == null)
-                throw new PatientNotFoundException("Patient not found");
-
-            _db.Patients.Remove(patient);
-            return "Deleted successfully";
+            _patientDb.Patients.Add(patient);
         }
 
         public List<Patient> GetAll()
         {
-            return _db.Patients.ToList();
+            return _patientDb.Patients;
         }
 
-        public Patient GetById(int id)
+        public Patient? GetById(int id)
         {
-            var patient = _db.Patients.FirstOrDefault(p => p.PatientId == id);
-
+            var patient = _patientDb.Patients.FirstOrDefault(pa => pa.PatientId == id);
             if (patient == null)
-                throw new PatientNotFoundException($"Patient with ID {id} not found");
+            {
+                throw new PatientNotFoundException($"Patient with id {id} not found");
 
+            }
             return patient;
         }
-
-        private int CalculateAge(DateTime dob)
+        public string DeletePatient(int id)
         {
-            int age = DateTime.Now.Year - dob.Year;
-            if (DateTime.Now.DayOfYear < dob.DayOfYear)
-                age--;
+            var patient = _patientDb.Patients.FirstOrDefault(p => p.PatientId == id);
+            if (patient == null)
+            {
+                throw new Exceptions.PatientNotFoundException($"Patient with {id} not found");
+            }
+            _patientDb.Patients.Remove(patient);
+            return $"Patient with id {id} deleted successfully";
+        }
+        public string UpdatePatient(int id, Patient patient)
+        {
+            var pat = _patientDb.Patients.FirstOrDefault(pa => pa.PatientId == id);
+            if (pat == null)
+            {
+                throw new PatientNotFoundException($"Patient with id {id} not found");
+            }
 
-            return age;
+            pat.FullName = patient.FullName;
+            pat.DateOfBirth = patient.DateOfBirth;
+            pat.Gender = patient.Gender;
+            pat.PhoneNumber = patient.PhoneNumber;
+            pat.Email = patient.Email;
+            pat.InsuranceId = patient.InsuranceId;
+            return $"Patient with id {id} updated successfully";
+
         }
     }
 }

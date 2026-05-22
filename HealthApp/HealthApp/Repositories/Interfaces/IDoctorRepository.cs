@@ -1,17 +1,18 @@
-﻿using System;
+﻿using HealthApp.Model;
+using System;
 using System.Collections.Generic;
-using POD1_NET_ConsoleApp.Models;
+using System.Text;
 
-namespace POD1_NET_ConsoleApp.Repositories.Interfaces
+namespace HealthApp.Repository.Interface
 {
     public interface IDoctorRepository
     {
-        string AddDoctor(Doctor doctor);
-        string DeleteDoctor(int doctorId);
-        List<Doctor> GetAllDoctors();
-        List<Doctor> GetAvailableDoctors();
-        Doctor GetDoctorById(int doctorId);
-        List<Doctor> GetDoctorsBySpecialisation(string specialisation);
-        string UpdateDoctor(int id, Doctor doctor);
+        void Add(Doctor doctor);
+
+        List<Doctor> GetAll();
+
+        Doctor? GetById(int id);
+        string DeleteDoctorById(int id);
+        string UpdateDoctorById(int id, Doctor doctor);
     }
 }
