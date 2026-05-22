@@ -1,0 +1,1408 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "5.3.0.0",
+        "fileVersion": "5.3.0-2.26219.105 (c23858a6d860abe3ca94f9ac630c3e61b2625664)",
+        "semanticVersion": "5.3.0",
+        "language": "en-US"
+      },
+      "results": [
+        {
+          "ruleId": "S3776",
+          "level": "warning",
+          "message": "Refactor this top-level file to reduce its Cognitive Complexity from 205 to the 15 allowed.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 1,
+                  "endLine": 39,
+                  "endColumn": 6
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 66,
+                  "startColumn": 5,
+                  "endLine": 66,
+                  "endColumn": 11
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 72,
+                  "startColumn": 17,
+                  "endLine": 72,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 21,
+                  "endLine": 77,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 85,
+                  "startColumn": 17,
+                  "endLine": 85,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 91,
+                  "startColumn": 21,
+                  "endLine": 91,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 97,
+                  "startColumn": 21,
+                  "endLine": 97,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 17,
+                  "endLine": 110,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 114,
+                  "startColumn": 17,
+                  "endLine": 114,
+                  "endColumn": 21
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 119,
+                  "startColumn": 17,
+                  "endLine": 119,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 125,
+                  "startColumn": 21,
+                  "endLine": 125,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 132,
+                  "startColumn": 17,
+                  "endLine": 132,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 21,
+                  "endLine": 138,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 156,
+                  "startColumn": 13,
+                  "endLine": 156,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 166,
+                  "startColumn": 13,
+                  "endLine": 166,
+                  "endColumn": 15
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 170,
+                  "startColumn": 13,
+                  "endLine": 170,
+                  "endColumn": 17
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 172,
+                  "startColumn": 17,
+                  "endLine": 172,
+                  "endColumn": 24
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 197,
+                  "startColumn": 17,
+                  "endLine": 197,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 202,
+                  "startColumn": 21,
+                  "endLine": 202,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 209,
+                  "startColumn": 17,
+                  "endLine": 209,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 215,
+                  "startColumn": 21,
+                  "endLine": 215,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 221,
+                  "startColumn": 21,
+                  "endLine": 221,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 235,
+                  "startColumn": 17,
+                  "endLine": 235,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 240,
+                  "startColumn": 17,
+                  "endLine": 240,
+                  "endColumn": 21
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 246,
+                  "startColumn": 17,
+                  "endLine": 246,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 252,
+                  "startColumn": 21,
+                  "endLine": 252,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 259,
+                  "startColumn": 17,
+                  "endLine": 259,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 265,
+                  "startColumn": 21,
+                  "endLine": 265,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 283,
+                  "startColumn": 13,
+                  "endLine": 283,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 287,
+                  "startColumn": 13,
+                  "endLine": 287,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 308,
+                  "startColumn": 13,
+                  "endLine": 308,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 319,
+                  "startColumn": 13,
+                  "endLine": 319,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 325,
+                  "startColumn": 17,
+                  "endLine": 325,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 334,
+                  "startColumn": 13,
+                  "endLine": 334,
+                  "endColumn": 20
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 341,
+                  "startColumn": 13,
+                  "endLine": 341,
+                  "endColumn": 15
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 345,
+                  "startColumn": 13,
+                  "endLine": 345,
+                  "endColumn": 17
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 357,
+                  "startColumn": 13,
+                  "endLine": 357,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 362,
+                  "startColumn": 17,
+                  "endLine": 362,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 372,
+                  "startColumn": 13,
+                  "endLine": 372,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 376,
+                  "startColumn": 17,
+                  "endLine": 376,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 399,
+                  "startColumn": 17,
+                  "endLine": 399,
+                  "endColumn": 24
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 412,
+                  "startColumn": 13,
+                  "endLine": 412,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 431,
+                  "startColumn": 13,
+                  "endLine": 431,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 445,
+                  "startColumn": 17,
+                  "endLine": 445,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 450,
+                  "startColumn": 21,
+                  "endLine": 450,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 459,
+                  "startColumn": 17,
+                  "endLine": 459,
+                  "endColumn": 24
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 466,
+                  "startColumn": 17,
+                  "endLine": 466,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 470,
+                  "startColumn": 17,
+                  "endLine": 470,
+                  "endColumn": 21
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 476,
+                  "startColumn": 17,
+                  "endLine": 476,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 482,
+                  "startColumn": 21,
+                  "endLine": 482,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 489,
+                  "startColumn": 17,
+                  "endLine": 489,
+                  "endColumn": 22
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 494,
+                  "startColumn": 21,
+                  "endLine": 494,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 521,
+                  "startColumn": 13,
+                  "endLine": 521,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 533,
+                  "startColumn": 13,
+                  "endLine": 533,
+                  "endColumn": 20
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 540,
+                  "startColumn": 13,
+                  "endLine": 540,
+                  "endColumn": 15
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 553,
+                  "startColumn": 13,
+                  "endLine": 553,
+                  "endColumn": 20
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 592,
+                  "startColumn": 17,
+                  "endLine": 592,
+                  "endColumn": 20
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 625,
+                  "startColumn": 13,
+                  "endLine": 625,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 630,
+                  "startColumn": 13,
+                  "endLine": 630,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 635,
+                  "startColumn": 13,
+                  "endLine": 635,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 640,
+                  "startColumn": 13,
+                  "endLine": 640,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 645,
+                  "startColumn": 13,
+                  "endLine": 645,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 649,
+                  "startColumn": 13,
+                  "endLine": 649,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 653,
+                  "startColumn": 13,
+                  "endLine": 653,
+                  "endColumn": 18
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 696,
+                  "startColumn": 13,
+                  "endLine": 696,
+                  "endColumn": 15
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 750,
+                  "startColumn": 13,
+                  "endLine": 750,
+                  "endColumn": 20
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 773,
+                  "startColumn": 13,
+                  "endLine": 773,
+                  "endColumn": 20
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "+1",
+              "1": "+2 (incl 1 for nesting)",
+              "10": "+4 (incl 3 for nesting)",
+              "11": "+3 (incl 2 for nesting)",
+              "12": "+4 (incl 3 for nesting)",
+              "13": "+3 (incl 2 for nesting)",
+              "14": "+3 (incl 2 for nesting)",
+              "15": "+1",
+              "16": "+4 (incl 3 for nesting)",
+              "17": "+3 (incl 2 for nesting)",
+              "18": "+4 (incl 3 for nesting)",
+              "19": "+3 (incl 2 for nesting)",
+              "2": "+3 (incl 2 for nesting)",
+              "20": "+4 (incl 3 for nesting)",
+              "21": "+4 (incl 3 for nesting)",
+              "22": "+3 (incl 2 for nesting)",
+              "23": "+1",
+              "24": "+3 (incl 2 for nesting)",
+              "25": "+4 (incl 3 for nesting)",
+              "26": "+3 (incl 2 for nesting)",
+              "27": "+4 (incl 3 for nesting)",
+              "28": "+3 (incl 2 for nesting)",
+              "29": "+3 (incl 2 for nesting)",
+              "3": "+4 (incl 3 for nesting)",
+              "30": "+3 (incl 2 for nesting)",
+              "31": "+3 (incl 2 for nesting)",
+              "32": "+4 (incl 3 for nesting)",
+              "33": "+3 (incl 2 for nesting)",
+              "34": "+3 (incl 2 for nesting)",
+              "35": "+1",
+              "36": "+3 (incl 2 for nesting)",
+              "37": "+4 (incl 3 for nesting)",
+              "38": "+3 (incl 2 for nesting)",
+              "39": "+4 (incl 3 for nesting)",
+              "4": "+3 (incl 2 for nesting)",
+              "40": "+3 (incl 2 for nesting)",
+              "41": "+3 (incl 2 for nesting)",
+              "42": "+3 (incl 2 for nesting)",
+              "43": "+3 (incl 2 for nesting)",
+              "44": "+4 (incl 3 for nesting)",
+              "45": "+3 (incl 2 for nesting)",
+              "46": "+3 (incl 2 for nesting)",
+              "47": "+1",
+              "48": "+3 (incl 2 for nesting)",
+              "49": "+4 (incl 3 for nesting)",
+              "5": "+4 (incl 3 for nesting)",
+              "50": "+3 (incl 2 for nesting)",
+              "51": "+4 (incl 3 for nesting)",
+              "52": "+3 (incl 2 for nesting)",
+              "53": "+3 (incl 2 for nesting)",
+              "54": "+3 (incl 2 for nesting)",
+              "55": "+3 (incl 2 for nesting)",
+              "56": "+3 (incl 2 for nesting)",
+              "57": "+3 (incl 2 for nesting)",
+              "58": "+3 (incl 2 for nesting)",
+              "59": "+3 (incl 2 for nesting)",
+              "6": "+4 (incl 3 for nesting)",
+              "60": "+3 (incl 2 for nesting)",
+              "61": "+3 (incl 2 for nesting)",
+              "62": "+3 (incl 2 for nesting)",
+              "63": "+3 (incl 2 for nesting)",
+              "64": "+3 (incl 2 for nesting)",
+              "65": "+3 (incl 2 for nesting)",
+              "66": "+3 (incl 2 for nesting)",
+              "7": "+3 (incl 2 for nesting)",
+              "8": "+1",
+              "9": "+3 (incl 2 for nesting)"
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Name: ' 4 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 35,
+                  "endLine": 74,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 199,
+                  "startColumn": 35,
+                  "endLine": 199,
+                  "endColumn": 43
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 321,
+                  "startColumn": 31,
+                  "endLine": 321,
+                  "endColumn": 39
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 447,
+                  "startColumn": 35,
+                  "endLine": 447,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1192",
+          "level": "warning",
+          "message": "Define a constant instead of using this literal 'Email: ' 4 times.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 134,
+                  "startColumn": 35,
+                  "endLine": 134,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 261,
+                  "startColumn": 35,
+                  "endLine": 261,
+                  "endColumn": 44
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 359,
+                  "startColumn": 31,
+                  "endLine": 359,
+                  "endColumn": 40
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 491,
+                  "startColumn": 35,
+                  "endLine": 491,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": null,
+              "1": null,
+              "2": null
+            }
+          }
+        },
+        {
+          "ruleId": "S1118",
+          "level": "warning",
+          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Constant/TimeSlot.cs",
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 18,
+                  "endLine": 7,
+                  "endColumn": 26
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6444",
+          "level": "warning",
+          "message": "Pass a timeout to limit the execution time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Model/Patient.cs",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 20,
+                  "endLine": 39,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6444",
+          "level": "warning",
+          "message": "Pass a timeout to limit the execution time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Model/Patient.cs",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 20,
+                  "endLine": 44,
+                  "endColumn": 55
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6444",
+          "level": "warning",
+          "message": "Pass a timeout to limit the execution time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Model/Patient.cs",
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 20,
+                  "endLine": 52,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1860",
+          "level": "note",
+          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Service/Impl/DoctorService.cs",
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 17,
+                  "endLine": 23,
+                  "endColumn": 37
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "DiagnosticPropertyKey": "Count"
+            }
+          }
+        },
+        {
+          "ruleId": "CA1860",
+          "level": "note",
+          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Service/Impl/PatientService.cs",
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 17,
+                  "endLine": 23,
+                  "endColumn": 37
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "DiagnosticPropertyKey": "Count"
+            }
+          }
+        },
+        {
+          "ruleId": "S6444",
+          "level": "warning",
+          "message": "Pass a timeout to limit the execution time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Model/Doctor.cs",
+                "region": {
+                  "startLine": 56,
+                  "startColumn": 20,
+                  "endLine": 56,
+                  "endColumn": 57
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6444",
+          "level": "warning",
+          "message": "Pass a timeout to limit the execution time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Model/Doctor.cs",
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 20,
+                  "endLine": 51,
+                  "endColumn": 55
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6444",
+          "level": "warning",
+          "message": "Pass a timeout to limit the execution time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Model/Doctor.cs",
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 20,
+                  "endLine": 64,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S112",
+          "level": "warning",
+          "message": "'System.Exception' should not be thrown by user code.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Service/Impl/AppointmentService.cs",
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 23,
+                  "endLine": 44,
+                  "endColumn": 37
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6580",
+          "level": "warning",
+          "message": "Use a format provider when parsing date and time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Service/Impl/AppointmentService.cs",
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 21,
+                  "endLine": 53,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6580",
+          "level": "warning",
+          "message": "Use a format provider when parsing date and time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 91,
+                  "startColumn": 26,
+                  "endLine": 91,
+                  "endColumn": 71
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6580",
+          "level": "warning",
+          "message": "Use a format provider when parsing date and time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 215,
+                  "startColumn": 26,
+                  "endLine": 215,
+                  "endColumn": 71
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6580",
+          "level": "warning",
+          "message": "Use a format provider when parsing date and time.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 586,
+                  "startColumn": 21,
+                  "endLine": 587,
+                  "endColumn": 45
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1860",
+          "level": "note",
+          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310676/VSCODE/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 166,
+                  "startColumn": 18,
+                  "endLine": 166,
+                  "endColumn": 32
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "DiagnosticPropertyKey": "Count"
+            }
+          }
+        }
+      ],
+      "rules": {
+        "CA1860": {
+          "id": "CA1860",
+          "shortDescription": "Avoid using 'Enumerable.Any()' extension method",
+          "fullDescription": "Prefer using 'IsEmpty', 'Count' or 'Length' properties whichever available, rather than calling 'Enumerable.Any()'. The intent is clearer and it is more performant than using 'Enumerable.Any()' extension method.",
+          "defaultLevel": "note",
+          "helpUri": "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1860",
+          "properties": {
+            "category": "Performance",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "S1118": {
+          "id": "S1118",
+          "shortDescription": "Utility classes should not have public constructors",
+          "fullDescription": "Whenever there are portions of code that are duplicated and do not depend on the state of their container class, they can be centralized inside a \"utility class\". A utility class is a class that only has static members, hence it should not be instantiated.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1118",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S112": {
+          "id": "S112",
+          "shortDescription": "General or reserved exceptions should never be thrown",
+          "fullDescription": "This rule raises an issue when a general or reserved exception is thrown.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-112",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S1192": {
+          "id": "S1192",
+          "shortDescription": "String literals should not be duplicated",
+          "fullDescription": "Duplicated string literals make the process of refactoring complex and error-prone, as any change would need to be propagated on all occurrences.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1192",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": false,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S3776": {
+          "id": "S3776",
+          "shortDescription": "Cognitive Complexity of methods should not be too high",
+          "fullDescription": "This rule raises an issue when the code cognitive complexity of a function is above a certain threshold.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3776",
+          "properties": {
+            "category": "Critical Code Smell",
+            "isEnabledByDefault": false,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S6444": {
+          "id": "S6444",
+          "shortDescription": "Not specifying a timeout for regular expressions is security-sensitive",
+          "fullDescription": "Not specifying a timeout for regular expressions can lead to a Denial-of-Service attack. Pass a timeout when using System.Text.RegularExpressions to process untrusted input because a malicious user might craft a value for which the evaluation lasts excessively long.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-6444",
+          "properties": {
+            "category": "Major Security Hotspot",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S6580": {
+          "id": "S6580",
+          "shortDescription": "Use a format provider when parsing date and time",
+          "fullDescription": "When converting a string representation of a date and time to a DateTime object or any other temporal type with one of the available system parsing methods, you should always provide an IFormatProvider parameter.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-6580",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
