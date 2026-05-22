@@ -19,6 +19,7 @@ namespace HealthAppTests
             _mockRepo = new Mock<IPatientRepository>();
             _patientService = new PatientService(_mockRepo.Object);
         }
+
         [Fact]
         public void GetAllPatients_ReturnsAllPatients()
         {
@@ -29,8 +30,8 @@ namespace HealthAppTests
                 {
                     PatientId = 1,
                     FullName = "John Doe",
-                    Gender = "Male",
-                    PhoneNumber = 9876543210,
+                    Gender = GenderType.Male,
+                    PhoneNumber = "9876543210",
                     Email = "john@example.com",
                     InsuranceId = "INS101"
                 },
@@ -38,8 +39,8 @@ namespace HealthAppTests
                 {
                     PatientId = 2,
                     FullName = "Jane Smith",
-                    Gender = "Female",
-                    PhoneNumber = 9123456780,
+                    Gender = GenderType.Female,
+                    PhoneNumber = "9123456780",
                     Email = "jane@example.com",
                     InsuranceId = "INS102"
                 }
@@ -48,11 +49,12 @@ namespace HealthAppTests
             _mockRepo.Setup(r => r.GetAll()).Returns(patients);
 
             // Act
-            var result = _patientService.GetAll();
+            var result = _patientService.GetAllPatients();
 
             // Assert
             Assert.NotNull(result);
             Assert.Equal(2, result.Count);
+
             _mockRepo.Verify(r => r.GetAll(), Times.Once);
         }
 
@@ -64,8 +66,8 @@ namespace HealthAppTests
             {
                 PatientId = 1,
                 FullName = "John Doe",
-                Gender = "Male",
-                PhoneNumber = 9876543210,
+                Gender = GenderType.Male,
+                PhoneNumber = "9876543210",
                 Email = "john@example.com",
                 InsuranceId = "INS101"
             };
@@ -73,11 +75,12 @@ namespace HealthAppTests
             _mockRepo.Setup(r => r.GetById(1)).Returns(patient);
 
             // Act
-            var result = _patientService.GetById(1);
+            var result = _patientService.GetPatientById(1);
 
             // Assert
             Assert.NotNull(result);
             Assert.Equal(1, result.PatientId);
+
             _mockRepo.Verify(r => r.GetById(1), Times.Once);
         }
 
@@ -90,9 +93,8 @@ namespace HealthAppTests
 
             // Act & Assert
             Assert.Throws<PatientNotFoundException>(() =>
-                _patientService.GetById(999));
+                _patientService.GetPatientById(999));
         }
-
 
         [Fact]
         public void RegisterPatient_ShouldAddPatientSuccessfully()
@@ -101,20 +103,23 @@ namespace HealthAppTests
             var patient = new Patient
             {
                 FullName = "David",
-                Gender = "Male",
-                PhoneNumber = 9876543210,
+                Gender = GenderType.Male,
+                PhoneNumber = "9876543210",
                 Email = "david@example.com",
                 InsuranceId = "INS103"
             };
 
-            _mockRepo.Setup(r => r.GetAll())
-                     .Returns(new List<Patient>()); 
-            _patientService.AddPatient(patient);
+            _mockRepo.Setup(r => r.GetAll()).Returns(new List<Patient>());
 
+            // Act
+            _patientService.RegisterPatient(patient);
+
+            // Assert
             Assert.Equal(1, patient.PatientId);
 
-            _mockRepo.Verify(r => r.AddPatient(patient), Times.Once);
+            _mockRepo.Verify(r => r.Add(patient), Times.Once);
         }
+
 
 
         [Fact]
@@ -124,8 +129,8 @@ namespace HealthAppTests
             var updatedPatient = new Patient
             {
                 FullName = "Updated Name",
-                Gender = "Female",
-                PhoneNumber = 9999999999,
+                Gender = GenderType.Female,
+                PhoneNumber = "9999999999",
                 Email = "updated@example.com",
                 InsuranceId = "INS999"
             };
@@ -134,10 +139,11 @@ namespace HealthAppTests
                      .Returns("Patient updated successfully");
 
             // Act
-            var result = _patientService.UpdatePatient(1, updatedPatient);
+            var result = _patientService.UpdatePatientById(1, updatedPatient);
 
             // Assert
             Assert.Equal("Patient updated successfully", result);
+
             _mockRepo.Verify(r => r.UpdatePatient(1, updatedPatient), Times.Once);
         }
 
@@ -152,7 +158,7 @@ namespace HealthAppTests
 
             // Act & Assert
             Assert.Throws<PatientNotFoundException>(() =>
-                _patientService.UpdatePatient(999, patient));
+                _patientService.UpdatePatientById(999, patient));
         }
 
         [Fact]
@@ -163,10 +169,11 @@ namespace HealthAppTests
                      .Returns("Patient with id 1 deleted successfully");
 
             // Act
-            var result = _patientService.DeletePatient(1);
+            var result = _patientService.DeletePatientById(1);
 
             // Assert
             Assert.Contains("successfully", result);
+
             _mockRepo.Verify(r => r.DeletePatient(1), Times.Once);
         }
 
@@ -179,7 +186,7 @@ namespace HealthAppTests
 
             // Act & Assert
             Assert.Throws<PatientNotFoundException>(() =>
-                _patientService.DeletePatient(999));
+                _patientService.DeletePatientById(999));
         }
     }
 }

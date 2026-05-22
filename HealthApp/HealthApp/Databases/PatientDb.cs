@@ -48,16 +48,6 @@ namespace HealthApp.Databases
                 PhoneNumber = "9012345678",
                 Email = "shilpa.nair@gmail.com",
                 InsuranceId = "INS1008"
-            },
-            new Patient
-            {
-                PatientId = 5,
-                FullName = "Alex Joseph",
-                DateOfBirth = new DateTime(2000, 2, 25),
-                Gender = GenderType.Other,
-                PhoneNumber = "9090909090",
-                Email = "alex.joseph@gmail.com",
-                InsuranceId = "INS1009"
             }
         };
     }

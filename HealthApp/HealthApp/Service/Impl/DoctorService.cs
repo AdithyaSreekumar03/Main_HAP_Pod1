@@ -41,7 +41,7 @@ namespace HealthApp.Service.Impl
 
             if (result == null)
             {
-                throw new NoPatientsRegisteredException("There are no Doctors registered");
+                throw new NoDoctorsRegisteredException("There are no Doctors registered");
             }
             return result;
         }
@@ -63,8 +63,6 @@ namespace HealthApp.Service.Impl
         }
         public string UpdateDoctorById(int id, Doctor doctor)
         {
-
-
             return _repo.UpdateDoctorById(id, doctor);
         }
     }

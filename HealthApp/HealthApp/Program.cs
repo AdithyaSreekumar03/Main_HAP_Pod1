@@ -80,11 +80,27 @@ while (true)
                     Console.WriteLine("The Name is Invalid.");
                 }
 
+                while (true)
+                {
+                    Console.Write("DOB (dd-mm-yyyy): ");
 
-                Console.Write("DOB (dd-mm-yyyy): ");
-                patient.DateOfBirth =
-                    DateTime.Parse(
-                        Console.ReadLine()!);
+                    string dobInput = Console.ReadLine()!;
+
+                    if (!DateTime.TryParse(dobInput, out DateTime dob))
+                    {
+                        Console.WriteLine("Invalid Date Format.");
+                        continue;
+                    }
+
+                    if (dob > DateTime.Today)
+                    {
+                        Console.WriteLine("DOB cannot be a future date.");
+                        continue;
+                    }
+
+                    patient.DateOfBirth = dob;
+                    break;
+                }
 
                 Console.Write("Gender (Male/Female/Other): ");
 
@@ -140,6 +156,10 @@ while (true)
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             break;
 
         case "2":
@@ -165,8 +185,8 @@ while (true)
                     Console.WriteLine($"Insurance ID: {p.InsuranceId}");
                 }
             }
-
             break;
+
         case "3":
 
             try
@@ -223,6 +243,10 @@ while (true)
                 Console.WriteLine(ex.Message);
             }
             catch (ValidationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -304,8 +328,6 @@ while (true)
                 Console.WriteLine("Invalid Email Format");
 
             }
-
-
 
             while (true)
             {
@@ -691,6 +713,10 @@ while (true)
 
         case "15":
             return;
+
+        default:
+
+            break;
     }
 
     Console.WriteLine(
