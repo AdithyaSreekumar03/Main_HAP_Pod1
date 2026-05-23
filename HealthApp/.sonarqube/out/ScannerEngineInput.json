@@ -1,0 +1,136 @@
+{
+  "scannerProperties": [
+    {
+      "key": "sonar.scanner.app",
+      "value": "ScannerMSBuild"
+    },
+    {
+      "key": "sonar.scanner.appVersion",
+      "value": "11.2.1"
+    },
+    {
+      "key": "sonar.scanner.bootstrapStartTime",
+      "value": "1779531066000"
+    },
+    {
+      "key": "sonar.projectKey",
+      "value": "HealthApp"
+    },
+    {
+      "key": "sonar.working.directory",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\.sonar"
+    },
+    {
+      "key": "sonar.projectBaseDir",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp"
+    },
+    {
+      "key": "sonar.pullrequest.cache.basepath",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp"
+    },
+    {
+      "key": "sonar.sources",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.vs\\HealthApp.slnx\\v18\\DocumentLayout.backup.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.vs\\HealthApp.slnx\\v18\\DocumentLayout.json"
+    },
+    {
+      "key": "sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "sonar.modules",
+      "value": "14164E3D-8A75-A4DA-EE92-D8290D864931,FFBE01E7-18F9-8709-5BDC-64235E150587"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.projectKey",
+      "value": "HealthApp:14164E3D-8A75-A4DA-EE92-D8290D864931"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.projectName",
+      "value": "HealthApp"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.projectBaseDir",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.working.directory",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\.sonar\\mod0"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.sources",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Constants\\TimeSlots.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Databases\\AppointmentDb.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Databases\\DoctorDb.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Databases\\HealthRecordDb.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Databases\\PatientDb.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\AppointmentConflictException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\DoctorNotFoundException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\DoctorUnavailableException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\NoDoctorsRegisteredException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\NoPatientRegisteredException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\PastDateException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\PatientNotFoundException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\RecordNotFoundException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\SlotAlreadyOverException.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Models\\Appointment.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Models\\Doctor.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Models\\HealthRecords.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Models\\Patient.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Program.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repository\\Impl\\AppointmentRepository.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repository\\Impl\\DoctorRepository.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repository\\Impl\\HealthRecordRepository.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repository\\Impl\\PatientRepository.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repository\\Interface\\IAppointmentRepository.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repository\\Interface\\IDoctorRepository.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repository\\Interface\\IHealthRecordRepository.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repository\\Interface\\IPatientRepository.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Service\\Impl\\AppointmentService.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Service\\Impl\\DoctorService.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Service\\Impl\\HealthRecordService.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Service\\Impl\\PatientService.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Service\\Interface\\IAppointmentService.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Service\\Interface\\IDoctorService.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Service\\Interface\\IHealthRecordService.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Service\\Interface\\IPatientService.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\obj\\HealthApp.csproj.nuget.dgspec.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\obj\\project.assets.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\bin\\Debug\\net10.0\\HealthApp.deps.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\bin\\Debug\\net10.0\\HealthApp.runtimeconfig.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthApp\\obj\\Debug\\net10.0\\HealthApp.sourcelink.json"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\1"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\1\\Issues.json"
+    },
+    {
+      "key": "14164E3D-8A75-A4DA-EE92-D8290D864931.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\1\\Telemetry.json"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.projectKey",
+      "value": "HealthApp:FFBE01E7-18F9-8709-5BDC-64235E150587"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.projectName",
+      "value": "HealthAppTests"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.projectBaseDir",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.working.directory",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\.sonar\\mod1"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.sources",
+      "value": ""
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.tests",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\obj\\HealthAppTests.csproj.nuget.dgspec.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\obj\\project.assets.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\bin\\Debug\\net10.0\\HealthApp.deps.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\bin\\Debug\\net10.0\\HealthApp.runtimeconfig.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\bin\\Debug\\net10.0\\HealthAppTests.deps.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\bin\\Debug\\net10.0\\HealthAppTests.runtimeconfig.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\obj\\Debug\\net10.0\\HealthAppTests.sourcelink.json,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\DoctorRepositoryTests.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\DoctorServiceTests.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\PatientRepositoryTests.cs,C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\HealthAppTests\\PatientServiceTests.cs"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\2"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\2\\Issues.json"
+    },
+    {
+      "key": "FFBE01E7-18F9-8709-5BDC-64235E150587.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\310507\\project\\Main_HAP_Pod1\\HealthApp\\.sonarqube\\out\\2\\Telemetry.json"
+    },
+    {
+      "key": "sonar.token",
+      "value": "***"
+    },
+    {
+      "key": "sonar.host.url",
+      "value": "http://localhost:9000"
+    },
+    {
+      "key": "sonar.visualstudio.enable",
+      "value": "false"
+    }
+  ]
+}

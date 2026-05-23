@@ -28,7 +28,7 @@ namespace HealthAppTests
                 {
                     PatientId = 5,
                     FullName = "John Doe",
-                    DateOfBirth = new DateTime(1995, 5, 10),
+                    DateOfBirth = new DateOnly(1995, 5, 10),
                     Gender = GenderType.Male,
                     PhoneNumber = "9876543210",
                     Email = "john@example.com",
@@ -39,7 +39,7 @@ namespace HealthAppTests
                 {
                     PatientId = 6,
                     FullName = "Jane Smith",
-                    DateOfBirth = new DateTime(1998, 8, 15),
+                    DateOfBirth = new DateOnly(1998, 8, 15),
                     Gender = GenderType.Female,
                     PhoneNumber = "9123456780",
                     Email = "jane@example.com",
@@ -50,7 +50,7 @@ namespace HealthAppTests
                 {
                     PatientId = 7,
                     FullName = "Robert Brown",
-                    DateOfBirth = new DateTime(1985, 2, 20),
+                    DateOfBirth = new DateOnly(1985, 2, 20),
                     Gender = GenderType.Male,
                     PhoneNumber = "9988776655",
                     Email = "robert@example.com",
@@ -88,7 +88,7 @@ namespace HealthAppTests
             {
                 PatientId = 8,
                 FullName = "Chris Evans",
-                DateOfBirth = new DateTime(1990, 12, 25),
+                DateOfBirth = new DateOnly(1990, 12, 25),
                 Gender = GenderType.Male,
                 PhoneNumber = "9001122334",
                 Email = "chris@example.com",
@@ -109,7 +109,7 @@ namespace HealthAppTests
             Patient updatedPatient = new Patient
             {
                 FullName = "Jane Williams",
-                DateOfBirth = new DateTime(1997, 7, 7),
+                DateOfBirth = new DateOnly(1997, 7, 7),
                 Gender = GenderType.Male,
                 PhoneNumber = "9556677889",
                 Email = "jane.williams@example.com",
@@ -133,7 +133,7 @@ namespace HealthAppTests
             Patient patient = new Patient
             {
                 FullName = "Invalid Patient",
-                DateOfBirth = new DateTime(2000, 1, 1),
+                DateOfBirth = new DateOnly(2000, 1, 1),
                 Gender = GenderType.Male,
                 PhoneNumber = "9999999999",
                 Email = "invalid@example.com",

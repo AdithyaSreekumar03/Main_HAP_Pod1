@@ -8,6 +8,7 @@ using HealthApp.Service.Impl;
 using HealthApp.Service.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Reflection;
 
 var services = new ServiceCollection();
@@ -35,12 +36,12 @@ var appointmentService = provider.GetRequiredService<IAppointmentService>();
 var healthRecordService = provider.GetRequiredService<IHealthRecordService>();
 
 Console.Clear();
+
 while (true)
 {
     Console.Clear();
 
-    Console.WriteLine(
-        "===== HEALTHCARE MANAGEMENT =====");
+    Console.WriteLine("===== HEALTHCARE MANAGEMENT =====");
 
     Console.WriteLine("1. Register Patient");
     Console.WriteLine("2. Get All Patients");
@@ -86,13 +87,20 @@ while (true)
 
                     string dobInput = Console.ReadLine()!;
 
-                    if (!DateTime.TryParse(dobInput, out DateTime dob))
+
+
+                    if (!DateOnly.TryParseExact(
+                                dobInput,
+                                ["dd-MM-yyyy", "dd/MM/yyyy"],
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.None,
+                                out var dob))
                     {
-                        Console.WriteLine("Invalid Date Format.");
+                        Console.WriteLine("Invalid date format. Please enter DOB in 'dd-MM-yyyy' or 'dd/MM/yyyy' format");
                         continue;
                     }
 
-                    if (dob > DateTime.Today)
+                    if (dob.ToDateTime(TimeOnly.MinValue)> DateTime.Today)
                     {
                         Console.WriteLine("DOB cannot be a future date.");
                         continue;
@@ -202,7 +210,7 @@ while (true)
 
                 Console.Write("DOB (dd-mm-yyyy): ");
                 updatedPatient.DateOfBirth =
-                    DateTime.Parse(Console.ReadLine()!);
+                    DateOnly.Parse(Console.ReadLine()!);
 
                 Console.Write("Gender (Male/Female/Other): ");
 

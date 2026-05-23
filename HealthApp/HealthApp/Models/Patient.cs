@@ -17,7 +17,7 @@ namespace HealthApp.Models
 
         public string FullName { get; set; } = string.Empty;
 
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
         public GenderType Gender { get; set; }
 
@@ -56,7 +56,7 @@ namespace HealthApp.Models
         {
             int age = DateTime.Today.Year - DateOfBirth.Year;
 
-            if (DateTime.Today < DateOfBirth.AddYears(age))
+            if (DateTime.Today < DateOfBirth.ToDateTime(TimeOnly.MinValue).AddYears(age))
             {
                 age--;
             }

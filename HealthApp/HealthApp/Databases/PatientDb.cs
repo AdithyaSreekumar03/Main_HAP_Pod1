@@ -7,13 +7,13 @@ namespace HealthApp.Databases
 {
     public class PatientDb
     {
-        public readonly List<Patient> patients = new List<Patient>
+        public List<Patient> patients = new List<Patient>
         {
             new Patient
             {
                 PatientId = 1,
                 FullName = "Mark David",
-                DateOfBirth = new DateTime(2001, 5, 10),
+                DateOfBirth = new DateOnly(2001, 5, 10),
                 Gender = GenderType.Male,
                 PhoneNumber = "9876543210",
                 Email = "mark.david@gmail.com",
@@ -23,7 +23,7 @@ namespace HealthApp.Databases
             {
                 PatientId = 2,
                 FullName = "Sara Thomas",
-                DateOfBirth = new DateTime(1991, 3, 15),
+                DateOfBirth = new DateOnly(1991, 3, 15),
                 Gender = GenderType.Female,
                 PhoneNumber = "9123456780",
                 Email = "sara.thomas@gmail.com",
@@ -33,7 +33,7 @@ namespace HealthApp.Databases
             {
                 PatientId = 3,
                 FullName = "John Mathew",
-                DateOfBirth = new DateTime(1996, 8, 20),
+                DateOfBirth = new DateOnly(1996, 8, 20),
                 Gender = GenderType.Male,
                 PhoneNumber = "9988776655",
                 Email = "john.mathew@gmail.com",
@@ -43,7 +43,7 @@ namespace HealthApp.Databases
             {
                 PatientId = 4,
                 FullName = "Shilpa Nair",
-                DateOfBirth = new DateTime(1999, 11, 5),
+                DateOfBirth = new DateOnly(1999, 11, 5),
                 Gender = GenderType.Female,
                 PhoneNumber = "9012345678",
                 Email = "shilpa.nair@gmail.com",
