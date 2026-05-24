@@ -7,7 +7,7 @@ namespace HealthApp.Databases
 {
     public class DoctorDb
     {
-        public List<Doctor> doctors = new List<Doctor>
+        public readonly List<Doctor> doctors = new List<Doctor>
         {
             new Doctor
             {
