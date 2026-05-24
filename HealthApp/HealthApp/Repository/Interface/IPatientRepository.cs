@@ -13,8 +13,8 @@ namespace HealthApp.Repository.Interface
 
         Patient? GetById(int id);
 
-        string DeletePatient(int id);
+        Patient? DeletePatient(int id);
 
-        string UpdatePatient(int id, Patient patient);
+        Patient? UpdatePatient(int id, Patient patient);
     }
 }

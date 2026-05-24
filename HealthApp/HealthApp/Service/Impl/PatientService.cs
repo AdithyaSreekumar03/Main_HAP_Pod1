@@ -1,4 +1,5 @@
-﻿using HealthApp.Model;
+﻿using HealthApp.Exceptions;
+using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
@@ -36,23 +37,49 @@ namespace HealthApp.Service.Impl
 
         public List<Patient> GetAllPatients()
         {
-            return _repo.GetAll();
+            var result = _repo.GetAll();
+            if (!result.Any())
+            {
+                throw new NoPatientRegisteredException("There are no Patients Registered");
+            }
+            return result;
         }
 
         public Patient? GetPatientById(int id)
         {
-            return _repo.GetById(id);
+            var patient = _repo.GetById(id);
+
+            if (patient == null)
+            {
+                throw new PatientNotFoundException(
+                    $"Patient with id {id} not found");
+            }
+
+            return patient;
         }
         public string DeletePatientById(int id)
         {
-            return _repo.DeletePatient(id);
+            var patient = _repo.DeletePatient(id);
+
+            if (patient == null)
+            {
+                throw new PatientNotFoundException(
+                    $"Patient with id {id} not found");
+            }
+
+            return $"Patient with id {id} deleted successfully";
         }
         public string UpdatePatientById(int id, Patient patient)
         {
+            var updatedPatient = _repo.UpdatePatient(id, patient);
 
+            if (updatedPatient == null)
+            {
+                throw new PatientNotFoundException(
+                    $"Patient with id {id} not found");
+            }
 
-            return _repo.UpdatePatient(id, patient);
-
+            return $"Patient with id {id} updated successfully";
         }
     }
 }

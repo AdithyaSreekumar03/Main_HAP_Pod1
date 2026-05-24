@@ -175,26 +175,28 @@ while (true)
 
         case "2":
 
-            var patients = patientService.GetAllPatients();
+            
 
-            if (!patients.Any())
+            try
             {
-                Console.WriteLine("No Patients Found");
+                var patients = patientService.GetAllPatients();
+                    foreach (var p in patients)
+                    {
+                        Console.WriteLine("-------------------------");
+                        Console.WriteLine($"ID: {p.PatientId}");
+                        Console.WriteLine($"Name: {p.FullName}");
+                        Console.WriteLine($"DOB: {p.DateOfBirth.ToShortDateString()}");
+                        Console.WriteLine($"Gender: {p.Gender}");
+                        Console.WriteLine($"Age: {p.GetAge()}");
+                        Console.WriteLine($"Phone: {p.PhoneNumber}");
+                        Console.WriteLine($"Email: {p.Email}");
+                        Console.WriteLine($"Insurance ID: {p.InsuranceId}");
+                    }
+                
             }
-            else
+            catch(NoPatientRegisteredException ex)
             {
-                foreach (var p in patients)
-                {
-                    Console.WriteLine("-------------------------");
-                    Console.WriteLine($"ID: {p.PatientId}");
-                    Console.WriteLine($"Name: {p.FullName}");
-                    Console.WriteLine($"DOB: {p.DateOfBirth.ToShortDateString()}");
-                    Console.WriteLine($"Gender: {p.Gender}");
-                    Console.WriteLine($"Age: {p.GetAge()}");
-                    Console.WriteLine($"Phone: {p.PhoneNumber}");
-                    Console.WriteLine($"Email: {p.Email}");
-                    Console.WriteLine($"Insurance ID: {p.InsuranceId}");
-                }
+                Console.WriteLine(ex.Message);
             }
 
             break;
@@ -445,7 +447,7 @@ while (true)
                     Console.WriteLine($"IsActive: {doc.IsActive}");
                 }
             }
-            catch (NoPatientsRegisteredException ex)
+            catch (NoDoctorsRegisteredException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -825,21 +827,28 @@ while (true)
             break;
 
         case "14":
-
-            Console.Write(
-                "Patient ID: ");
-
-            int pId =
-                int.Parse(Console.ReadLine()!);
-
-            var records =
-                healthRecordService
-                .GetPatientRecords(pId);
-
-            foreach (var r in records)
+            try
             {
-                Console.WriteLine(
-                    r.GetSummary());
+
+                Console.Write(
+                    "Patient ID: ");
+
+                int pId =
+                    int.Parse(Console.ReadLine()!);
+
+                var records =
+                    healthRecordService
+                    .GetPatientRecords(pId);
+
+                foreach (var r in records)
+                {
+                    Console.WriteLine(
+                        r.GetSummary());
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
             }
 
             break;
@@ -988,13 +997,7 @@ while (true)
                         doctorId,
                         patientId);
 
-                if (!record.Any())
-                {
-                    Console.WriteLine(
-                        "No health records found.");
-                }
-                else
-                {
+               
                     Console.WriteLine(
                         "\nHealth Records:\n");
 
@@ -1024,7 +1027,7 @@ while (true)
                         Console.WriteLine(
                             "--------------------------------");
                     }
-                }
+                
             }
             catch (Exception ex)
             {
