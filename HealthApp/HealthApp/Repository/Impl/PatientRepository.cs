@@ -28,30 +28,31 @@ namespace HealthApp.Repository.Impl
 
         public Patient? GetById(int id)
         {
-            var patient = _patientDb.Patients.FirstOrDefault(pa => pa.PatientId == id);
+            return _patientDb.Patients
+                             .FirstOrDefault(pa => pa.PatientId == id);
+        }
+        public Patient? DeletePatient(int id)
+        {
+            var patient = _patientDb.Patients
+                                    .FirstOrDefault(p => p.PatientId == id);
+
             if (patient == null)
             {
-                throw new PatientNotFoundException($"Patient with id {id} not found");
-
+                return null;
             }
+
+            _patientDb.Patients.Remove(patient);
+
             return patient;
         }
-        public string DeletePatient(int id)
+        public Patient? UpdatePatient(int id, Patient patient)
         {
-            var patient = _patientDb.Patients.FirstOrDefault(p => p.PatientId == id);
-            if (patient == null)
-            {
-                throw new Exceptions.PatientNotFoundException($"Patient with {id} not found");
-            }
-            _patientDb.Patients.Remove(patient);
-            return $"Patient with id {id} deleted successfully";
-        }
-        public string UpdatePatient(int id, Patient patient)
-        {
-            var pat = _patientDb.Patients.FirstOrDefault(pa => pa.PatientId == id);
+            var pat = _patientDb.Patients
+                                .FirstOrDefault(pa => pa.PatientId == id);
+
             if (pat == null)
             {
-                throw new PatientNotFoundException($"Patient with id {id} not found");
+                return null;
             }
 
             pat.FullName = patient.FullName;
@@ -60,8 +61,8 @@ namespace HealthApp.Repository.Impl
             pat.PhoneNumber = patient.PhoneNumber;
             pat.Email = patient.Email;
             pat.InsuranceId = patient.InsuranceId;
-            return $"Patient with id {id} updated successfully";
 
+            return pat;
         }
     }
 }

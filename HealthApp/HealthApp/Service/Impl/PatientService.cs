@@ -1,4 +1,5 @@
-﻿using HealthApp.Models;
+﻿using HealthApp.Exceptions;
+using HealthApp.Models;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
@@ -18,32 +19,67 @@ namespace HealthApp.Service.Impl
 
         public void RegisterPatient(Patient patient)
         {
+
+
             if (_repo.GetAll().Any())
             {
-                patient.PatientId =_repo.GetAll().Max(p => p.PatientId) + 1;
+                patient.PatientId =
+                _repo.GetAll().Max(p => p.PatientId) + 1;
             }
             else
             {
                 patient.PatientId = 1;
             }
+
+
             _repo.Add(patient);
         }
+
         public List<Patient> GetAllPatients()
         {
-            return _repo.GetAll();
+            var result = _repo.GetAll();
+            if (!result.Any())
+            {
+                throw new NoPatientsRegisteredException("There are no Patients Registered");
+            }
+            return result;
         }
 
         public Patient? GetPatientById(int id)
         {
-            return _repo.GetById(id);
+            var patient = _repo.GetById(id);
+
+            if (patient == null)
+            {
+                throw new PatientNotFoundException(
+                    $"Patient with id {id} not found");
+            }
+
+            return patient;
         }
         public string DeletePatientById(int id)
         {
-            return _repo.DeletePatient(id);
+            var patient = _repo.DeletePatient(id);
+
+            if (patient == null)
+            {
+                throw new PatientNotFoundException(
+                    $"Patient with id {id} not found");
+            }
+
+            return $"Patient with id {id} deleted successfully";
         }
         public string UpdatePatientById(int id, Patient patient)
         {
-            return _repo.UpdatePatient(id, patient);
+            var updatedPatient = _repo.UpdatePatient(id, patient);
+
+            if (updatedPatient == null)
+            {
+                throw new PatientNotFoundException(
+                    $"Patient with id {id} not found");
+            }
+
+            return $"Patient with id {id} updated successfully";
         }
     }
 }

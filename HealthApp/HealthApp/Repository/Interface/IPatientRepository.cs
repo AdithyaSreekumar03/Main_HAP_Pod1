@@ -10,7 +10,7 @@ namespace HealthApp.Repository.Interface
         void Add(Patient patient);
         List<Patient> GetAll();
         Patient? GetById(int id);
-        string DeletePatient(int id);
-        string UpdatePatient(int id, Patient patient);
+        Patient? DeletePatient(int id);
+        Patient? UpdatePatient(int id, Patient patient);
     }
 }

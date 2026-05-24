@@ -7,7 +7,8 @@ using System.Text;
 
 namespace HealthApp.Service.Impl
 {
-    public class HealthRecordService : IHealthRecordService
+    public class HealthRecordService
+      : IHealthRecordService
     {
         private readonly IHealthRecordRepository
             _repo;
@@ -29,22 +30,38 @@ namespace HealthApp.Service.Impl
         public List<HealthRecord>
             GetPatientRecords(int patientId)
         {
-            return _repo.GetAll()
+            var result = _repo.GetAll()
                 .Where(r =>
                     r.Patient.PatientId ==
                     patientId)
                 .ToList();
+            if (!result.Any())
+            {
+                throw new Exception($"There are no health records of the patient with id {patientId}");
+            }
+            return result;
         }
 
-        public List<HealthRecord>GetHealthRecordsByDoctor(int doctorId, int patientId)
+        public List<HealthRecord>
+    GetHealthRecordsByDoctor(
+        int doctorId,
+        int patientId)
         {
-            return _repo.GetAll()
+            var result = _repo.GetAll()
                 .Where(r =>
                     r.Doctor.DoctorId == doctorId
                     &&
                     r.Patient.PatientId == patientId)
-                    .OrderByDescending(r => r.VisitDate)
-                    .ToList();
+                .OrderByDescending(r => r.VisitDate)
+                .ToList();
+
+            if (!result.Any())
+            {
+
+                throw new Exception($"There are no health records involving patient with id {patientId} and doctor with doctor id {doctorId}");
+
             }
+            return result;
+        }
     }
 }

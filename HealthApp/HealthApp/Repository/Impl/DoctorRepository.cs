@@ -30,56 +30,56 @@ namespace HealthApp.Repository.Impl
         {
             var doctor = _doctorDb.Doctors
                 .FirstOrDefault(d => d.DoctorId == id);
-            if (doctor == null)
-            {
-                throw new DoctorNotFoundException($"Doctor with id {id} not found");
 
-            }
             return doctor;
         }
-        public string DeleteDoctorById(int id)
+        public Doctor? DeleteDoctorById(int id)
         {
+            var doctor = _doctorDb.Doctors
+                                  .FirstOrDefault(p => p.DoctorId == id);
 
-            var doctor = _doctorDb.Doctors.FirstOrDefault(p => p.DoctorId == id);
             if (doctor == null)
             {
-                throw new Exceptions.DoctorNotFoundException($"Doctor with {id} not found");
+                return null;
             }
+
             _doctorDb.Doctors.Remove(doctor);
-            return $"Doctor with id {id} deleted successfully";
+
+            return doctor;
         }
-        public string UpdateDoctorById(int id, Doctor doctor)
+        public Doctor? UpdateDoctorById(int id, Doctor doctor)
         {
-            var doc = _doctorDb.Doctors.FirstOrDefault(dc => dc.DoctorId == id);
+            var doc = _doctorDb.Doctors
+                               .FirstOrDefault(dc => dc.DoctorId == id);
+
             if (doc == null)
             {
-                throw new DoctorNotFoundException($"Doctor with id {id} not found");
+                return null;
             }
+
             doc.FullName = doctor.FullName;
             doc.Specialisation = doctor.Specialisation;
             doc.DoctorPhoneNo = doctor.DoctorPhoneNo;
             doc.DoctorEmail = doctor.DoctorEmail;
             doc.YearsOfExperience = doctor.YearsOfExperience;
             doc.ConsultationFee = doctor.ConsultationFee;
-            return $"Doctor with id {id} updated successfully";
+
+            return doc;
         }
 
-        public string ChangeDoctorStatus(int id, bool isActive)
+        public Doctor? ChangeDoctorStatus(int id, bool isActive)
         {
             var doctor = _doctorDb.Doctors
-                .FirstOrDefault(d => d.DoctorId == id);
+                                  .FirstOrDefault(d => d.DoctorId == id);
 
             if (doctor == null)
             {
-                throw new DoctorNotFoundException(
-                    $"Doctor with id {id} not found");
+                return null;
             }
 
             doctor.IsActive = isActive;
 
-            return isActive
-                ? $"Doctor with id {id} is now Active"
-                : $"Doctor with id {id} is now Inactive";
+            return doctor;
         }
     }
 }

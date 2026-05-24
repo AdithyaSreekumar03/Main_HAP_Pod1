@@ -39,7 +39,7 @@ namespace HealthApp.Service.Impl
         {
             var result = _repo.GetAll();
 
-            if (result == null)
+            if (!result.Any())
             {
                 throw new NoDoctorsRegisteredException("There are no Doctors registered");
             }
@@ -48,10 +48,18 @@ namespace HealthApp.Service.Impl
 
         public Doctor? GetDoctorById(int id)
         {
-            return _repo.GetById(id);
+
+            var doctor = _repo.GetById(id);
+            if (doctor == null)
+            {
+                throw new DoctorNotFoundException($"Doctor with id {id} not found");
+
+            }
+            return doctor;
         }
 
-        public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
+        public List<Doctor> SearchBySpecialisation(
+     SpecialisationType specialisation)
         {
             return _repo.GetAll()
                 .Where(d => d.Specialisation == specialisation)
@@ -59,16 +67,42 @@ namespace HealthApp.Service.Impl
         }
         public string DeleteDoctorById(int id)
         {
-            return _repo.DeleteDoctorById(id);
+            var doctor = _repo.DeleteDoctorById(id);
+
+            if (doctor == null)
+            {
+                throw new Exceptions.DoctorNotFoundException(
+                    $"Doctor with id {id} not found");
+            }
+
+            return $"Doctor with id {id} deleted successfully";
         }
         public string UpdateDoctorById(int id, Doctor doctor)
         {
-            return _repo.UpdateDoctorById(id, doctor);
+            var updatedDoctor = _repo.UpdateDoctorById(id, doctor);
+
+            if (updatedDoctor == null)
+            {
+                throw new DoctorNotFoundException(
+                    $"Doctor with id {id} not found");
+            }
+
+            return $"Doctor with id {id} updated successfully";
         }
 
         public string ChangeDoctorStatus(int id, bool isActive)
         {
-            return _repo.ChangeDoctorStatus(id, isActive);
+            var doctor = _repo.ChangeDoctorStatus(id, isActive);
+
+            if (doctor == null)
+            {
+                throw new DoctorNotFoundException(
+                    $"Doctor with id {id} not found");
+            }
+
+            return isActive
+                ? $"Doctor with id {id} is now Active"
+                : $"Doctor with id {id} is now Inactive";
         }
     }
 }

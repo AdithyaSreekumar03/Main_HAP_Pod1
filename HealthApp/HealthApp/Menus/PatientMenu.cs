@@ -453,6 +453,5 @@ namespace HealthApp.Menus
 
             return patient;
         }
-
     }
 }
