@@ -3,6 +3,54 @@
   "WorkspaceRootPath": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{69AA97CE-0259-4604-A708-C2B6B68F4DE3}|HealthAppTesting\\HealthAppTesting.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapptesting\\servicetesting\\patientservicetesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69AA97CE-0259-4604-A708-C2B6B68F4DE3}|HealthAppTesting\\HealthAppTesting.csproj|solutionrelative:healthapptesting\\servicetesting\\patientservicetesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69AA97CE-0259-4604-A708-C2B6B68F4DE3}|HealthAppTesting\\HealthAppTesting.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapptesting\\repositorytesting\\patientrepositorytesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69AA97CE-0259-4604-A708-C2B6B68F4DE3}|HealthAppTesting\\HealthAppTesting.csproj|solutionrelative:healthapptesting\\repositorytesting\\patientrepositorytesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69AA97CE-0259-4604-A708-C2B6B68F4DE3}|HealthAppTesting\\HealthAppTesting.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapptesting\\servicetesting\\doctorservicetesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69AA97CE-0259-4604-A708-C2B6B68F4DE3}|HealthAppTesting\\HealthAppTesting.csproj|solutionrelative:healthapptesting\\servicetesting\\doctorservicetesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69AA97CE-0259-4604-A708-C2B6B68F4DE3}|HealthAppTesting\\HealthAppTesting.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapptesting\\repositorytesting\\doctorrepositorytesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69AA97CE-0259-4604-A708-C2B6B68F4DE3}|HealthAppTesting\\HealthAppTesting.csproj|solutionrelative:healthapptesting\\repositorytesting\\doctorrepositorytesting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\exceptions\\nodoctorsregisteredexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\exceptions\\nodoctorsregisteredexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\services\\impl\\patientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\services\\impl\\patientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\services\\impl\\doctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\services\\impl\\doctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\repositories\\interfaces\\idoctorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\repositories\\interfaces\\idoctorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\repositories\\impl\\doctorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\repositories\\impl\\doctorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\repositories\\interfaces\\ipatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\repositories\\interfaces\\ipatientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\repositories\\impl\\patientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\repositories\\impl\\patientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\repositories\\impl\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\repositories\\impl\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|c:\\users\\310476\\main_hap_pod1\\healthapp\\healthapp\\services\\impl\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{14164E3D-8A75-A4DA-EE92-D8290D864931}|HealthApp\\HealthApp.csproj|solutionrelative:healthapp\\services\\impl\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -34,11 +82,167 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NoDoctorsRegisteredException.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\NoDoctorsRegisteredException.cs",
+              "RelativeDocumentMoniker": "HealthApp\\Exceptions\\NoDoctorsRegisteredException.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Exceptions\\NoDoctorsRegisteredException.cs",
+              "RelativeToolTip": "HealthApp\\Exceptions\\NoDoctorsRegisteredException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:30:40.62Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DoctorServiceTesting.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\ServiceTesting\\DoctorServiceTesting.cs",
+              "RelativeDocumentMoniker": "HealthAppTesting\\ServiceTesting\\DoctorServiceTesting.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\ServiceTesting\\DoctorServiceTesting.cs",
+              "RelativeToolTip": "HealthAppTesting\\ServiceTesting\\DoctorServiceTesting.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAowDoAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:27:28.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DoctorRepositoryTesting.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\RepositoryTesting\\DoctorRepositoryTesting.cs",
+              "RelativeDocumentMoniker": "HealthAppTesting\\RepositoryTesting\\DoctorRepositoryTesting.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\RepositoryTesting\\DoctorRepositoryTesting.cs",
+              "RelativeToolTip": "HealthAppTesting\\RepositoryTesting\\DoctorRepositoryTesting.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAQwCQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:27:12.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PatientServiceTesting.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\ServiceTesting\\PatientServiceTesting.cs",
+              "RelativeDocumentMoniker": "HealthAppTesting\\ServiceTesting\\PatientServiceTesting.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\ServiceTesting\\PatientServiceTesting.cs",
+              "RelativeToolTip": "HealthAppTesting\\ServiceTesting\\PatientServiceTesting.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAA+wDQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:26:53.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PatientRepositoryTesting.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\RepositoryTesting\\PatientRepositoryTesting.cs",
+              "RelativeDocumentMoniker": "HealthAppTesting\\RepositoryTesting\\PatientRepositoryTesting.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\RepositoryTesting\\PatientRepositoryTesting.cs",
+              "RelativeToolTip": "HealthAppTesting\\RepositoryTesting\\PatientRepositoryTesting.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwDIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:25:40.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PatientService.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Services\\Impl\\PatientService.cs",
+              "RelativeDocumentMoniker": "HealthApp\\Services\\Impl\\PatientService.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Services\\Impl\\PatientService.cs",
+              "RelativeToolTip": "HealthApp\\Services\\Impl\\PatientService.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAiwDUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:19:40.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DoctorService.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Services\\Impl\\DoctorService.cs",
+              "RelativeDocumentMoniker": "HealthApp\\Services\\Impl\\DoctorService.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Services\\Impl\\DoctorService.cs",
+              "RelativeToolTip": "HealthApp\\Services\\Impl\\DoctorService.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAwwHkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:18:09.809Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IPatientRepository.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Interfaces\\IPatientRepository.cs",
+              "RelativeDocumentMoniker": "HealthApp\\Repositories\\Interfaces\\IPatientRepository.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Interfaces\\IPatientRepository.cs",
+              "RelativeToolTip": "HealthApp\\Repositories\\Interfaces\\IPatientRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:17:14.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PatientRepository.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Impl\\PatientRepository.cs",
+              "RelativeDocumentMoniker": "HealthApp\\Repositories\\Impl\\PatientRepository.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Impl\\PatientRepository.cs",
+              "RelativeToolTip": "HealthApp\\Repositories\\Impl\\PatientRepository.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAEAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:16:10.908Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IDoctorRepository.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Interfaces\\IDoctorRepository.cs",
+              "RelativeDocumentMoniker": "HealthApp\\Repositories\\Interfaces\\IDoctorRepository.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Interfaces\\IDoctorRepository.cs",
+              "RelativeToolTip": "HealthApp\\Repositories\\Interfaces\\IDoctorRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAiwBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:15:50.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DoctorRepository.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Impl\\DoctorRepository.cs",
+              "RelativeDocumentMoniker": "HealthApp\\Repositories\\Impl\\DoctorRepository.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Impl\\DoctorRepository.cs",
+              "RelativeToolTip": "HealthApp\\Repositories\\Impl\\DoctorRepository.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAswE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:14:27.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AppointmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Impl\\AppointmentRepository.cs",
+              "RelativeDocumentMoniker": "HealthApp\\Repositories\\Impl\\AppointmentRepository.cs",
+              "ToolTip": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Repositories\\Impl\\AppointmentRepository.cs",
+              "RelativeToolTip": "HealthApp\\Repositories\\Impl\\AppointmentRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T19:01:16.753Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "AppointmentService.cs",
               "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Services\\Impl\\AppointmentService.cs",
               "RelativeDocumentMoniker": "HealthApp\\Services\\Impl\\AppointmentService.cs",
@@ -51,7 +255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 14,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Program.cs",
               "RelativeDocumentMoniker": "HealthApp\\Program.cs",
@@ -64,7 +268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 13,
               "Title": "DoctorMenu.cs",
               "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Menus\\DoctorMenu.cs",
               "RelativeDocumentMoniker": "HealthApp\\Menus\\DoctorMenu.cs",
@@ -77,7 +281,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 15,
               "Title": "PatientMenu.cs",
               "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Menus\\PatientMenu.cs",
               "RelativeDocumentMoniker": "HealthApp\\Menus\\PatientMenu.cs",
@@ -90,7 +294,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 16,
               "Title": "HealthRecordServiceTesting.cs",
               "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthAppTesting\\ServiceTesting\\HealthRecordServiceTesting.cs",
               "RelativeDocumentMoniker": "HealthAppTesting\\ServiceTesting\\HealthRecordServiceTesting.cs",
@@ -103,7 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 17,
               "Title": "Appointment.cs",
               "DocumentMoniker": "C:\\Users\\310476\\Main_HAP_Pod1\\HealthApp\\HealthApp\\Model\\Appointment.cs",
               "RelativeDocumentMoniker": "HealthApp\\Model\\Appointment.cs",

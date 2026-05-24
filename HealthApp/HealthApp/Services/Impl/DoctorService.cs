@@ -2,7 +2,6 @@
 using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,56 +35,88 @@ namespace HealthApp.Service.Impl
             _repo.Add(doctor);
         }
 
-        // ✅ GET ALL DOCTORS (IMPROVED)
+        // ✅ GET ALL DOCTORS
         public List<Doctor> GetAllDoctors()
         {
-            var result = _repo.GetAll();
+            var doctors = _repo.GetAll();
 
-            // ✅ FIX: Check BOTH null and empty
-            if (result == null || !result.Any())
+            if (doctors == null || !doctors.Any())
             {
-                throw new NoDoctorsRegisteredException("No doctors found");
+                throw new NoDoctorsRegisteredException("No doctors found.");
             }
 
-            return result;
+            return doctors;
         }
 
         // ✅ GET BY ID
         public Doctor? GetDoctorById(int id)
         {
-            // Repo already throws exception if not found ✅
-            return _repo.GetById(id);
+            var doctor = _repo.GetById(id);
+
+            if (doctor == null)
+            {
+                throw new DoctorNotFoundException($"Doctor with id {id} not found");
+            }
+
+            return doctor;
         }
 
-        // ✅ SEARCH
+        // ✅ SEARCH BY SPECIALISATION
         public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
         {
             var doctors = _repo.GetAll();
 
-            var filtered = doctors
+            var result = doctors
                 .Where(d => d.Specialisation == specialisation)
                 .ToList();
 
-            return filtered;
+            if (!result.Any())
+            {
+                throw new DoctorNotFoundException($"No doctors found with specialization {specialisation}");
+            }
+
+            return result;
         }
 
-        // ✅ DELETE
+        // ✅ DELETE DOCTOR
         public string DeleteDoctorById(int id)
         {
-            // Exception handled in repo ✅
-            return _repo.DeleteDoctorById(id);
+            var doctor = _repo.DeleteDoctorById(id);
+
+            if (doctor == null)
+            {
+                throw new DoctorNotFoundException($"Doctor with id {id} not found");
+            }
+
+            return $"Doctor with id {id} deleted successfully";
         }
 
-        // ✅ UPDATE
+        // ✅ UPDATE DOCTOR
         public string UpdateDoctorById(int id, Doctor doctor)
         {
-            return _repo.UpdateDoctorById(id, doctor);
+            var updated = _repo.UpdateDoctorById(id, doctor);
+
+            if (updated == null)
+            {
+                throw new DoctorNotFoundException($"Doctor with id {id} not found");
+            }
+
+            return $"Doctor with id {id} updated successfully";
         }
 
         // ✅ CHANGE STATUS
         public string ChangeDoctorStatus(int id, bool isActive)
         {
-            return _repo.ChangeDoctorStatus(id, isActive);
+            var doctor = _repo.ChangeDoctorStatus(id, isActive);
+
+            if (doctor == null)
+            {
+                throw new DoctorNotFoundException($"Doctor with id {id} not found");
+            }
+
+            return isActive
+                ? $"Doctor with id {id} is now Active"
+                : $"Doctor with id {id} is now Inactive";
         }
     }
 }

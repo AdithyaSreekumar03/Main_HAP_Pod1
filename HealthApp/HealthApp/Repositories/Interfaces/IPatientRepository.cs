@@ -1,16 +1,21 @@
 ﻿using HealthApp.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HealthApp.Repository.Interface
 {
     public interface IPatientRepository
     {
         void Add(Patient patient);
+
         List<Patient> GetAll();
+
+        // ✅ Return null if not found
         Patient? GetById(int id);
-        string DeletePatient(int id);
-        string UpdatePatient(int id, Patient patient);
+
+        // ✅ Return deleted patient or null
+        Patient? DeletePatient(int id);
+
+        // ✅ Return updated patient or null
+        Patient? UpdatePatient(int id, Patient patient);
     }
 }

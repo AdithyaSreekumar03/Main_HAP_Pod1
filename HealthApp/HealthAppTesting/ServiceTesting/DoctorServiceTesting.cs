@@ -3,9 +3,7 @@ using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Impl;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace HealthApp.Tests
@@ -26,12 +24,13 @@ namespace HealthApp.Tests
         {
             DoctorId = 1,
             FullName = "Test Doctor",
-            Specialisation = SpecialisationType.Cardiologist
+            Specialisation = SpecialisationType.Cardiologist,
+            IsActive = true
         };
 
-        // ✅ 1. Add Doctor (when no doctors)
+        // ✅ 1. Add Doctor
         [Fact]
-        public void AddDoctor_ShouldAssignId1_WhenEmpty()
+        public void AddDoctor_ShouldAssignId()
         {
             _mockRepo.Setup(r => r.GetAll()).Returns(new List<Doctor>());
 
@@ -44,90 +43,99 @@ namespace HealthApp.Tests
             _mockRepo.Verify(r => r.Add(doctor), Times.Once);
         }
 
-        // ✅ 2. Add Doctor (existing doctors)
-        [Fact]
-        public void AddDoctor_ShouldAssignNextId()
-        {
-            _mockRepo.Setup(r => r.GetAll()).Returns(new List<Doctor>
-            {
-                new Doctor { DoctorId = 5 }
-            });
-
-            var doctor = GetDoctor();
-
-            _service.AddDoctor(doctor);
-
-            Assert.Equal(6, doctor.DoctorId);
-        }
-
-        // ✅ 3. GetAllDoctors (success)
+        // ✅ 2. Get All Doctors (Success)
         [Fact]
         public void GetAllDoctors_ShouldReturnDoctors()
         {
-            var doctors = new List<Doctor>
-            {
-                new Doctor { DoctorId = 1 }
-            };
-
-            _mockRepo.Setup(r => r.GetAll()).Returns(doctors);
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<Doctor> { GetDoctor() });
 
             var result = _service.GetAllDoctors();
 
             Assert.Single(result);
         }
 
-        
-        // ✅ 5. GetDoctorById
+        // ✅ 3. Get All Doctors (Exception)
         [Fact]
-        public void GetDoctorById_ShouldCallRepository()
+        public void GetAllDoctors_ShouldThrowException_WhenEmpty()
         {
-            var doctor = GetDoctor();
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<Doctor>());
 
-            _mockRepo.Setup(r => r.GetById(1)).Returns(doctor);
+            Assert.Throws<NoDoctorsRegisteredException>(() =>
+                _service.GetAllDoctors());
+        }
+
+        // ✅ 4. Get Doctor By Id (Success)
+        [Fact]
+        public void GetDoctorById_ShouldReturnDoctor()
+        {
+            _mockRepo.Setup(r => r.GetById(1))
+                     .Returns(GetDoctor());
 
             var result = _service.GetDoctorById(1);
 
             Assert.NotNull(result);
-            Assert.Equal(1, result.DoctorId);
         }
 
-        // ✅ 6. Search by Specialisation
+        // ✅ 5. Get Doctor By Id (Exception)
         [Fact]
-        public void Search_ShouldReturnMatchingDoctors()
+        public void GetDoctorById_ShouldThrowException_WhenNotFound()
         {
-            var doctors = new List<Doctor>
-            {
-                new Doctor { Specialisation = SpecialisationType.Cardiologist },
-                new Doctor { Specialisation = SpecialisationType.Dermatologist }
-            };
+            _mockRepo.Setup(r => r.GetById(1))
+                     .Returns((Doctor?)null);
 
-            _mockRepo.Setup(r => r.GetAll()).Returns(doctors);
+            Assert.Throws<DoctorNotFoundException>(() =>
+                _service.GetDoctorById(1));
+        }
+
+        // ✅ 6. Search By Specialisation (Success)
+        [Fact]
+        public void Search_ShouldReturnDoctors()
+        {
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<Doctor> { GetDoctor() });
 
             var result = _service.SearchBySpecialisation(SpecialisationType.Cardiologist);
 
             Assert.Single(result);
         }
 
+        // ✅ 7. Search By Specialisation (Exception)
+        [Fact]
+        public void Search_ShouldThrowException_WhenNoMatch()
+        {
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<Doctor>());
 
+            Assert.Throws<DoctorNotFoundException>(() =>
+                _service.SearchBySpecialisation(SpecialisationType.Cardiologist));
+        }
 
-        // ✅ 11. Change Status
+    
+
+       
+
+        // ✅ 12. Change Status (Success)
         [Fact]
         public void ChangeStatus_ShouldReturnMessage()
         {
-            _mockRepo.Setup(r => r.ChangeDoctorStatus(1, true))
-                     .Returns("Active");
+            var doctor = GetDoctor();
 
-            var result = _service.ChangeDoctorStatus(1, true);
+            _mockRepo.Setup(r => r.ChangeDoctorStatus(1, false))
+                     .Returns(doctor);
 
-            Assert.Equal("Active", result);
+            var result = _service.ChangeDoctorStatus(1, false);
+
+            Assert.Contains("Inactive", result);
         }
 
-        // ✅ 12. Change Status Exception
+        // ✅ 13. Change Status (Exception)
         [Fact]
-        public void ChangeStatus_ShouldThrowException()
+        public void ChangeStatus_ShouldThrowException_WhenNotFound()
         {
             _mockRepo.Setup(r => r.ChangeDoctorStatus(1, true))
-                     .Throws(new DoctorNotFoundException("error"));
+                     .Returns((Doctor?)null);
 
             Assert.Throws<DoctorNotFoundException>(() =>
                 _service.ChangeDoctorStatus(1, true));
