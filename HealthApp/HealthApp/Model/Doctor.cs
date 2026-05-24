@@ -48,12 +48,17 @@ namespace HealthApp.Model
         public bool IsValidEmail()
         {
             string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            return Regex.IsMatch(DoctorEmail, pattern);
+            return Regex.IsMatch(
+       DoctorEmail,
+       pattern,
+       RegexOptions.None,
+       TimeSpan.FromSeconds(1)
+   ); 
         }
         public bool IsValidPhoneNumber()
         {
             string pattern = @"^[0-9]{10}$";
-            return Regex.IsMatch(DoctorPhoneNo, pattern);
+            return Regex.IsMatch(DoctorPhoneNo, pattern, RegexOptions.None, TimeSpan.FromSeconds(1));
         }
         public bool IsValidName()
         {
@@ -61,7 +66,7 @@ namespace HealthApp.Model
                 return false;
 
             string pattern = @"^[a-zA-Z\s\.\-]{3,50}$";
-            return Regex.IsMatch(FullName, pattern);
+            return Regex.IsMatch(FullName, pattern, RegexOptions.None, TimeSpan.FromSeconds(1));
         }
     }
 }

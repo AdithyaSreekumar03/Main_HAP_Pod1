@@ -23,10 +23,12 @@ namespace HealthApp.Model
         public string GetSummary()
         {
             return
-                $"Record #{RecordId} | " +
-                $"Patient: {Patient.FullName} | " +
-                $"Doctor: Dr. {Doctor.FullName} | " +
-                $"Diagnosis: {Diagnosis}";
+                $"Date: {VisitDate}\n"+
+                $"Patient: {Patient.FullName}\n" +
+                $"Doctor: Dr. {Doctor.FullName}\n"+
+                $"Diagnosis: {Diagnosis}\n"+
+                $"Presription: {Prescription}\n"+
+                $"Notes: {Notes}";
         }
     }
 }

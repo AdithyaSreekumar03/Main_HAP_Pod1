@@ -6,10 +6,11 @@ using HealthApp.Repository.Impl;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Impl;
 using HealthApp.Service.Interface;
+using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Numerics;
-using Microsoft.Extensions.DependencyInjection;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 var services = new ServiceCollection();
 
@@ -55,9 +56,17 @@ while (true)
     Console.WriteLine("10. Book Appointment");
     Console.WriteLine("11. Cancel Appointment");
     Console.WriteLine("12. Add Health Record");
-    Console.WriteLine("13. View Patient Appointments");
+    Console.WriteLine("13. View Patient Upcoming Appointments");
     Console.WriteLine("14. View Health History");
-    Console.WriteLine("15. Exit");
+    Console.WriteLine("15. Check Doctor Availability");
+    Console.WriteLine("16. View Doctor Upcoming Appointment");
+    Console.WriteLine("17. View Health Records By Doctor");
+    Console.WriteLine("18. Make Doctor Active/Inactive");
+    Console.WriteLine("19. View Pending Appointments");
+    Console.WriteLine("20. Confirm Appointment");
+    Console.WriteLine("21. Cancel Appointment By Doctor");
+    Console.WriteLine("22. Exit");
+    
 
     Console.Write("\nChoose: ");
 
@@ -84,17 +93,22 @@ while (true)
 
                 while (true)
                 {
-                    Console.Write("DOB (dd-mm-yyyy): ");
+                    Console.Write("DOB (dd-MM-yyyy): ");
 
                     string dobInput = Console.ReadLine()!;
 
-                    if (!DateTime.TryParse(dobInput, out DateTime dob))
+                    if (!DateOnly.TryParseExact(
+                            dobInput,
+                            "dd-MM-yyyy",
+                            null,
+                            System.Globalization.DateTimeStyles.None,
+                            out DateOnly dob))
                     {
-                        Console.WriteLine("Invalid Date Format.");
+                        Console.WriteLine("Invalid Date Format. Use dd-MM-yyyy");
                         continue;
                     }
 
-                    if (dob > DateTime.Today)
+                    if (dob > DateOnly.FromDateTime(DateTime.Today))
                     {
                         Console.WriteLine("DOB cannot be a future date.");
                         continue;
@@ -208,17 +222,22 @@ while (true)
 
                 while (true)
                 {
-                    Console.Write("DOB (dd-mm-yyyy): ");
+                    Console.Write("DOB (dd-MM-yyyy): ");
 
                     string dobInput = Console.ReadLine()!;
 
-                    if (!DateTime.TryParse(dobInput, out DateTime dob))
+                    if (!DateOnly.TryParseExact(
+                            dobInput,
+                            "dd-MM-yyyy",
+                            null,
+                            System.Globalization.DateTimeStyles.None,
+                            out DateOnly dob))
                     {
-                        Console.WriteLine("Invalid Date Format.");
+                        Console.WriteLine("Invalid Date Format. Use dd-MM-yyyy");
                         continue;
                     }
 
-                    if (dob > DateTime.Today)
+                    if (dob > DateOnly.FromDateTime(DateTime.Today))
                     {
                         Console.WriteLine("DOB cannot be a future date.");
                         continue;
@@ -380,11 +399,28 @@ while (true)
                 Console.WriteLine("Invalid Phone Number");
             }
 
-            Console.Write("Fee: ");
-            doctor.ConsultationFee =
-                decimal.Parse(
-                    Console.ReadLine()!);
+            while (true)
+            {
+                Console.Write("Fee: ");
 
+                string feeInput = Console.ReadLine()!;
+
+                if (decimal.TryParse(feeInput, out decimal fee))
+                {
+                    if (fee <= 0)
+                    {
+                        Console.WriteLine(
+                            "Fee must be greater than zero.");
+                        continue;
+                    }
+
+                    doctor.ConsultationFee = fee;
+                    break;
+                }
+
+                Console.WriteLine(
+                    "Invalid Fee. Enter numbers only.");
+            }
 
             doctorService.AddDoctor(doctor);
 
@@ -560,6 +596,7 @@ while (true)
             break;
 
         case "10":
+            DateTime date;
             try
             {
                 Console.Write("Patient ID: ");
@@ -580,11 +617,33 @@ while (true)
                     doctorService
                     .GetDoctorById(doctorId);
 
-                Console.Write("Date: ");
+                while (true)
+                {
+                    Console.Write("Appointment Date (dd-MM-yyyy): ");
 
-                DateTime date =
-                    DateTime.Parse(
-                        Console.ReadLine()!);
+                    string input = Console.ReadLine()!;
+
+                    if (!DateTime.TryParseExact(
+                            input,
+                            "dd-MM-yyyy",
+                            null,
+                            System.Globalization.DateTimeStyles.None,
+                            out  date))
+                    {
+                        Console.WriteLine(
+                            "Invalid date format. Use dd-MM-yyyy");
+                        continue;
+                    }
+
+                    if (date.Date < DateTime.Today)
+                    {
+                        Console.WriteLine(
+                            "Appointment date cannot be in the past.");
+                        continue;
+                    }
+
+                    break;
+                }
 
                 Console.WriteLine(
                     "\nAvailable Slots:");
@@ -747,13 +806,20 @@ while (true)
                 appointmentService
                 .GetAppointmentsByPatient(pid);
 
-            foreach (var a in appointments)
+            if (!appointments.Any())
             {
                 Console.WriteLine(
-                    a.GetDetails());
+                    "No upcoming appointments found.");
+            }
+            else
+            {
+                foreach (var a in appointments)
+                {
+                    Console.WriteLine(a.GetDetails());
 
-                Console.WriteLine(
-                    "---------------");
+                    Console.WriteLine(
+                        "---------------");
+                }
             }
 
             break;
@@ -779,6 +845,329 @@ while (true)
             break;
 
         case "15":
+
+            try
+            {
+                Console.Write("Doctor ID: ");
+
+                int doctorId =
+                    int.Parse(Console.ReadLine()!);
+
+                Console.Write(
+                    "Enter Date (dd-MM-yyyy): ");
+
+                string input =
+                    Console.ReadLine()!;
+
+                if (!DateTime.TryParseExact(
+                        input,
+                        "dd-MM-yyyy",
+                        null,
+                        System.Globalization.DateTimeStyles.None,
+                        out DateTime dat))
+                {
+                    Console.WriteLine(
+                        "Invalid Date Format.");
+
+                    break;
+                }
+
+                var availableSlots =
+                    appointmentService
+                    .CheckDoctorAvailability(
+                        doctorId,
+                        dat);
+
+                Console.WriteLine(
+                    "\nAvailable Slots:");
+
+                foreach (var slot in availableSlots)
+                {
+                    Console.WriteLine(slot);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    $"Error: {ex.Message}");
+            }
+
+            break;
+
+        case "16":
+
+            try
+            {
+                Console.Write("Doctor ID: ");
+
+                int doctorId =
+                    int.Parse(Console.ReadLine()!);
+
+                Console.Write(
+                    "From Date (dd-MM-yyyy): ");
+
+                DateTime fromDate =
+                    DateTime.ParseExact(
+                        Console.ReadLine()!,
+                        "dd-MM-yyyy",
+                        null);
+
+                Console.Write(
+                    "To Date (dd-MM-yyyy): ");
+
+                DateTime toDate =
+                    DateTime.ParseExact(
+                        Console.ReadLine()!,
+                        "dd-MM-yyyy",
+                        null);
+
+                var apptments =
+                    appointmentService
+                    .GetUpcomingAppointmentsByDoctor(
+                        doctorId,
+                        fromDate,
+                        toDate);
+
+                if (!apptments.Any())
+                {
+                    Console.WriteLine(
+                        "No upcoming appointments found.");
+                }
+                else
+                {
+                    Console.WriteLine(
+                        "\nUpcoming Appointments:\n");
+
+                    foreach (var appointment in apptments)
+                    {
+                        Console.WriteLine(
+                            $"Appointment ID : {appointment.AppointmentId}");
+
+                        Console.WriteLine(
+                            $"Patient Name   : {appointment.Patient.FullName}");
+
+                        Console.WriteLine(
+                            $"Date           : {appointment.ScheduledDate:dd-MM-yyyy}");
+
+                        Console.WriteLine(
+                            $"Slot           : {appointment.TimeSlot}");
+
+                        Console.WriteLine(
+                            $"Status         : {appointment.Status}");
+
+                        Console.WriteLine(
+                            "--------------------------------");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    $"Error: {ex.Message}");
+            }
+
+            break;
+
+        case "17":
+
+            try
+            {
+                Console.Write("Doctor ID: ");
+
+                int doctorId =
+                    int.Parse(Console.ReadLine()!);
+
+                Console.Write("Patient ID: ");
+
+                int patientId =
+                    int.Parse(Console.ReadLine()!);
+
+                var record =
+                    healthRecordService
+                    .GetHealthRecordsByDoctor(
+                        doctorId,
+                        patientId);
+
+                if (!record.Any())
+                {
+                    Console.WriteLine(
+                        "No health records found.");
+                }
+                else
+                {
+                    Console.WriteLine(
+                        "\nHealth Records:\n");
+
+                    foreach (var rec in record)
+                    {
+                        Console.WriteLine(
+                            $"Record ID    : {rec.RecordId}");
+
+                        Console.WriteLine(
+                            $"Patient Name : {rec.Patient.FullName}");
+
+                        Console.WriteLine(
+                            $"Doctor Name  : Dr. {rec.Doctor.FullName}");
+
+                        Console.WriteLine(
+                            $"Visit Date   : {rec.VisitDate:dd-MM-yyyy}");
+
+                        Console.WriteLine(
+                            $"Diagnosis    : {rec.Diagnosis}");
+
+                        Console.WriteLine(
+                            $"Prescription : {rec.Prescription}");
+
+                        Console.WriteLine(
+                            $"Notes        : {rec.Notes}");
+
+                        Console.WriteLine(
+                            "--------------------------------");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    $"Error: {ex.Message}");
+            }
+
+            break;
+
+        case "18":
+
+            try
+            {
+                Console.Write("Enter Doctor ID: ");
+
+                int doctorId =
+                    int.Parse(Console.ReadLine()!);
+
+                Console.Write(
+                    "Make Doctor Active? (yes/no): ");
+
+                string input =
+                    Console.ReadLine()!.Trim().ToLower();
+
+                bool isActive;
+
+                if (input == "yes")
+                {
+                    isActive = true;
+                }
+                else if (input == "no")
+                {
+                    isActive = false;
+                }
+                else
+                {
+                    Console.WriteLine(
+                        "Invalid input. Enter yes or no.");
+                    break;
+                }
+
+                string result =
+                    doctorService.ChangeDoctorStatus(
+                        doctorId,
+                        isActive);
+
+                Console.WriteLine(result);
+            }
+            catch (DoctorNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            break;
+
+        case "19":
+
+            Console.Write("Doctor ID: ");
+
+            int doctId =
+                int.Parse(Console.ReadLine()!);
+
+            var pendingAppointments =
+                appointmentService
+                .GetPendingAppointmentsByDoctor(
+                    doctId);
+
+            if (!pendingAppointments.Any())
+            {
+                Console.WriteLine(
+                    "No pending appointments.");
+            }
+            else
+            {
+                foreach (var appointment
+                    in pendingAppointments)
+                {
+                    Console.WriteLine(
+                        appointment.GetDetails());
+
+                    Console.WriteLine(
+                        "----------------------");
+                }
+            }
+
+            break;
+
+        case "20":
+
+            try
+            {
+                Console.Write(
+                    "Appointment ID: ");
+
+                int appointId =
+                    int.Parse(Console.ReadLine()!);
+
+                appointmentService
+                    .ConfirmAppointment(
+                        appointId);
+
+                Console.WriteLine(
+                    "Appointment confirmed.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            break;
+
+        case "21":
+
+            try
+            {
+                Console.Write(
+                    "Appointment ID: ");
+
+                int appoinmentId =
+                    int.Parse(Console.ReadLine()!);
+
+                Console.Write(
+                    "Reason for cancellation: ");
+
+                string reson =
+                    Console.ReadLine()!;
+
+                appointmentService
+                    .CancelAppointment(
+                        appoinmentId,
+                        reson);
+
+                Console.WriteLine(
+                    "Appointment cancelled.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            break;
+
+        case "22":
             return;
     }
 

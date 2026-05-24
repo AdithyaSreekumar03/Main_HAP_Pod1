@@ -65,5 +65,23 @@ namespace HealthApp.Repository.Impl
 
 
         }
+
+        public string ChangeDoctorStatus(int id, bool isActive)
+        {
+            var doctor = _doctorDb.Doctors
+                .FirstOrDefault(d => d.DoctorId == id);
+
+            if (doctor == null)
+            {
+                throw new DoctorNotFoundException(
+                    $"Doctor with id {id} not found");
+            }
+
+            doctor.IsActive = isActive;
+
+            return isActive
+                ? $"Doctor with id {id} is now Active"
+                : $"Doctor with id {id} is now Inactive";
+        }
     }
 }

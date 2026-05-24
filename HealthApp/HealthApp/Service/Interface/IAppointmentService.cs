@@ -23,5 +23,17 @@ namespace HealthApp.Service.Interface
 
         List<Appointment> GetAppointmentsByPatient(
             int patientId);
+        List<string> CheckDoctorAvailability(
+    int doctorId,
+    DateTime date);
+        List<Appointment> GetUpcomingAppointmentsByDoctor(
+    int doctorId,
+    DateTime fromDate,
+    DateTime toDate);
+
+        List<Appointment> GetPendingAppointmentsByDoctor(
+    int doctorId);
+
+        void ConfirmAppointment(int appointmentId);
     }
 }
