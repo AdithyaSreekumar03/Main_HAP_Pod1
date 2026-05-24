@@ -4,6 +4,7 @@ using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace HealthApp.Repository.Impl

@@ -8,13 +8,9 @@ namespace HealthApp.Repository.Interface
     public interface IPatientRepository
     {
         void Add(Patient patient);
-
         List<Patient> GetAll();
-
         Patient? GetById(int id);
-
         string DeletePatient(int id);
-
         string UpdatePatient(int id, Patient patient);
     }
 }

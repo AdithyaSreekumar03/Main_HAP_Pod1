@@ -7,8 +7,7 @@ using System.Text;
 
 namespace HealthApp.Service.Impl
 {
-    public class HealthRecordService
-      : IHealthRecordService
+    public class HealthRecordService : IHealthRecordService
     {
         private readonly IHealthRecordRepository
             _repo;
@@ -35,6 +34,17 @@ namespace HealthApp.Service.Impl
                     r.Patient.PatientId ==
                     patientId)
                 .ToList();
+        }
+
+        public List<HealthRecord> GetHealthRecordsByDoctor(int doctorId, int patientId)
+        {
+            return _repo.GetAll()
+                .Where(r =>
+                    r.Doctor.DoctorId == doctorId
+                    &&
+                    r.Patient.PatientId == patientId)
+                    .OrderByDescending(r => r.VisitDate)
+                    .ToList();
         }
     }
 }

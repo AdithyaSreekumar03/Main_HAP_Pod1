@@ -18,10 +18,13 @@ namespace HealthApp.Service.Interface
             string reason);
 
         Appointment? GetAppointmentById(int id);
-
         List<Appointment> GetAllAppointments();
+        List<Appointment> GetAppointmentsByPatient(int patientId);
+        List<string> CheckDoctorAvailability(int doctorId, DateTime date);
+        List<Appointment> GetUpcomingAppointmentsByDoctor(int doctorId, DateTime fromDate, DateTime toDate);
 
-        List<Appointment> GetAppointmentsByPatient(
-            int patientId);
+        List<Appointment> GetPendingAppointmentsByDoctor(int doctorId);
+
+        void ConfirmAppointment(int appointmentId);
     }
 }

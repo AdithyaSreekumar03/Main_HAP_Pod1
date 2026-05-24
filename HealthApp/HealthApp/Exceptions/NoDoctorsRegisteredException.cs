@@ -4,8 +4,8 @@ using System.Text;
 
 namespace HealthApp.Exceptions
 {
-    public class NoPatientsRegisteredException : Exception
+    internal class NoDoctorsRegisteredException : Exception
     {
-        public NoPatientsRegisteredException(string message) : base(message) { }
+        public NoDoctorsRegisteredException(string message) : base(message) { }
     }
 }

@@ -1,83 +1,85 @@
-﻿using System;
-using System.Collections.Generic;
-using HealthApp.Model;
+﻿using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Impl;
-using HealthApp.Exceptions;
 using Moq;
+using System.Collections.Generic;
 using Xunit;
 
 namespace HealthApp.Tests
 {
-    public class PatientServiceTests
+    public class PatientServiceTesting
     {
-        private readonly Mock<IPatientRepository> _repoMock;
+        private readonly Mock<IPatientRepository> _mockRepo;
         private readonly PatientService _service;
 
-        public PatientServiceTests()
+        public PatientServiceTesting()
         {
-            _repoMock = new Mock<IPatientRepository>();
-            _service = new PatientService(_repoMock.Object);
+            _mockRepo = new Mock<IPatientRepository>();
+            _service = new PatientService(_mockRepo.Object);
         }
 
-        private Patient GetPatient() =>
-            new Patient { PatientId = 1, FullName = "Test" };
-
-
-
-        // ✅ 1. Register Patient Success
-        [Fact]
-        public void RegisterPatient_Should_Add_Patient()
+        // ✅ Helper
+        private Patient GetPatient() => new Patient
         {
-            _repoMock.Setup(r => r.GetAll()).Returns(new List<Patient>());
+            PatientId = 1,
+            FullName = "Test Patient"
+        };
 
-            var patient = new Patient { FullName = "Rishab" };
+        // ✅ 1. Register Patient (Empty list → ID = 1)
+        [Fact]
+        public void RegisterPatient_ShouldAssignId_WhenEmpty()
+        {
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<Patient>());
+
+            var patient = GetPatient();
 
             _service.RegisterPatient(patient);
 
-            _repoMock.Verify(r => r.Add(It.IsAny<Patient>()), Times.Once);
+            Assert.Equal(1, patient.PatientId);
+            _mockRepo.Verify(r => r.Add(patient), Times.Once);
         }
 
-
-
-        // ✅ 2. Register assigns correct ID
+        // ✅ 2. Register Patient (Existing patients → next ID)
         [Fact]
-        public void RegisterPatient_Should_Set_Id()
+        public void RegisterPatient_ShouldAssignNextId()
         {
-            _repoMock.Setup(r => r.GetAll()).Returns(new List<Patient>
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<Patient>
+                     {
+                         new Patient { PatientId = 5 }
+                     });
+
+            var patient = GetPatient();
+
+            _service.RegisterPatient(patient);
+
+            Assert.Equal(6, patient.PatientId);
+        }
+
+        // ✅ 3. Get All Patients
+        [Fact]
+        public void GetAllPatients_ShouldReturnPatients()
+        {
+            var patients = new List<Patient>
             {
-                new Patient { PatientId = 1 }
-            });
+                GetPatient()
+            };
 
-            var patient = new Patient();
-
-            _service.RegisterPatient(patient);
-
-            Assert.Equal(2, patient.PatientId);
-        }
-
-
-
-        // ✅ 3. GetAll Patients
-        [Fact]
-        public void GetAllPatients_Should_Return_List()
-        {
-            _repoMock.Setup(r => r.GetAll())
-                .Returns(new List<Patient> { GetPatient() });
+            _mockRepo.Setup(r => r.GetAll()).Returns(patients);
 
             var result = _service.GetAllPatients();
 
             Assert.Single(result);
         }
 
-
-
-        // ✅ 4. GetPatientById Success
+        // ✅ 4. Get Patient By Id
         [Fact]
-        public void GetPatientById_Should_Return_Patient()
+        public void GetPatientById_ShouldReturnPatient()
         {
-            _repoMock.Setup(r => r.GetById(1))
-                     .Returns(GetPatient());
+            var patient = GetPatient();
+
+            _mockRepo.Setup(r => r.GetById(1)).Returns(patient);
 
             var result = _service.GetPatientById(1);
 
@@ -85,57 +87,11 @@ namespace HealthApp.Tests
             Assert.Equal(1, result.PatientId);
         }
 
-
-
-        // ✅ 5. GetPatientById Not Found (Exception)
+        // ✅ 5. Delete Patient
         [Fact]
-        public void GetPatientById_Should_Throw_Exception()
+        public void DeletePatient_ShouldReturnMessage()
         {
-            _repoMock.Setup(r => r.GetById(1))
-                     .Throws(new PatientNotFoundException("Not found"));
-
-            Assert.Throws<PatientNotFoundException>(() =>
-                _service.GetPatientById(1));
-        }
-
-
-
-        // ✅ 6. Update Patient Success
-        [Fact]
-        public void UpdatePatient_Should_Call_Repository()
-        {
-            var patient = new Patient { FullName = "Updated" };
-
-            _repoMock.Setup(r => r.UpdatePatient(1, patient))
-                     .Returns("updated");
-
-            var result = _service.UpdatePatientById(1, patient);
-
-            Assert.Equal("updated", result);
-        }
-
-
-
-        // ✅ 7. Update Patient Not Found
-        [Fact]
-        public void UpdatePatient_Should_Throw_Exception()
-        {
-            var patient = new Patient();
-
-            _repoMock.Setup(r => r.UpdatePatient(1, patient))
-                     .Throws(new PatientNotFoundException("Not found"));
-
-            Assert.Throws<PatientNotFoundException>(() =>
-                _service.UpdatePatientById(1, patient));
-        }
-
-
-
-        // ✅ 8. Delete Patient Success
-        [Fact]
-        public void DeletePatient_Should_Call_Repository()
-        {
-            _repoMock.Setup(r => r.DeletePatient(1))
+            _mockRepo.Setup(r => r.DeletePatient(1))
                      .Returns("deleted");
 
             var result = _service.DeletePatientById(1);
@@ -143,17 +99,38 @@ namespace HealthApp.Tests
             Assert.Equal("deleted", result);
         }
 
-
-
-        // ✅ 9. Delete Patient Not Found
+        // ✅ 6. Delete Patient Exception
         [Fact]
-        public void DeletePatient_Should_Throw_Exception()
+        public void DeletePatient_ShouldThrowException()
         {
-            _repoMock.Setup(r => r.DeletePatient(1))
-                     .Throws(new PatientNotFoundException("Not found"));
+            _mockRepo.Setup(r => r.DeletePatient(1))
+                     .Throws(new Exceptions.PatientNotFoundException("error"));
 
-            Assert.Throws<PatientNotFoundException>(() =>
+            Assert.Throws<Exceptions.PatientNotFoundException>(() =>
                 _service.DeletePatientById(1));
+        }
+
+        // ✅ 7. Update Patient
+        [Fact]
+        public void UpdatePatient_ShouldReturnMessage()
+        {
+            _mockRepo.Setup(r => r.UpdatePatient(1, It.IsAny<Patient>()))
+                     .Returns("updated");
+
+            var result = _service.UpdatePatientById(1, GetPatient());
+
+            Assert.Equal("updated", result);
+        }
+
+        // ✅ 8. Update Patient Exception
+        [Fact]
+        public void UpdatePatient_ShouldThrowException()
+        {
+            _mockRepo.Setup(r => r.UpdatePatient(1, It.IsAny<Patient>()))
+                     .Throws(new Exceptions.PatientNotFoundException("error"));
+
+            Assert.Throws<Exceptions.PatientNotFoundException>(() =>
+                _service.UpdatePatientById(1, GetPatient()));
         }
     }
 }

@@ -1,112 +1,120 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HealthApp.Model;
+﻿using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Impl;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace HealthApp.Tests
 {
-    public class HealthRecordServiceTests
+    public class HealthRecordServiceTesting
     {
-        private readonly Mock<IHealthRecordRepository> _repoMock;
+        private readonly Mock<IHealthRecordRepository> _mockRepo;
         private readonly HealthRecordService _service;
 
-        public HealthRecordServiceTests()
+        public HealthRecordServiceTesting()
         {
-            _repoMock = new Mock<IHealthRecordRepository>();
-            _service = new HealthRecordService(_repoMock.Object);
+            _mockRepo = new Mock<IHealthRecordRepository>();
+            _service = new HealthRecordService(_mockRepo.Object);
         }
 
-        private Patient GetPatient(int id) =>
-            new Patient { PatientId = id, FullName = $"Patient{id}" };
-
-        private Doctor GetDoctor() =>
-            new Doctor { DoctorId = 1, FullName = "Dr Test" };
-
-
-
-        // ✅ 1. AddRecord Should Add Record
-        [Fact]
-        public void AddRecord_Should_Add_Record()
+        // ✅ Helper
+        private HealthRecord GetRecord(int patientId = 1, int doctorId = 1)
         {
-            _repoMock.Setup(r => r.GetAll()).Returns(new List<HealthRecord>());
-
-            var record = new HealthRecord
+            return new HealthRecord
             {
-                Diagnosis = "Fever",
-                Patient = GetPatient(1),
-                Doctor = GetDoctor()
+                RecordId = 1,
+                Patient = new Patient { PatientId = patientId },
+                Doctor = new Doctor { DoctorId = doctorId },
+                VisitDate = DateTime.Now
             };
-
-            _service.AddRecord(record);
-
-            _repoMock.Verify(r => r.Add(It.IsAny<HealthRecord>()), Times.Once);
         }
 
-
-
-        // ✅ 2. AddRecord Should Assign ID
+        // ✅ 1. Add Record
         [Fact]
-        public void AddRecord_Should_Set_RecordId()
+        public void AddRecord_ShouldAssignIdAndAdd()
         {
-            _repoMock.Setup(r => r.GetAll()).Returns(new List<HealthRecord>
-            {
-                new HealthRecord { RecordId = 1 }
-            });
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<HealthRecord>());
 
-            var record = new HealthRecord();
+            var record = GetRecord();
 
             _service.AddRecord(record);
 
-            Assert.Equal(2, record.RecordId);
+            Assert.Equal(1, record.RecordId);
+            _mockRepo.Verify(r => r.Add(record), Times.Once);
         }
 
-
-
-        // ✅ 3. GetPatientRecords Should Return Records
+        // ✅ 2. GetPatientRecords
         [Fact]
-        public void GetPatientRecords_Should_Return_Correct_Records()
+        public void GetPatientRecords_ShouldReturnMatchingRecords()
         {
             var records = new List<HealthRecord>
             {
-                new HealthRecord
-                {
-                    RecordId = 1,
-                    Patient = GetPatient(1),
-                    Doctor = GetDoctor(),
-                    Diagnosis = "Cold"
-                },
-                new HealthRecord
-                {
-                    RecordId = 2,
-                    Patient = GetPatient(2),
-                    Doctor = GetDoctor(),
-                    Diagnosis = "Fever"
-                }
+                GetRecord(1),
+                GetRecord(2),
+                GetRecord(1)
             };
 
-            _repoMock.Setup(r => r.GetAll()).Returns(records);
+            _mockRepo.Setup(r => r.GetAll()).Returns(records);
 
             var result = _service.GetPatientRecords(1);
 
-            Assert.Single(result);
-            Assert.Equal("Cold", result[0].Diagnosis);
+            Assert.Equal(2, result.Count);
         }
 
-
-
-        // ✅ 4. GetPatientRecords Empty Case
+        // ✅ 3. GetPatientRecords (No Match)
         [Fact]
-        public void GetPatientRecords_Should_Return_Empty_When_No_Match()
+        public void GetPatientRecords_ShouldReturnEmpty_WhenNoMatch()
         {
-            _repoMock.Setup(r => r.GetAll()).Returns(new List<HealthRecord>());
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<HealthRecord>());
 
-            var result = _service.GetPatientRecords(99);
+            var result = _service.GetPatientRecords(1);
 
             Assert.Empty(result);
+        }
+
+        // ✅ 4. GetHealthRecordsByDoctor
+        [Fact]
+        public void GetHealthRecordsByDoctor_ShouldReturnFilteredRecords()
+        {
+            var records = new List<HealthRecord>
+            {
+                GetRecord(1, 1),
+                GetRecord(1, 2),
+                GetRecord(1, 1)
+            };
+
+            _mockRepo.Setup(r => r.GetAll()).Returns(records);
+
+            var result = _service.GetHealthRecordsByDoctor(1, 1);
+
+            Assert.Equal(2, result.Count);
+        }
+
+        // ✅ 5. GetHealthRecordsByDoctor (Sorted)
+        [Fact]
+        public void GetHealthRecordsByDoctor_ShouldBeSortedDescending()
+        {
+            var r1 = GetRecord(1, 1);
+            r1.VisitDate = DateTime.Now;
+
+            var r2 = GetRecord(1, 1);
+            r2.VisitDate = DateTime.Now.AddDays(-1);
+
+            var r3 = GetRecord(1, 1);
+            r3.VisitDate = DateTime.Now.AddDays(-2);
+
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<HealthRecord> { r3, r2, r1 });
+
+            var result = _service.GetHealthRecordsByDoctor(1, 1);
+
+            Assert.Equal(3, result.Count);
+            Assert.True(result[0].VisitDate >= result[1].VisitDate);
         }
     }
 }

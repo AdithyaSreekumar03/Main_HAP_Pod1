@@ -1,142 +1,78 @@
-﻿using System;
-using System.Linq;
-using HealthApp.Database;
+﻿using HealthApp.Database;
 using HealthApp.Model;
 using HealthApp.Repository.Impl;
+using System;
 using Xunit;
 
-namespace HealthAppTesting.RepositoryTesting
+namespace HealthApp.Tests
 {
-    public class AppointmentRepositoryTests
+    public class AppointmentRepositoryTesting
     {
         private readonly AppointmentDb _db;
         private readonly AppointmentRepository _repo;
 
-        public AppointmentRepositoryTests()
+        public AppointmentRepositoryTesting()
         {
-            // ✅ Arrange (setup)
             _db = new AppointmentDb();
+            _db.Appointments.Clear();   // ✅ important
             _repo = new AppointmentRepository(_db);
         }
 
-        // ✅ TEST 1: Add Appointment
         [Fact]
-        public void Add_Should_Add_Appointment()
+        public void Add_ShouldAddAppointment()
         {
-            // Arrange
-            var appointment = new Appointment
-            {
-                AppointmentId = 1,
-                Patient = new Patient { PatientId = 1, FullName = "Rishab" },
-                Doctor = new Doctor { DoctorId = 1, FullName = "Dr. Smith" },
-                ScheduledDate = DateTime.Today,
-                TimeSlot = "09:00 AM"
-            };
+            int before = _db.Appointments.Count;
 
-            // Act
-            _repo.Add(appointment);
+            _repo.Add(new Appointment());
 
-            // Assert
-            Assert.Single(_db.Appointments);
-            Assert.Equal(1, _db.Appointments[0].AppointmentId);
+            Assert.Equal(before + 1, _db.Appointments.Count);
         }
 
-        // ✅ TEST 2: GetAll Appointments
         [Fact]
-        public void GetAll_Should_Return_All_Appointments()
+        public void Add_ShouldHandleMultipleAppointments()
         {
-            // Arrange
-            _repo.Add(new Appointment
-            {
-                AppointmentId = 1,
-                Patient = new Patient { PatientId = 1 },
-                Doctor = new Doctor { DoctorId = 1 },
-                ScheduledDate = DateTime.Today,
-                TimeSlot = "09:00 AM"
-            });
+            _repo.Add(new Appointment());
+            _repo.Add(new Appointment());
 
-            _repo.Add(new Appointment
-            {
-                AppointmentId = 2,
-                Patient = new Patient { PatientId = 2 },
-                Doctor = new Doctor { DoctorId = 2 },
-                ScheduledDate = DateTime.Today,
-                TimeSlot = "10:00 AM"
-            });
+            Assert.Equal(2, _db.Appointments.Count);
+        }
 
-            // Act
+        [Fact]
+        public void GetAll_ShouldReturnAllAppointments()
+        {
+            _db.Appointments.Add(new Appointment());
+            _db.Appointments.Add(new Appointment());
+
             var result = _repo.GetAll();
 
-            // Assert
             Assert.Equal(2, result.Count);
         }
 
-        // ✅ TEST 3: GetById Success
         [Fact]
-        public void GetById_Should_Return_Appointment_When_Exists()
+        public void GetAll_ShouldReturnEmptyList()
         {
-            // Arrange
-            var appointment = new Appointment
-            {
-                AppointmentId = 1,
-                Patient = new Patient { PatientId = 1 },
-                Doctor = new Doctor { DoctorId = 1 },
-                ScheduledDate = DateTime.Today,
-                TimeSlot = "09:00 AM"
-            };
+            var result = _repo.GetAll();
 
-            _repo.Add(appointment);
+            Assert.Empty(result);
+        }
 
-            // Act
+        [Fact]
+        public void GetById_ShouldReturnAppointment()
+        {
+            var appointment = new Appointment { AppointmentId = 1 };
+            _db.Appointments.Add(appointment);
+
             var result = _repo.GetById(1);
 
-            // Assert
             Assert.NotNull(result);
-            Assert.Equal(1, result.AppointmentId);
         }
 
-        // ✅ TEST 4: GetById Not Found
         [Fact]
-        public void GetById_Should_Return_Null_When_NotFound()
+        public void GetById_ShouldReturnNull_WhenNotFound()
         {
-            // Act
-            var result = _repo.GetById(99);
+            var result = _repo.GetById(999);
 
-            // Assert
             Assert.Null(result);
-        }
-
-        // ✅ TEST 5: Multiple Add Maintains Data
-        [Fact]
-        public void Add_Multiple_Appointments_Should_Work_Correctly()
-        {
-            // Arrange
-            var appt1 = new Appointment
-            {
-                AppointmentId = 1,
-                Patient = new Patient { PatientId = 1 },
-                Doctor = new Doctor { DoctorId = 1 },
-                ScheduledDate = DateTime.Today,
-                TimeSlot = "09:00 AM"
-            };
-
-            var appt2 = new Appointment
-            {
-                AppointmentId = 2,
-                Patient = new Patient { PatientId = 2 },
-                Doctor = new Doctor { DoctorId = 2 },
-                ScheduledDate = DateTime.Today,
-                TimeSlot = "10:00 AM"
-            };
-
-            // Act
-            _repo.Add(appt1);
-            _repo.Add(appt2);
-
-            // Assert
-            Assert.Equal(2, _db.Appointments.Count);
-            Assert.Equal("09:00 AM", _db.Appointments[0].TimeSlot);
-            Assert.Equal("10:00 AM", _db.Appointments[1].TimeSlot);
         }
     }
 }

@@ -4,7 +4,7 @@ using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace HealthApp.Service.Impl
 {
@@ -17,13 +17,14 @@ namespace HealthApp.Service.Impl
             _repo = repo;
         }
 
+        // ✅ ADD DOCTOR
         public void AddDoctor(Doctor doctor)
         {
+            var doctors = _repo.GetAll();
 
-            if (_repo.GetAll().Any())
+            if (doctors.Any())
             {
-                doctor.DoctorId =
-                _repo.GetAll().Max(d => d.DoctorId) + 1;
+                doctor.DoctorId = doctors.Max(d => d.DoctorId) + 1;
             }
             else
             {
@@ -35,38 +36,56 @@ namespace HealthApp.Service.Impl
             _repo.Add(doctor);
         }
 
+        // ✅ GET ALL DOCTORS (IMPROVED)
         public List<Doctor> GetAllDoctors()
         {
             var result = _repo.GetAll();
 
-            if (result == null)
+            // ✅ FIX: Check BOTH null and empty
+            if (result == null || !result.Any())
             {
-                throw new NoPatientsRegisteredException("There are no Doctors registered");
+                throw new NoDoctorsRegisteredException("No doctors found");
             }
+
             return result;
         }
 
+        // ✅ GET BY ID
         public Doctor? GetDoctorById(int id)
         {
+            // Repo already throws exception if not found ✅
             return _repo.GetById(id);
         }
 
-        public List<Doctor> SearchBySpecialisation(
-     SpecialisationType specialisation)
+        // ✅ SEARCH
+        public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
         {
-            return _repo.GetAll()
+            var doctors = _repo.GetAll();
+
+            var filtered = doctors
                 .Where(d => d.Specialisation == specialisation)
                 .ToList();
+
+            return filtered;
         }
+
+        // ✅ DELETE
         public string DeleteDoctorById(int id)
         {
+            // Exception handled in repo ✅
             return _repo.DeleteDoctorById(id);
         }
+
+        // ✅ UPDATE
         public string UpdateDoctorById(int id, Doctor doctor)
         {
-
-
             return _repo.UpdateDoctorById(id, doctor);
+        }
+
+        // ✅ CHANGE STATUS
+        public string ChangeDoctorStatus(int id, bool isActive)
+        {
+            return _repo.ChangeDoctorStatus(id, isActive);
         }
     }
 }

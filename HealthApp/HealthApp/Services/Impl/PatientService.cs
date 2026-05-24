@@ -18,22 +18,16 @@ namespace HealthApp.Service.Impl
 
         public void RegisterPatient(Patient patient)
         {
-
-
             if (_repo.GetAll().Any())
             {
-                patient.PatientId =
-                _repo.GetAll().Max(p => p.PatientId) + 1;
+                patient.PatientId = _repo.GetAll().Max(p => p.PatientId) + 1;
             }
             else
             {
                 patient.PatientId = 1;
             }
-
-
             _repo.Add(patient);
         }
-
         public List<Patient> GetAllPatients()
         {
             return _repo.GetAll();
@@ -49,10 +43,7 @@ namespace HealthApp.Service.Impl
         }
         public string UpdatePatientById(int id, Patient patient)
         {
-
-
             return _repo.UpdatePatient(id, patient);
-
         }
     }
 }

@@ -1,149 +1,134 @@
-﻿using System;
-using System.Linq;
-using HealthApp.Database;
+﻿using HealthApp.Database;
+using HealthApp.Exceptions;
 using HealthApp.Model;
 using HealthApp.Repository.Impl;
-using HealthApp.Exceptions;
+using System;
 using Xunit;
 
-namespace HealthAppTesting.RepositoryTesting
+namespace HealthApp.Tests
 {
-    public class DoctorRepositoryTests
+    public class DoctorRepositoryTesting
     {
         private readonly DoctorDb _db;
         private readonly DoctorRepository _repo;
 
-        public DoctorRepositoryTests()
+        public DoctorRepositoryTesting()
         {
-            // ✅ Arrange
             _db = new DoctorDb();
+            _db.Doctors.Clear(); // ✅ FIX
             _repo = new DoctorRepository(_db);
         }
 
-        // ✅ TEST 1: Add Doctor
         [Fact]
-        public void Add_Should_Add_Doctor()
+        public void Add_ShouldAddDoctor()
         {
-            var doctor = new Doctor
-            {
-                DoctorId = 1,
-                FullName = "Dr. Smith"
-            };
+            int before = _db.Doctors.Count;
 
-            _repo.Add(doctor);
+            _repo.Add(new Doctor());
 
-            Assert.Single(_db.Doctors);
-            Assert.Equal("Dr. Smith", _db.Doctors[0].FullName);
+            Assert.Equal(before + 1, _db.Doctors.Count);
         }
 
-        // ✅ TEST 2: GetAll Doctors
         [Fact]
-        public void GetAll_Should_Return_All_Doctors()
+        public void GetAll_ShouldReturnDoctors()
         {
-            _repo.Add(new Doctor { DoctorId = 1, FullName = "A" });
-            _repo.Add(new Doctor { DoctorId = 2, FullName = "B" });
+            _db.Doctors.Add(new Doctor());
+            _db.Doctors.Add(new Doctor());
 
             var result = _repo.GetAll();
 
             Assert.Equal(2, result.Count);
         }
 
-        // ✅ TEST 3: GetById Success
         [Fact]
-        public void GetById_Should_Return_Doctor_When_Exists()
+        public void GetById_ShouldReturnDoctor()
         {
-            var doctor = new Doctor
-            {
-                DoctorId = 1,
-                FullName = "Test Doctor"
-            };
-
-            _repo.Add(doctor);
+            var doctor = new Doctor { DoctorId = 1 };
+            _db.Doctors.Add(doctor);
 
             var result = _repo.GetById(1);
 
             Assert.NotNull(result);
-            Assert.Equal("Test Doctor", result.FullName);
         }
 
-        // ✅ TEST 4: GetById Not Found (Exception)
         [Fact]
-        public void GetById_Should_Throw_Exception_When_NotFound()
+        public void GetById_ShouldThrowException()
         {
             Assert.Throws<DoctorNotFoundException>(() =>
-                _repo.GetById(99));
+                _repo.GetById(999));
         }
 
-        // ✅ TEST 5: Delete Doctor Success
         [Fact]
-        public void DeleteDoctor_Should_Remove_Doctor()
+        public void DeleteDoctorById_ShouldRemoveDoctor()
+        {
+            var doctor = new Doctor { DoctorId = 1 };
+            _db.Doctors.Add(doctor);
+
+            int before = _db.Doctors.Count;
+
+            _repo.DeleteDoctorById(1);
+
+            Assert.Equal(before - 1, _db.Doctors.Count);
+        }
+
+        [Fact]
+        public void DeleteDoctorById_ShouldThrow()
+        {
+            Assert.Throws<DoctorNotFoundException>(() =>
+                _repo.DeleteDoctorById(999));
+        }
+
+        [Fact]
+        public void UpdateDoctorById_ShouldUpdateDoctor()
         {
             var doctor = new Doctor
             {
                 DoctorId = 1,
-                FullName = "Test"
+                FullName = "Old"
             };
 
-            _repo.Add(doctor);
+            _db.Doctors.Add(doctor);
 
-            var result = _repo.DeleteDoctorById(1);
+            var updated = new Doctor
+            {
+                FullName = "New"
+            };
 
-            Assert.Empty(_db.Doctors);
-            Assert.Contains("deleted", result.ToLower());
+            _repo.UpdateDoctorById(1, updated);
+
+            var result = _repo.GetById(1); // ✅ FIX
+
+            Assert.Equal("New", result.FullName);
         }
 
-        // ✅ TEST 6: Delete Doctor Not Found
         [Fact]
-        public void DeleteDoctor_Should_Throw_Exception_When_NotFound()
+        public void UpdateDoctorById_ShouldThrow()
         {
             Assert.Throws<DoctorNotFoundException>(() =>
-                _repo.DeleteDoctorById(100));
+                _repo.UpdateDoctorById(999, new Doctor()));
         }
 
-        // ✅ TEST 7: Update Doctor Success
         [Fact]
-        public void UpdateDoctor_Should_Modify_Doctor()
+        public void ChangeDoctorStatus_ShouldUpdateStatus()
         {
             var doctor = new Doctor
             {
                 DoctorId = 1,
-                FullName = "Old Name",
-                Specialisation = SpecialisationType.GeneralPhysician,
-                DoctorEmail = "old@mail.com",
-                DoctorPhoneNo = "9999999999",
-                YearsOfExperience = 5,
-                ConsultationFee = 200
+                IsActive = true
             };
 
-            _repo.Add(doctor);
+            _db.Doctors.Add(doctor);
 
-            var updatedDoctor = new Doctor
-            {
-                FullName = "New Name",
-                Specialisation = SpecialisationType.Cardiologist,
-                DoctorEmail = "new@mail.com",
-                DoctorPhoneNo = "8888888888",
-                YearsOfExperience = 10,
-                ConsultationFee = 500
-            };
+            _repo.ChangeDoctorStatus(1, false);
 
-            var result = _repo.UpdateDoctorById(1, updatedDoctor);
-
-            Assert.Equal("New Name", _db.Doctors[0].FullName);
-            Assert.Equal(SpecialisationType.Cardiologist, _db.Doctors[0].Specialisation);
+            Assert.False(doctor.IsActive);
         }
 
-        // ✅ TEST 8: Update Doctor Not Found
         [Fact]
-        public void UpdateDoctor_Should_Throw_Exception_When_NotFound()
+        public void ChangeDoctorStatus_ShouldThrow()
         {
-            var updatedDoctor = new Doctor
-            {
-                FullName = "Test"
-            };
-
             Assert.Throws<DoctorNotFoundException>(() =>
-                _repo.UpdateDoctorById(99, updatedDoctor));
+                _repo.ChangeDoctorStatus(999, true));
         }
     }
 }

@@ -1,8 +1,0 @@
-C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTests\bin\Debug\net10.0\.msCoverageSourceRootsMapping_HealthAppTests
-C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTests\bin\Debug\net10.0\CoverletSourceRootsMapping_HealthAppTests
-C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\HealthAppTests.csproj.AssemblyReference.cache
-C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\HealthAppTests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\HealthAppTests.AssemblyInfoInputs.cache
-C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\HealthAppTests.AssemblyInfo.cs
-C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\HealthAppTests.csproj.CoreCompileInputs.cache
-C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\HealthAppTests.sourcelink.json
