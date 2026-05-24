@@ -20,7 +20,7 @@ namespace HealthApp.Service.Impl
         {
             if (_repo.GetAll().Any())
             {
-                patient.PatientId = _repo.GetAll().Max(p => p.PatientId) + 1;
+                patient.PatientId =_repo.GetAll().Max(p => p.PatientId) + 1;
             }
             else
             {

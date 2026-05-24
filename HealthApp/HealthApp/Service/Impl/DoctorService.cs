@@ -65,5 +65,10 @@ namespace HealthApp.Service.Impl
         {
             return _repo.UpdateDoctorById(id, doctor);
         }
+
+        public string ChangeDoctorStatus(int id, bool isActive)
+        {
+            return _repo.ChangeDoctorStatus(id, isActive);
+        }
     }
 }

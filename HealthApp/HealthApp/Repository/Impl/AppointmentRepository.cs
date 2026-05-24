@@ -8,7 +8,7 @@ using System.Text;
 
 namespace HealthApp.Repository.Impl
 {
-    public class AppointmentRepository : IAppointmentRepository
+    public class AppointmentRepository: IAppointmentRepository
     {
         private readonly AppointmentDb _appointmentDb;
         public AppointmentRepository(AppointmentDb appointmentDb)
@@ -19,12 +19,10 @@ namespace HealthApp.Repository.Impl
         {
             _appointmentDb.Appointments.Add(appointment);
         }
-
         public List<Appointment> GetAll()
         {
             return _appointmentDb.Appointments;
         }
-
         public Appointment? GetById(int id)
         {
             return _appointmentDb.Appointments

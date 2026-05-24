@@ -18,17 +18,17 @@ namespace HealthApp.Repository.Impl
 
         public void Add(Doctor doctor)
         {
-            _doctorDb.doctors.Add(doctor);
+            _doctorDb.Doctors.Add(doctor);
         }
 
         public List<Doctor> GetAll()
         {
-            return _doctorDb.doctors;
+            return _doctorDb.Doctors;
         }
 
         public Doctor? GetById(int id)
         {
-            var doctor = _doctorDb.doctors
+            var doctor = _doctorDb.Doctors
                 .FirstOrDefault(d => d.DoctorId == id);
             if (doctor == null)
             {
@@ -40,17 +40,17 @@ namespace HealthApp.Repository.Impl
         public string DeleteDoctorById(int id)
         {
 
-            var doctor = _doctorDb.doctors.FirstOrDefault(p => p.DoctorId == id);
+            var doctor = _doctorDb.Doctors.FirstOrDefault(p => p.DoctorId == id);
             if (doctor == null)
             {
                 throw new Exceptions.DoctorNotFoundException($"Doctor with {id} not found");
             }
-            _doctorDb.doctors.Remove(doctor);
+            _doctorDb.Doctors.Remove(doctor);
             return $"Doctor with id {id} deleted successfully";
         }
         public string UpdateDoctorById(int id, Doctor doctor)
         {
-            var doc = _doctorDb.doctors.FirstOrDefault(dc => dc.DoctorId == id);
+            var doc = _doctorDb.Doctors.FirstOrDefault(dc => dc.DoctorId == id);
             if (doc == null)
             {
                 throw new DoctorNotFoundException($"Doctor with id {id} not found");
@@ -62,6 +62,24 @@ namespace HealthApp.Repository.Impl
             doc.YearsOfExperience = doctor.YearsOfExperience;
             doc.ConsultationFee = doctor.ConsultationFee;
             return $"Doctor with id {id} updated successfully";
+        }
+
+        public string ChangeDoctorStatus(int id, bool isActive)
+        {
+            var doctor = _doctorDb.Doctors
+                .FirstOrDefault(d => d.DoctorId == id);
+
+            if (doctor == null)
+            {
+                throw new DoctorNotFoundException(
+                    $"Doctor with id {id} not found");
+            }
+
+            doctor.IsActive = isActive;
+
+            return isActive
+                ? $"Doctor with id {id} is now Active"
+                : $"Doctor with id {id} is now Inactive";
         }
     }
 }

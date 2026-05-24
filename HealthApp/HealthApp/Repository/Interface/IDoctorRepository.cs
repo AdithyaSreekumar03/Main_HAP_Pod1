@@ -12,5 +12,6 @@ namespace HealthApp.Repository.Interface
         Doctor? GetById(int id);
         string DeleteDoctorById(int id);
         string UpdateDoctorById(int id, Doctor doctor);
+        string ChangeDoctorStatus(int id, bool isActive);
     }
 }

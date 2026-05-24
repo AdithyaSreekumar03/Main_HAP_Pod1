@@ -9,7 +9,9 @@ namespace HealthApp.Service.Impl
 {
     public class HealthRecordService : IHealthRecordService
     {
-        private readonly IHealthRecordRepository _repo;
+        private readonly IHealthRecordRepository
+            _repo;
+
         public HealthRecordService(
             IHealthRecordRepository repo)
         {
@@ -23,11 +25,26 @@ namespace HealthApp.Service.Impl
 
             _repo.Add(record);
         }
+
         public List<HealthRecord>
             GetPatientRecords(int patientId)
         {
             return _repo.GetAll()
-                .Where(r =>r.Patient.PatientId == patientId).ToList();
+                .Where(r =>
+                    r.Patient.PatientId ==
+                    patientId)
+                .ToList();
         }
+
+        public List<HealthRecord>GetHealthRecordsByDoctor(int doctorId, int patientId)
+        {
+            return _repo.GetAll()
+                .Where(r =>
+                    r.Doctor.DoctorId == doctorId
+                    &&
+                    r.Patient.PatientId == patientId)
+                    .OrderByDescending(r => r.VisitDate)
+                    .ToList();
+            }
     }
 }
