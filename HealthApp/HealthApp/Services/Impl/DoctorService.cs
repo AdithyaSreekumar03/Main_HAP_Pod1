@@ -19,9 +19,10 @@ namespace HealthApp.Service.Impl
         // ADD DOCTOR
         public void AddDoctor(Doctor doctor)
         {
+
             var doctors = _repo.GetAll();
 
-            if (doctors.Any())
+            if (doctors.Count != 0)
             {
                 doctor.DoctorId = doctors.Max(d => d.DoctorId) + 1;
             }
@@ -29,6 +30,7 @@ namespace HealthApp.Service.Impl
             {
                 doctor.DoctorId = 1;
             }
+
 
             doctor.IsActive = true;
 
@@ -40,7 +42,7 @@ namespace HealthApp.Service.Impl
         {
             var doctors = _repo.GetAll();
 
-            if (doctors == null || !doctors.Any())
+            if (doctors == null || doctors.Count == 0)
             {
                 throw new NoDoctorsRegisteredException("No doctors found.");
             }
@@ -70,7 +72,7 @@ namespace HealthApp.Service.Impl
                 .Where(d => d.Specialisation == specialisation)
                 .ToList();
 
-            if (!result.Any())
+            if (result.Count == 0)
             {
                 throw new DoctorNotFoundException($"No doctors found with specialization {specialisation}");
             }

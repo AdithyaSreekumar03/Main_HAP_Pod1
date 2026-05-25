@@ -20,7 +20,7 @@ namespace HealthApp.Tests
         }
 
         // ✅ Helper
-        private Doctor GetDoctor() => new Doctor
+        private static Doctor GetDoctor() => new Doctor
         {
             DoctorId = 1,
             FullName = "Test Doctor",

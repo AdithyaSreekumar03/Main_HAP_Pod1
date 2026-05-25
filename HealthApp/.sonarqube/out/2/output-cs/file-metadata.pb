@@ -29,7 +29,8 @@ XC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\SlotAlreadyOverExc
 XC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PatientNotFoundException.csutf-8Z
 QC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PastDateException.csutf-8e
 \C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoPatientRegisteredException.csutf-8e
-\C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoDoctorsRegisteredException.csutf-8b
+\C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoDoctorsRegisteredException.csutf-8]
+TC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\InvalidSlotException.csutf-8b
 YC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\InvalidDateRangeException.csutf-8c
 ZC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorUnavailableException.csutf-8`
 WC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorNotFoundException.csutf-8e
@@ -38,7 +39,7 @@ WC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorNotFoundExce
 dC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentAlreadyCompletedException.csutf-8m
 dC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentAlreadyCancelledException.csutf-8P
 GC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Database\PatientDb.csutf-8U
-LC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Database\HealthRecordDb.csutf-8O
-FC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Database\DoctorDb.csutf-8T
+LC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Database\HealthRecordDb.csutf-8T
 KC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Database\AppointmentDb.csutf-8O
+FC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Database\DoctorDb.csutf-8O
 FC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Constant\TimeSlot.csutf-8

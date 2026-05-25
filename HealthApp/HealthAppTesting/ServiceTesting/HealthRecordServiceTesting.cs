@@ -21,7 +21,7 @@ namespace HealthApp.Tests
         }
 
         // ✅ Helper
-        private HealthRecord GetRecord(int patientId = 1, int doctorId = 1)
+        private static HealthRecord GetRecord(int patientId = 1, int doctorId = 1)
         {
             return new HealthRecord
             {

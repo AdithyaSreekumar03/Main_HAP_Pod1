@@ -37,7 +37,7 @@ namespace HealthApp.Service.Impl
 
             if (!TimeSlots.Slots.Contains(slot))
             {
-                throw new Exception("Invalid slot.");
+                throw new InvalidSlotException("Invalid slot.");
             }
 
             // ✅ FIXED: culture-safe parsing

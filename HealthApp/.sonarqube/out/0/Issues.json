@@ -203,6 +203,48 @@
           }
         },
         {
+          "ruleId": "CA1050",
+          "level": "note",
+          "message": "Declare types in namespaces",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Exceptions/InvalidSlotException.cs",
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 14,
+                  "endLine": 2,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3903",
+          "level": "warning",
+          "message": "Move 'InvalidSlotException' into a named namespace.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Exceptions/InvalidSlotException.cs",
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 14,
+                  "endLine": 2,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
           "ruleId": "S3903",
           "level": "warning",
           "message": "Move 'InvalidDateRangeException' into a named namespace.",
@@ -394,45 +436,27 @@
           }
         },
         {
-          "ruleId": "S112",
-          "level": "warning",
-          "message": "'System.Exception' should not be thrown by user code.",
+          "ruleId": "CA1860",
+          "level": "note",
+          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
           "locations": [
             {
               "resultFile": {
                 "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/PatientService.cs",
                 "region": {
-                  "startLine": 36,
-                  "startColumn": 23,
-                  "endLine": 36,
-                  "endColumn": 69
+                  "startLine": 26,
+                  "startColumn": 17,
+                  "endLine": 26,
+                  "endColumn": 37
                 }
               }
             }
           ],
           "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S112",
-          "level": "warning",
-          "message": "'System.Exception' should not be thrown by user code.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/PatientService.cs",
-                "region": {
-                  "startLine": 41,
-                  "startColumn": 23,
-                  "endLine": 41,
-                  "endColumn": 62
-                }
-              }
+            "warningLevel": 1,
+            "customProperties": {
+              "DiagnosticPropertyKey": "Count"
             }
-          ],
-          "properties": {
-            "warningLevel": 1
           }
         },
         {
@@ -457,123 +481,6 @@
           }
         },
         {
-          "ruleId": "CA1860",
-          "level": "note",
-          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/PatientService.cs",
-                "region": {
-                  "startLine": 52,
-                  "startColumn": 38,
-                  "endLine": 52,
-                  "endColumn": 52
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "DiagnosticPropertyKey": "Count"
-            }
-          }
-        },
-        {
-          "ruleId": "CA1860",
-          "level": "note",
-          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/PatientService.cs",
-                "region": {
-                  "startLine": 25,
-                  "startColumn": 17,
-                  "endLine": 25,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "DiagnosticPropertyKey": "Count"
-            }
-          }
-        },
-        {
-          "ruleId": "S112",
-          "level": "warning",
-          "message": "'System.Exception' should not be thrown by user code.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/PatientService.cs",
-                "region": {
-                  "startLine": 92,
-                  "startColumn": 23,
-                  "endLine": 92,
-                  "endColumn": 69
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1860",
-          "level": "note",
-          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/DoctorService.cs",
-                "region": {
-                  "startLine": 43,
-                  "startColumn": 37,
-                  "endLine": 43,
-                  "endColumn": 50
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "DiagnosticPropertyKey": "Count"
-            }
-          }
-        },
-        {
-          "ruleId": "CA1860",
-          "level": "note",
-          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/DoctorService.cs",
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 17,
-                  "endLine": 24,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "DiagnosticPropertyKey": "Count"
-            }
-          }
-        },
-        {
           "ruleId": "S2325",
           "level": "warning",
           "message": "Make 'Pause' a static method.",
@@ -582,9 +489,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/PatientMenu.cs",
                 "region": {
-                  "startLine": 111,
+                  "startLine": 109,
                   "startColumn": 22,
-                  "endLine": 111,
+                  "endLine": 109,
                   "endColumn": 27
                 }
               }
@@ -592,135 +499,6 @@
           ],
           "properties": {
             "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S112",
-          "level": "warning",
-          "message": "'System.Exception' should not be thrown by user code.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/AppointmentService.cs",
-                "region": {
-                  "startLine": 40,
-                  "startColumn": 23,
-                  "endLine": 40,
-                  "endColumn": 53
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1481",
-          "level": "warning",
-          "message": "Remove the unused local variable 'patientService'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
-                "region": {
-                  "startLine": 34,
-                  "startColumn": 5,
-                  "endLine": 34,
-                  "endColumn": 19
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1481",
-          "level": "warning",
-          "message": "Remove the unused local variable 'doctorService'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
-                "region": {
-                  "startLine": 35,
-                  "startColumn": 5,
-                  "endLine": 35,
-                  "endColumn": 18
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1481",
-          "level": "warning",
-          "message": "Remove the unused local variable 'appointmentService'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
-                "region": {
-                  "startLine": 36,
-                  "startColumn": 5,
-                  "endLine": 36,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1481",
-          "level": "warning",
-          "message": "Remove the unused local variable 'healthRecordService'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
-                "region": {
-                  "startLine": 37,
-                  "startColumn": 5,
-                  "endLine": 37,
-                  "endColumn": 24
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1860",
-          "level": "note",
-          "message": "Prefer comparing 'Count' to 0 rather than using 'Any()', both for clarity and for performance",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Services/Impl/DoctorService.cs",
-                "region": {
-                  "startLine": 73,
-                  "startColumn": 18,
-                  "endLine": 73,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "DiagnosticPropertyKey": "Count"
-            }
           }
         },
         {
@@ -913,9 +691,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/PatientMenu.cs",
                 "region": {
-                  "startLine": 128,
+                  "startLine": 126,
                   "startColumn": 22,
-                  "endLine": 128,
+                  "endLine": 126,
                   "endColumn": 35
                 }
               }
@@ -937,9 +715,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/PatientMenu.cs",
                 "region": {
-                  "startLine": 158,
+                  "startLine": 156,
                   "startColumn": 22,
-                  "endLine": 158,
+                  "endLine": 156,
                   "endColumn": 40
                 }
               }
@@ -950,6 +728,90 @@
             "customProperties": {
               "DiagnosticPropertyKey": "Count"
             }
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'patientService'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 5,
+                  "endLine": 34,
+                  "endColumn": 19
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'doctorService'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 5,
+                  "endLine": 35,
+                  "endColumn": 18
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'appointmentService'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 36,
+                  "startColumn": 5,
+                  "endLine": 36,
+                  "endColumn": 23
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'healthRecordService'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Program.cs",
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 5,
+                  "endLine": 37,
+                  "endColumn": 24
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
           }
         },
         {
@@ -974,18 +836,18 @@
           }
         },
         {
-          "ruleId": "CA1822",
-          "level": "note",
-          "message": "Member 'Pause' does not access instance data and can be marked as static",
+          "ruleId": "S1199",
+          "level": "warning",
+          "message": "Extract this nested code block into a separate method.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/DoctorMenu.cs",
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/PatientMenu.cs",
                 "region": {
-                  "startLine": 653,
-                  "startColumn": 22,
-                  "endLine": 653,
-                  "endColumn": 27
+                  "startLine": 376,
+                  "startColumn": 17,
+                  "endLine": 376,
+                  "endColumn": 18
                 }
               }
             }
@@ -1024,27 +886,6 @@
               "resultFile": {
                 "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/PatientMenu.cs",
                 "region": {
-                  "startLine": 237,
-                  "startColumn": 26,
-                  "endLine": 242,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S6580",
-          "level": "warning",
-          "message": "Use a format provider when parsing date and time.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/PatientMenu.cs",
-                "region": {
                   "startLine": 401,
                   "startColumn": 22,
                   "endLine": 406,
@@ -1064,11 +905,53 @@
           "locations": [
             {
               "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/DoctorMenu.cs",
+                "region": {
+                  "startLine": 653,
+                  "startColumn": 22,
+                  "endLine": 653,
+                  "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6580",
+          "level": "warning",
+          "message": "Use a format provider when parsing date and time.",
+          "locations": [
+            {
+              "resultFile": {
                 "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/PatientMenu.cs",
                 "region": {
-                  "startLine": 111,
+                  "startLine": 235,
+                  "startColumn": 26,
+                  "endLine": 240,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1822",
+          "level": "note",
+          "message": "Member 'Pause' does not access instance data and can be marked as static",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthApp/Menus/PatientMenu.cs",
+                "region": {
+                  "startLine": 109,
                   "startColumn": 22,
-                  "endLine": 111,
+                  "endLine": 109,
                   "endColumn": 27
                 }
               }
@@ -1162,22 +1045,6 @@
             ]
           }
         },
-        "S112": {
-          "id": "S112",
-          "shortDescription": "General or reserved exceptions should never be thrown",
-          "fullDescription": "This rule raises an issue when a general or reserved exception is thrown.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-112",
-          "properties": {
-            "category": "Major Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
         "S1192": {
           "id": "S1192",
           "shortDescription": "String literals should not be duplicated",
@@ -1190,6 +1057,23 @@
             "tags": [
               "C#",
               "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S1199": {
+          "id": "S1199",
+          "shortDescription": "Nested code blocks should not be used",
+          "fullDescription": "Nested code blocks create new scopes where variables declared within are inaccessible from the outside, and their lifespan ends with the block.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1199",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
               "SonarWay"
             ]
           }

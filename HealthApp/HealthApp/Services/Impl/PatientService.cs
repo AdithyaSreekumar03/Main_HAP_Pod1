@@ -2,6 +2,9 @@
 using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
+
+using System.ComponentModel.DataAnnotations;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,35 +24,26 @@ namespace HealthApp.Service.Impl
         {
             var patients = _repo.GetAll();
 
-            //  Assign ID
-            if (patients.Any())
-            {
-                patient.PatientId = patients.Max(p => p.PatientId) + 1;
-            }
-            else
+            if (patients.Count == 0)
             {
                 patient.PatientId = 1;
             }
-
-            if (string.IsNullOrWhiteSpace(patient.FullName))
+            else
             {
-                throw new Exception("Patient name cannot be empty.");
-            }
-
-            if (patient.DateOfBirth == default)
-            {
-                throw new Exception("Invalid Date of Birth.");
+                patient.PatientId = patients.Max(p => p.PatientId) + 1;
             }
 
             _repo.Add(patient);
         }
+
+
 
         //  GET ALL PATIENTS
         public List<Patient> GetAllPatients()
         {
             var patients = _repo.GetAll();
 
-            if (patients == null || !patients.Any())
+            if (patients == null || patients.Count==0)
             {
                 throw new NoPatientRegisteredException("No patients found.");
             }
@@ -89,7 +83,7 @@ namespace HealthApp.Service.Impl
             // VALIDATION
             if (string.IsNullOrWhiteSpace(patient.FullName))
             {
-                throw new Exception("Patient name cannot be empty.");
+                throw new ValidationException("Patient name cannot be empty.");
             }
 
             var updated = _repo.UpdatePatient(id, patient);

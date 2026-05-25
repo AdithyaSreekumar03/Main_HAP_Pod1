@@ -24,7 +24,7 @@ namespace HealthApp.Tests
 
         private Patient GetPatient() => new Patient { PatientId = 1 };
 
-        private Doctor GetDoctor(bool isActive = true) =>
+        private static Doctor GetDoctor(bool isActive = true) =>
             new Doctor { DoctorId = 1, IsActive = isActive };
 
         // ✅ 1. Past Date

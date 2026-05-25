@@ -20,7 +20,7 @@ namespace HealthApp.Tests
             _service = new PatientService(_mockRepo.Object);
         }
 
-        private Patient GetPatient() => new Patient
+        private static Patient GetPatient() => new Patient
         {
             FullName = "John",
             DateOfBirth = DateOnly.FromDateTime(DateTime.Today.AddYears(-20))

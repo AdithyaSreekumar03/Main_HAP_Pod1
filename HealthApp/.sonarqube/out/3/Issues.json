@@ -14,111 +14,6 @@
         {
           "ruleId": "CA1822",
           "level": "note",
-          "message": "Member 'CreateRepo' does not access instance data and can be marked as static",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/RepositoryTesting/PatientRepositoryTesting.cs",
-                "region": {
-                  "startLine": 11,
-                  "startColumn": 35,
-                  "endLine": 11,
-                  "endColumn": 45
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1822",
-          "level": "note",
-          "message": "Member 'CreateRepo' does not access instance data and can be marked as static",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/RepositoryTesting/DoctorRepositoryTesting.cs",
-                "region": {
-                  "startLine": 11,
-                  "startColumn": 34,
-                  "endLine": 11,
-                  "endColumn": 44
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1822",
-          "level": "note",
-          "message": "Member 'GetRecord' does not access instance data and can be marked as static",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/HealthRecordServiceTesting.cs",
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 30,
-                  "endLine": 24,
-                  "endColumn": 39
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1822",
-          "level": "note",
-          "message": "Member 'GetDoctor' does not access instance data and can be marked as static",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/DoctorServiceTesting.cs",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 24,
-                  "endLine": 23,
-                  "endColumn": 33
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1822",
-          "level": "note",
-          "message": "Member 'GetPatient' does not access instance data and can be marked as static",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/PatientServiceTesting.cs",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 25,
-                  "endLine": 23,
-                  "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1822",
-          "level": "note",
           "message": "Member 'GetPatient' does not access instance data and can be marked as static",
           "locations": [
             {
@@ -129,27 +24,6 @@
                   "startColumn": 25,
                   "endLine": 25,
                   "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1822",
-          "level": "note",
-          "message": "Member 'GetDoctor' does not access instance data and can be marked as static",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/AppointmentServiceTesting.cs",
-                "region": {
-                  "startLine": 27,
-                  "startColumn": 24,
-                  "endLine": 27,
-                  "endColumn": 33
                 }
               }
             }

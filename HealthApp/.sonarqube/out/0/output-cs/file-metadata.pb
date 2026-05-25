@@ -1,12 +1,12 @@
-h
+Z
+QC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Impl\PatientService.csutf-8h
 ]C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\HealthApp.AssemblyInfo.csutf-8~
 sC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\.NETCoreApp,Version=v10.0.AssemblyAttributes.csutf-8j
 _C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\obj\Debug\net10.0\HealthApp.GlobalUsings.g.csutf-8a
 XC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Interfaces\IPatientService.csutf-8f
 ]C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Interfaces\IHealthRecordService.csutf-8`
 WC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Interfaces\IDoctorService.csutf-8e
-\C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Interfaces\IAppointmentService.csutf-8Z
-QC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Impl\PatientService.csutf-8_
+\C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Interfaces\IAppointmentService.csutf-8_
 VC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Impl\HealthRecordService.csutf-8Y
 PC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Impl\DoctorService.csutf-8^
 UC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Services\Impl\AppointmentService.csutf-8h
@@ -29,7 +29,8 @@ XC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\SlotAlreadyOverExc
 XC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PatientNotFoundException.csutf-8Z
 QC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PastDateException.csutf-8e
 \C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoPatientRegisteredException.csutf-8e
-\C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoDoctorsRegisteredException.csutf-8b
+\C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoDoctorsRegisteredException.csutf-8]
+TC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\InvalidSlotException.csutf-8b
 YC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\InvalidDateRangeException.csutf-8c
 ZC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorUnavailableException.csutf-8`
 WC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorNotFoundException.csutf-8e

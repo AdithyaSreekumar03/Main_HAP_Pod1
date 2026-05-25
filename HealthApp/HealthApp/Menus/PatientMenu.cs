@@ -2,10 +2,8 @@
 using HealthApp.Exceptions;
 using HealthApp.Model;
 using HealthApp.Service.Interface;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+
 
 namespace HealthApp.Menus
 {
@@ -375,7 +373,9 @@ namespace HealthApp.Menus
             }
             catch (ValidationException ex)
             {
-                Console.WriteLine(ex.Message);
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 

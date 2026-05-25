@@ -8,7 +8,7 @@ namespace HealthApp.Tests
     public class DoctorRepositoryTests
     {
         // ✅ Create fresh repo every test
-        private DoctorRepository CreateRepo(out DoctorDb db)
+        private static DoctorRepository CreateRepo(out DoctorDb db)
         {
             db = new DoctorDb();
             db.Doctors = new System.Collections.Generic.List<Doctor>(); // ✅ reset

@@ -12,13 +12,7 @@
 #HealthApp.Tests.PatientServiceTestsDelete_ShouldThrow_WhenNotFoundA
 #HealthApp.Tests.PatientServiceTestsUpdate_ShouldReturnMessageI
 #HealthApp.Tests.PatientServiceTests"Update_ShouldThrow_WhenNameInvalidF
-#HealthApp.Tests.PatientServiceTestsUpdate_ShouldThrow_WhenNotFound»
-eC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\ServiceTesting\HealthRecordServiceTesting.csHealthAppTestingL
-*HealthApp.Tests.HealthRecordServiceTestingAddRecord_ShouldAssignIdAndAdd[
-*HealthApp.Tests.HealthRecordServiceTesting-GetPatientRecords_ShouldReturnMatchingRecords]
-*HealthApp.Tests.HealthRecordServiceTesting/GetPatientRecords_ShouldReturnEmpty_WhenNoMatchb
-*HealthApp.Tests.HealthRecordServiceTesting4GetHealthRecordsByDoctor_ShouldReturnFilteredRecords_
-*HealthApp.Tests.HealthRecordServiceTesting1GetHealthRecordsByDoctor_ShouldBeSortedDescending∞
+#HealthApp.Tests.PatientServiceTestsUpdate_ShouldThrow_WhenNotFound∞
 _C:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\ServiceTesting\DoctorServiceTesting.csHealthAppTesting@
 $HealthApp.Tests.DoctorServiceTestingAddDoctor_ShouldAssignIdI
 $HealthApp.Tests.DoctorServiceTesting!GetAllDoctors_ShouldReturnDoctorsT
@@ -28,7 +22,13 @@ $HealthApp.Tests.DoctorServiceTesting/GetDoctorById_ShouldThrowException_WhenNo
 $HealthApp.Tests.DoctorServiceTestingSearch_ShouldReturnDoctorsO
 $HealthApp.Tests.DoctorServiceTesting'Search_ShouldThrowException_WhenNoMatchH
 $HealthApp.Tests.DoctorServiceTesting ChangeStatus_ShouldReturnMessageV
-$HealthApp.Tests.DoctorServiceTesting.ChangeStatus_ShouldThrowException_WhenNotFound¿
+$HealthApp.Tests.DoctorServiceTesting.ChangeStatus_ShouldThrowException_WhenNotFound»
+eC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\ServiceTesting\HealthRecordServiceTesting.csHealthAppTestingL
+*HealthApp.Tests.HealthRecordServiceTestingAddRecord_ShouldAssignIdAndAdd[
+*HealthApp.Tests.HealthRecordServiceTesting-GetPatientRecords_ShouldReturnMatchingRecords]
+*HealthApp.Tests.HealthRecordServiceTesting/GetPatientRecords_ShouldReturnEmpty_WhenNoMatchb
+*HealthApp.Tests.HealthRecordServiceTesting4GetHealthRecordsByDoctor_ShouldReturnFilteredRecords_
+*HealthApp.Tests.HealthRecordServiceTesting1GetHealthRecordsByDoctor_ShouldBeSortedDescending¿
 dC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\ServiceTesting\AppointmentServiceTesting.csHealthAppTestingN
 )HealthApp.Tests.AppointmentServiceTesting!Book_ShouldThrowPastDateExceptionW
 )HealthApp.Tests.AppointmentServiceTesting*Book_ShouldThrowDoctorUnavailableExceptionQ
@@ -59,19 +59,19 @@ fC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\RepositoryTesting\Pati
 &HealthApp.Tests.PatientRepositoryTests!DeletePatient_ShouldRemovePatientU
 &HealthApp.Tests.PatientRepositoryTests+DeletePatient_ShouldReturnNull_WhenNotFoundK
 &HealthApp.Tests.PatientRepositoryTests!UpdatePatient_ShouldModifyPatientU
-&HealthApp.Tests.PatientRepositoryTests+UpdatePatient_ShouldReturnNull_WhenNotFound 
-kC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\RepositoryTesting\HealthRecordRepositoryTesting.csHealthAppTestingJ
--HealthApp.Tests.HealthRecordRepositoryTestingAdd_ShouldAddHealthRecordP
--HealthApp.Tests.HealthRecordRepositoryTestingAdd_ShouldHandleMultipleRecordsN
--HealthApp.Tests.HealthRecordRepositoryTestingGetAll_ShouldReturnAllRecords[
--HealthApp.Tests.HealthRecordRepositoryTesting*GetAll_ShouldReturnEmptyList_WhenNoRecords∞
+&HealthApp.Tests.PatientRepositoryTests+UpdatePatient_ShouldReturnNull_WhenNotFound∞
 eC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\RepositoryTesting\DoctorRepositoryTesting.csHealthAppTesting<
 %HealthApp.Tests.DoctorRepositoryTestsAdd_ShouldAddDoctorC
 %HealthApp.Tests.DoctorRepositoryTestsGetAll_ShouldReturnDoctorsC
 %HealthApp.Tests.DoctorRepositoryTestsGetById_ShouldReturnDoctorN
 %HealthApp.Tests.DoctorRepositoryTests%GetById_ShouldReturnNull_WhenNotFoundH
 %HealthApp.Tests.DoctorRepositoryTestsChangeStatus_ShouldUpdateStatusS
-%HealthApp.Tests.DoctorRepositoryTests*ChangeStatus_ShouldReturnNull_WhenNotFoundË
+%HealthApp.Tests.DoctorRepositoryTests*ChangeStatus_ShouldReturnNull_WhenNotFound 
+kC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\RepositoryTesting\HealthRecordRepositoryTesting.csHealthAppTestingJ
+-HealthApp.Tests.HealthRecordRepositoryTestingAdd_ShouldAddHealthRecordP
+-HealthApp.Tests.HealthRecordRepositoryTestingAdd_ShouldHandleMultipleRecordsN
+-HealthApp.Tests.HealthRecordRepositoryTestingGetAll_ShouldReturnAllRecords[
+-HealthApp.Tests.HealthRecordRepositoryTesting*GetAll_ShouldReturnEmptyList_WhenNoRecordsË
 jC:\Users\310476\Main_HAP_Pod1\HealthApp\HealthAppTesting\RepositoryTesting\AppointmentRepositoryTesting.csHealthAppTestingH
 ,HealthApp.Tests.AppointmentRepositoryTestingAdd_ShouldAddAppointmentT
 ,HealthApp.Tests.AppointmentRepositoryTesting$Add_ShouldHandleMultipleAppointmentsR
