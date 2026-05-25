@@ -16,12 +16,12 @@ namespace HealthApp.Service.Impl
             _repo = repo;
         }
 
-        // ✅ REGISTER PATIENT
+        //  REGISTER PATIENT
         public void RegisterPatient(Patient patient)
         {
             var patients = _repo.GetAll();
 
-            // ✅ Assign ID
+            //  Assign ID
             if (patients.Any())
             {
                 patient.PatientId = patients.Max(p => p.PatientId) + 1;
@@ -31,7 +31,6 @@ namespace HealthApp.Service.Impl
                 patient.PatientId = 1;
             }
 
-            // ✅ BASIC VALIDATION
             if (string.IsNullOrWhiteSpace(patient.FullName))
             {
                 throw new Exception("Patient name cannot be empty.");
@@ -45,7 +44,7 @@ namespace HealthApp.Service.Impl
             _repo.Add(patient);
         }
 
-        // ✅ GET ALL PATIENTS
+        //  GET ALL PATIENTS
         public List<Patient> GetAllPatients()
         {
             var patients = _repo.GetAll();
@@ -58,7 +57,7 @@ namespace HealthApp.Service.Impl
             return patients;
         }
 
-        // ✅ GET PATIENT BY ID
+        // GET PATIENT BY ID
         public Patient? GetPatientById(int id)
         {
             var patient = _repo.GetById(id);
@@ -71,7 +70,7 @@ namespace HealthApp.Service.Impl
             return patient;
         }
 
-        // ✅ DELETE PATIENT
+        //  DELETE PATIENT
         public string DeletePatientById(int id)
         {
             var patient = _repo.DeletePatient(id);
@@ -84,10 +83,10 @@ namespace HealthApp.Service.Impl
             return $"Patient with id {id} deleted successfully";
         }
 
-        // ✅ UPDATE PATIENT
+        // ✅UPDATE PATIENT
         public string UpdatePatientById(int id, Patient patient)
         {
-            // ✅ VALIDATION
+            // VALIDATION
             if (string.IsNullOrWhiteSpace(patient.FullName))
             {
                 throw new Exception("Patient name cannot be empty.");

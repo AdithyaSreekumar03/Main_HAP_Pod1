@@ -1,5 +1,4 @@
 ﻿using HealthApp.Model;
-using HealthApp.Model;
 
 namespace HealthApp.Repository.Interface
 {
@@ -11,13 +10,9 @@ namespace HealthApp.Repository.Interface
 
         Doctor? GetById(int id);
 
-        // ✅ Return object instead of string
-        Doctor? DeleteDoctorById(int id);
+ 
 
-        // ✅ Return updated object
-        Doctor? UpdateDoctorById(int id, Doctor doctor);
-
-        // ✅ Return object after status change
+        //  Return object after status change
         Doctor? ChangeDoctorStatus(int id, bool isActive);
     }
 }

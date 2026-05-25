@@ -14,7 +14,7 @@ namespace HealthApp.Tests
         public AppointmentRepositoryTesting()
         {
             _db = new AppointmentDb();
-            _db.Appointments.Clear();   // ✅ important
+            _db.Appointments.Clear();   // important
             _repo = new AppointmentRepository(_db);
         }
 

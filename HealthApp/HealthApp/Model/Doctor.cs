@@ -21,7 +21,7 @@ namespace HealthApp.Model
     {
         public int DoctorId { get; set; }
 
-        public string FullName { get; set; } = string.Empty;
+        public string FullName { get; set; }
 
         public SpecialisationType Specialisation { get; set; }
         public string DoctorPhoneNo { get; set; } = string.Empty;

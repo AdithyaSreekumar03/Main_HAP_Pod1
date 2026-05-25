@@ -12,18 +12,60 @@
       },
       "results": [
         {
-          "ruleId": "CS8600",
-          "level": "warning",
-          "message": "Converting null literal or possible null value to non-nullable type.",
+          "ruleId": "CA1822",
+          "level": "note",
+          "message": "Member 'CreateRepo' does not access instance data and can be marked as static",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/AppointmentServiceTesting.cs",
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/RepositoryTesting/DoctorRepositoryTesting.cs",
                 "region": {
-                  "startLine": 241,
-                  "startColumn": 31,
-                  "endLine": 241,
-                  "endColumn": 48
+                  "startLine": 11,
+                  "startColumn": 34,
+                  "endLine": 11,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1822",
+          "level": "note",
+          "message": "Member 'CreateRepo' does not access instance data and can be marked as static",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/RepositoryTesting/PatientRepositoryTesting.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 35,
+                  "endLine": 11,
+                  "endColumn": 45
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1822",
+          "level": "note",
+          "message": "Member 'GetRecord' does not access instance data and can be marked as static",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/HealthRecordServiceTesting.cs",
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 30,
+                  "endLine": 24,
+                  "endColumn": 39
                 }
               }
             }
@@ -39,33 +81,12 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/HealthRecordServiceTesting.cs",
-                "region": {
-                  "startLine": 26,
-                  "startColumn": 24,
-                  "endLine": 26,
-                  "endColumn": 33
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CA1822",
-          "level": "note",
-          "message": "Member 'GetPatient' does not access instance data and can be marked as static",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/HealthRecordServiceTesting.cs",
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/DoctorServiceTesting.cs",
                 "region": {
                   "startLine": 23,
-                  "startColumn": 25,
+                  "startColumn": 24,
                   "endLine": 23,
-                  "endColumn": 35
+                  "endColumn": 33
                 }
               }
             }
@@ -98,16 +119,16 @@
         {
           "ruleId": "CA1822",
           "level": "note",
-          "message": "Member 'GetDoctor' does not access instance data and can be marked as static",
+          "message": "Member 'GetPatient' does not access instance data and can be marked as static",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/DoctorServiceTesting.cs",
+                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/AppointmentServiceTesting.cs",
                 "region": {
-                  "startLine": 24,
-                  "startColumn": 24,
-                  "endLine": 24,
-                  "endColumn": 33
+                  "startLine": 25,
+                  "startColumn": 25,
+                  "endLine": 25,
+                  "endColumn": 35
                 }
               }
             }
@@ -136,27 +157,6 @@
           "properties": {
             "warningLevel": 1
           }
-        },
-        {
-          "ruleId": "CA1822",
-          "level": "note",
-          "message": "Member 'GetPatient' does not access instance data and can be marked as static",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/310476/Main_HAP_Pod1/HealthApp/HealthAppTesting/ServiceTesting/AppointmentServiceTesting.cs",
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 25,
-                  "endLine": 24,
-                  "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
         }
       ],
       "rules": {
@@ -173,20 +173,6 @@
               "PortedFromFxCop",
               "Telemetry",
               "EnabledRuleInAggressiveMode"
-            ]
-          }
-        },
-        "CS8600": {
-          "id": "CS8600",
-          "shortDescription": "Converting null literal or possible null value to non-nullable type.",
-          "defaultLevel": "warning",
-          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8600)",
-          "properties": {
-            "category": "Compiler",
-            "isEnabledByDefault": true,
-            "tags": [
-              "Compiler",
-              "Telemetry"
             ]
           }
         }

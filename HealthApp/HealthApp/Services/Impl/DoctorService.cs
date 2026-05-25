@@ -16,7 +16,7 @@ namespace HealthApp.Service.Impl
             _repo = repo;
         }
 
-        // ✅ ADD DOCTOR
+        // ADD DOCTOR
         public void AddDoctor(Doctor doctor)
         {
             var doctors = _repo.GetAll();
@@ -35,7 +35,7 @@ namespace HealthApp.Service.Impl
             _repo.Add(doctor);
         }
 
-        // ✅ GET ALL DOCTORS
+        // GET ALL DOCTORS
         public List<Doctor> GetAllDoctors()
         {
             var doctors = _repo.GetAll();
@@ -48,7 +48,7 @@ namespace HealthApp.Service.Impl
             return doctors;
         }
 
-        // ✅ GET BY ID
+        // GET BY ID
         public Doctor? GetDoctorById(int id)
         {
             var doctor = _repo.GetById(id);
@@ -61,7 +61,7 @@ namespace HealthApp.Service.Impl
             return doctor;
         }
 
-        // ✅ SEARCH BY SPECIALISATION
+        //  SEARCH BY SPECIALISATION
         public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
         {
             var doctors = _repo.GetAll();
@@ -78,33 +78,9 @@ namespace HealthApp.Service.Impl
             return result;
         }
 
-        // ✅ DELETE DOCTOR
-        public string DeleteDoctorById(int id)
-        {
-            var doctor = _repo.DeleteDoctorById(id);
+    
 
-            if (doctor == null)
-            {
-                throw new DoctorNotFoundException($"Doctor with id {id} not found");
-            }
-
-            return $"Doctor with id {id} deleted successfully";
-        }
-
-        // ✅ UPDATE DOCTOR
-        public string UpdateDoctorById(int id, Doctor doctor)
-        {
-            var updated = _repo.UpdateDoctorById(id, doctor);
-
-            if (updated == null)
-            {
-                throw new DoctorNotFoundException($"Doctor with id {id} not found");
-            }
-
-            return $"Doctor with id {id} updated successfully";
-        }
-
-        // ✅ CHANGE STATUS
+        //  CHANGE STATUS
         public string ChangeDoctorStatus(int id, bool isActive)
         {
             var doctor = _repo.ChangeDoctorStatus(id, isActive);

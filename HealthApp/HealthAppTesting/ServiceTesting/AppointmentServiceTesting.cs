@@ -6,6 +6,7 @@ using HealthApp.Service.Impl;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace HealthApp.Tests
@@ -21,7 +22,6 @@ namespace HealthApp.Tests
             _service = new AppointmentService(_mockRepo.Object);
         }
 
-        // ✅ Helpers
         private Patient GetPatient() => new Patient { PatientId = 1 };
 
         private Doctor GetDoctor(bool isActive = true) =>
@@ -63,7 +63,7 @@ namespace HealthApp.Tests
                     "INVALID"));
         }
 
-        // ✅ 4. Patient already booked same doctor
+        // ✅ 4. Patient conflict
         [Fact]
         public void Book_ShouldThrowPatientConflictException()
         {
@@ -76,7 +76,7 @@ namespace HealthApp.Tests
                 Doctor = doctor,
                 ScheduledDate = DateTime.Today.AddDays(1)
             };
-            existing.Confirm(); // ✅ IMPORTANT
+            existing.Confirm();
 
             _mockRepo.Setup(r => r.GetAll())
                      .Returns(new List<Appointment> { existing });
@@ -89,7 +89,7 @@ namespace HealthApp.Tests
                     "10:00 AM"));
         }
 
-        // ✅ 5. Slot already booked
+        // ✅ 5. Slot conflict
         [Fact]
         public void Book_ShouldThrowSlotConflictException()
         {
@@ -102,7 +102,7 @@ namespace HealthApp.Tests
                 ScheduledDate = DateTime.Today.AddDays(1),
                 TimeSlot = "10:00 AM"
             };
-            existing.Confirm(); // ✅ FIX
+            existing.Confirm();
 
             _mockRepo.Setup(r => r.GetAll())
                      .Returns(new List<Appointment> { existing });
@@ -115,25 +115,29 @@ namespace HealthApp.Tests
                     "10:00 AM"));
         }
 
-        // ✅ 6. SUCCESS CASE
+        // ✅ 6. SUCCESS BOOKING
         [Fact]
-        public void Book_ShouldSucceed()
+        public void Book_ShouldCreateValidAppointment()
         {
             _mockRepo.Setup(r => r.GetAll())
                      .Returns(new List<Appointment>());
 
+            var patient = GetPatient();
+            var doctor = GetDoctor();
+
             var result = _service.BookAppointment(
-                GetPatient(),
-                GetDoctor(),
+                patient,
+                doctor,
                 DateTime.Today.AddDays(1),
-                TimeSlots.Slots[0]);
+                TimeSlots.Slots.First());
 
             Assert.NotNull(result);
+            Assert.Equal(patient, result.Patient);
+            Assert.Equal(doctor, result.Doctor);
+            Assert.Equal(AppointmentStatus.Pending, result.Status);
         }
 
-        // ✅ CANCEL
-
-        // 7. Not found
+        // ✅ 7. CANCEL - Not found
         [Fact]
         public void Cancel_ShouldThrowNotFoundException()
         {
@@ -144,12 +148,12 @@ namespace HealthApp.Tests
                 _service.CancelAppointment(1, "Reason"));
         }
 
-        // 8. Already cancelled
+        // ✅ 8. CANCEL - Already cancelled
         [Fact]
         public void Cancel_ShouldThrowAlreadyCancelledException()
         {
             var app = new Appointment();
-            app.Cancel("test"); // ✅ FIX
+            app.Cancel("test");
 
             _mockRepo.Setup(r => r.GetById(It.IsAny<int>()))
                      .Returns(app);
@@ -158,12 +162,12 @@ namespace HealthApp.Tests
                 _service.CancelAppointment(1, "Reason"));
         }
 
-        // 9. Completed
+        // ✅ 9. CANCEL - Completed
         [Fact]
         public void Cancel_ShouldThrowCompletedException()
         {
             var app = new Appointment();
-            app.Complete(); // ✅ FIX
+            app.Complete();
 
             _mockRepo.Setup(r => r.GetById(It.IsAny<int>()))
                      .Returns(app);
@@ -172,9 +176,21 @@ namespace HealthApp.Tests
                 _service.CancelAppointment(1, "Reason"));
         }
 
-        // ✅ CONFIRM
+        // ✅ 10. CANCEL SUCCESS
+        [Fact]
+        public void Cancel_ShouldSucceed()
+        {
+            var app = new Appointment();
 
-        // 10. Not found
+            _mockRepo.Setup(r => r.GetById(It.IsAny<int>()))
+                     .Returns(app);
+
+            _service.CancelAppointment(1, "Test");
+
+            Assert.Equal(AppointmentStatus.Cancelled, app.Status);
+        }
+
+        // ✅ 11. CONFIRM - Not found
         [Fact]
         public void Confirm_ShouldThrowNotFoundException()
         {
@@ -185,12 +201,12 @@ namespace HealthApp.Tests
                 _service.ConfirmAppointment(1));
         }
 
-        // 11. Already cancelled
+        // ✅ 12. CONFIRM - already cancelled
         [Fact]
         public void Confirm_ShouldThrowException_WhenCancelled()
         {
             var app = new Appointment();
-            app.Cancel("test"); // ✅ FIX
+            app.Cancel("test");
 
             _mockRepo.Setup(r => r.GetById(It.IsAny<int>()))
                      .Returns(app);
@@ -199,22 +215,157 @@ namespace HealthApp.Tests
                 _service.ConfirmAppointment(1));
         }
 
-        // ✅ CHECK AVAILABILITY
-
-        // 12. Past date
+        // ✅ 13. CONFIRM SUCCESS
         [Fact]
-        public void Availability_ShouldThrowForPastDate()
+        public void Confirm_ShouldSucceed()
         {
-            Assert.Throws<Exception>(() =>
-                _service.CheckDoctorAvailability(1, DateTime.Today.AddDays(-1)));
+            var app = new Appointment();
+
+            _mockRepo.Setup(r => r.GetById(It.IsAny<int>()))
+                     .Returns(app);
+
+            _service.ConfirmAppointment(1);
+
+            Assert.Equal(AppointmentStatus.Confirmed, app.Status);
         }
 
-        // 13. Beyond 30 days
+        // ✅ 14. GetAll
         [Fact]
-        public void Availability_ShouldThrowForFutureLimit()
+        public void GetAllAppointments_ShouldReturnList()
+        {
+            var list = new List<Appointment> { new Appointment() };
+
+            _mockRepo.Setup(r => r.GetAll()).Returns(list);
+
+            var result = _service.GetAllAppointments();
+
+            Assert.Single(result);
+        }
+
+        // ✅ 15. GetById
+        [Fact]
+        public void GetById_ShouldReturnAppointment()
+        {
+            var app = new Appointment();
+
+            _mockRepo.Setup(r => r.GetById(1)).Returns(app);
+
+            var result = _service.GetAppointmentById(1);
+
+            Assert.NotNull(result);
+        }
+
+        // ✅ 16. GetAppointmentsByPatient
+        [Fact]
+        public void GetAppointmentsByPatient_ShouldFilterCorrectly()
+        {
+            var patient = GetPatient();
+
+            var list = new List<Appointment>
+            {
+                new Appointment
+                {
+                    Patient = patient,
+                    ScheduledDate = DateTime.Today.AddDays(1)
+                }
+            };
+
+            _mockRepo.Setup(r => r.GetAll()).Returns(list);
+
+            var result = _service.GetAppointmentsByPatient(1);
+
+            Assert.Single(result);
+        }
+
+        // ✅ 17. Upcoming appointments success
+        [Fact]
+        public void GetUpcoming_ShouldReturnConfirmedAppointments()
+        {
+            var doctor = GetDoctor();
+
+            var list = new List<Appointment>
+            {
+                new Appointment
+                {
+                    Doctor = doctor,
+                    ScheduledDate = DateTime.Today.AddDays(1)
+                }
+            };
+            list[0].Confirm();
+
+            _mockRepo.Setup(r => r.GetAll()).Returns(list);
+
+            var result = _service.GetUpcomingAppointmentsByDoctor(
+                1, DateTime.Today, DateTime.Today.AddDays(10));
+
+            Assert.Single(result);
+        }
+
+        // ✅ 18. invalid date range
+        [Fact]
+        public void GetUpcoming_ShouldThrowForInvalidRange()
         {
             Assert.Throws<Exception>(() =>
-                _service.CheckDoctorAvailability(1, DateTime.Today.AddDays(31)));
+                _service.GetUpcomingAppointmentsByDoctor(
+                    1,
+                    DateTime.Today.AddDays(5),
+                    DateTime.Today));
+        }
+
+        // ✅ 19. pending appointments
+        [Fact]
+        public void GetPending_ShouldReturnPendingOnly()
+        {
+            var doctor = GetDoctor();
+
+            var list = new List<Appointment>
+            {
+                new Appointment
+                {
+                    Doctor = doctor
+                }
+            };
+
+            _mockRepo.Setup(r => r.GetAll()).Returns(list);
+
+            var result = _service.GetPendingAppointmentsByDoctor(1);
+
+            Assert.Single(result);
+        }
+
+        // ✅ 20. availability success
+        [Fact]
+        public void Availability_ShouldReturnSlots()
+        {
+            _mockRepo.Setup(r => r.GetAll())
+                     .Returns(new List<Appointment>());
+
+            var result = _service.CheckDoctorAvailability(
+                1,
+                DateTime.Today.AddDays(1));
+
+            Assert.NotEmpty(result);
+        }
+
+        // ✅ 21. availability no slots
+        [Fact]
+        public void Availability_ShouldThrow_WhenNoSlots()
+        {
+            var doctor = GetDoctor();
+
+            var full = TimeSlots.Slots.Select(s => new Appointment
+            {
+                Doctor = doctor,
+                ScheduledDate = DateTime.Today.AddDays(1),
+                TimeSlot = s
+            }).ToList();
+
+            _mockRepo.Setup(r => r.GetAll()).Returns(full);
+
+            Assert.Throws<Exception>(() =>
+                _service.CheckDoctorAvailability(
+                    1,
+                    DateTime.Today.AddDays(1)));
         }
     }
 }

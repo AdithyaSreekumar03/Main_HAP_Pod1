@@ -5,6 +5,7 @@ using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace HealthApp.Service.Impl
@@ -18,35 +19,36 @@ namespace HealthApp.Service.Impl
             _repo = repo;
         }
 
-        //  BOOK APPOINTMENT 
         public Appointment BookAppointment(
             Patient patient,
             Doctor doctor,
             DateTime date,
             string slot)
         {
-            // ✅ 1. Past date check
             if (date.Date < DateTime.Today)
             {
                 throw new PastDateException("Cannot book past date.");
             }
 
-            // ✅ 2. Doctor active check
             if (!doctor.IsActive)
             {
                 throw new DoctorUnavailableException("Doctor unavailable.");
             }
 
-            // ✅ 3. Slot validation
             if (!TimeSlots.Slots.Contains(slot))
             {
                 throw new Exception("Invalid slot.");
             }
 
-            // ✅ 4. Slot already over (today)
+            // ✅ FIXED: culture-safe parsing
             if (date.Date == DateTime.Today)
             {
-                DateTime slotTime = DateTime.Parse(slot);
+                DateTime slotTime = DateTime.ParseExact(
+                    slot,
+                    "hh:mm tt",
+                    CultureInfo.InvariantCulture
+                );
+
                 DateTime finalTime = date.Date + slotTime.TimeOfDay;
 
                 if (finalTime < DateTime.Now)
@@ -55,12 +57,10 @@ namespace HealthApp.Service.Impl
                 }
             }
 
-            // ✅ IMPORTANT: Fetch once
             var allAppointments = _repo.GetAll();
 
             string normalizedSlot = slot.Trim().ToUpper();
 
-            // ✅ 5. Same patient + same doctor on same day
             bool patientAlreadyBooked = allAppointments.Any(a =>
                 a.Patient.PatientId == patient.PatientId &&
                 a.Doctor.DoctorId == doctor.DoctorId &&
@@ -73,11 +73,14 @@ namespace HealthApp.Service.Impl
                     "You already booked an appointment with this doctor on this day.");
             }
 
-            // ✅ ✅ ✅ 6. FIXED SLOT CONFLICT (MAIN LOGIC)
             bool slotAlreadyBooked = allAppointments.Any(a =>
                 a.Doctor.DoctorId == doctor.DoctorId &&
                 a.ScheduledDate.Date == date.Date &&
-                a.TimeSlot.Trim().ToUpper() == normalizedSlot &&
+
+            string.Equals(
+                 a.TimeSlot.Trim(),
+                 normalizedSlot,
+                    StringComparison.OrdinalIgnoreCase) &&
                 a.Status != AppointmentStatus.Cancelled
             );
 
@@ -86,7 +89,6 @@ namespace HealthApp.Service.Impl
                 throw new AppointmentConflictException("Slot already booked.");
             }
 
-            // ✅ 7. Create appointment
             Appointment appointment = new()
             {
                 AppointmentId = allAppointments.Count + 1,
@@ -96,13 +98,11 @@ namespace HealthApp.Service.Impl
                 TimeSlot = slot
             };
 
-            // ✅ default = Pending
             _repo.Add(appointment);
 
             return appointment;
         }
 
-        // ✅ CANCEL APPOINTMENT
         public void CancelAppointment(int appointmentId, string reason)
         {
             var appointment = _repo.GetById(appointmentId);
@@ -128,19 +128,16 @@ namespace HealthApp.Service.Impl
             appointment.Cancel(reason);
         }
 
-        // ✅ GET BY ID
         public Appointment? GetAppointmentById(int id)
         {
             return _repo.GetById(id);
         }
 
-        // ✅ GET ALL
         public List<Appointment> GetAllAppointments()
         {
             return _repo.GetAll();
         }
 
-        // ✅ GET PATIENT APPOINTMENTS
         public List<Appointment> GetAppointmentsByPatient(int patientId)
         {
             return _repo.GetAll()
@@ -154,21 +151,22 @@ namespace HealthApp.Service.Impl
                 .ToList();
         }
 
-        // ✅ UPCOMING APPOINTMENTS (CONFIRMED ONLY)
         public List<Appointment> GetUpcomingAppointmentsByDoctor(
             int doctorId,
             DateTime fromDate,
             DateTime toDate)
         {
+
             if (fromDate.Date < DateTime.Today || toDate.Date < DateTime.Today)
             {
-                throw new Exception("Date cannot be past.");
+                throw new InvalidDateRangeException("Date cannot be past.");
             }
 
             if (fromDate.Date > toDate.Date)
             {
-                throw new Exception("From date cannot be greater than To date.");
+                throw new InvalidDateRangeException("From date cannot be greater than To date.");
             }
+
 
             return _repo.GetAll()
                 .Where(a =>
@@ -181,7 +179,6 @@ namespace HealthApp.Service.Impl
                 .ToList();
         }
 
-        // ✅ PENDING APPOINTMENTS
         public List<Appointment> GetPendingAppointmentsByDoctor(int doctorId)
         {
             return _repo.GetAll()
@@ -193,17 +190,16 @@ namespace HealthApp.Service.Impl
                 .ToList();
         }
 
-        // ✅ DOCTOR AVAILABILITY
         public List<string> CheckDoctorAvailability(int doctorId, DateTime date)
         {
             if (date.Date < DateTime.Today)
             {
-                throw new Exception("Past date not allowed.");
+                throw new PastDateException("Past date not allowed.");
             }
 
             if (date.Date > DateTime.Today.AddDays(30))
             {
-                throw new Exception("Check only within 30 days.");
+                throw new InvalidDateRangeException("Check only within 30 days.");
             }
 
             var bookedSlots = _repo.GetAll()
@@ -218,15 +214,16 @@ namespace HealthApp.Service.Impl
                 .Where(s => !bookedSlots.Contains(s.ToUpper().Trim()))
                 .ToList();
 
-            if (!availableSlots.Any())
+
+            if (availableSlots.Count == 0)
             {
-                throw new Exception("No slots available.");
+                throw new SlotAlreadyOverException("No slots available.");
             }
+
 
             return availableSlots;
         }
 
-        // ✅ CONFIRM APPOINTMENT
         public void ConfirmAppointment(int appointmentId)
         {
             var appointment = _repo.GetById(appointmentId);
@@ -239,7 +236,7 @@ namespace HealthApp.Service.Impl
 
             if (appointment.Status == AppointmentStatus.Cancelled)
             {
-                throw new Exception("Cancelled appointment cannot be confirmed.");
+                throw new AppointmentAlreadyCancelledException("Cancelled appointment cannot be confirmed.");
             }
 
             appointment.Confirm();

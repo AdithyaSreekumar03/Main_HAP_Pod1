@@ -31,36 +31,8 @@ namespace HealthApp.Repository.Impl
                 .FirstOrDefault(d => d.DoctorId == id);
         }
 
-        public Doctor? DeleteDoctorById(int id)
-        {
-            var doctor = _doctorDb.Doctors
-                .FirstOrDefault(d => d.DoctorId == id);
 
-            if (doctor != null)
-            {
-                _doctorDb.Doctors.Remove(doctor);
-            }
-
-            return doctor;
-        }
-
-        public Doctor? UpdateDoctorById(int id, Doctor doctor)
-        {
-            var existing = _doctorDb.Doctors
-                .FirstOrDefault(d => d.DoctorId == id);
-
-            if (existing != null)
-            {
-                existing.FullName = doctor.FullName;
-                existing.Specialisation = doctor.Specialisation;
-                existing.DoctorPhoneNo = doctor.DoctorPhoneNo;
-                existing.DoctorEmail = doctor.DoctorEmail;
-                existing.YearsOfExperience = doctor.YearsOfExperience;
-                existing.ConsultationFee = doctor.ConsultationFee;
-            }
-
-            return existing;
-        }
+       
 
         public Doctor? ChangeDoctorStatus(int id, bool isActive)
         {

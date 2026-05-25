@@ -16,13 +16,13 @@ namespace HealthApp.Model
     {
         public int AppointmentId { get; set; }
 
-        public Patient Patient { get; set; } = default!;
+        public Patient Patient { get; set; }
 
-        public Doctor Doctor { get; set; } = default!;
+        public Doctor Doctor { get; set; }
 
         public DateTime ScheduledDate { get; set; }
 
-        public string TimeSlot { get; set; } = string.Empty;
+        public string TimeSlot { get; set; } 
 
         public AppointmentStatus Status { get; private set; }
             = AppointmentStatus.Pending;
@@ -60,7 +60,7 @@ namespace HealthApp.Model
             return
                 $"Appointment ID: {AppointmentId}\n" +
                 $"Patient: {Patient.FullName}\n" +
-                $"Doctor: Dr. {Doctor.FullName}\n" +
+                $"Doctor: {Doctor.FullName}\n" +
                 $"Date: {ScheduledDate:dd-MM-yyyy}\n" +
                 $"Slot: {TimeSlot}\n" +
                 $"Status: {Status}\n" +

@@ -262,7 +262,7 @@ namespace HealthApp.Menu
 
                 _doctorService.AddDoctor(doc);
 
-                Console.WriteLine("Doctor Added Successfully ✅");
+                Console.WriteLine("Doctor Added Successfully ");
 
             }
 

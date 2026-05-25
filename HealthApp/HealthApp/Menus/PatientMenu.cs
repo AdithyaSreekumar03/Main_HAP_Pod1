@@ -100,6 +100,7 @@ namespace HealthApp.Menus
 
                 Console.WriteLine("\nPatient Registered Successfully");
                 Console.WriteLine(patient.GetProfileSummary());
+                Console.WriteLine($"Patient ID: {patient.PatientId}");
             }
             catch (ValidationException ex)
             {
