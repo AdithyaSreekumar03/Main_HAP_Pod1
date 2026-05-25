@@ -13,7 +13,7 @@ namespace HealthApp.Database
             Patients = GetDummyPatients();
         }
 
-        private List<Patient> GetDummyPatients()
+        private static List<Patient> GetDummyPatients()
         {
             return new List<Patient>
             {
@@ -69,7 +69,7 @@ namespace HealthApp.Database
             };
         }
 
-        private Patient CreatePatient(
+        private static Patient CreatePatient(
             int id,
             string name,
             DateOnly dob,

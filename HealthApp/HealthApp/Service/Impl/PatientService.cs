@@ -19,18 +19,17 @@ namespace HealthApp.Service.Impl
 
         public void RegisterPatient(Patient patient)
         {
+            var patients = _repo.GetAll();
 
-
-            if (_repo.GetAll().Any())
+            if (patients.Count > 0)
             {
                 patient.PatientId =
-                _repo.GetAll().Max(p => p.PatientId) + 1;
+                    patients.Max(p => p.PatientId) + 1;
             }
             else
             {
                 patient.PatientId = 1;
             }
-
 
             _repo.Add(patient);
         }
@@ -38,7 +37,7 @@ namespace HealthApp.Service.Impl
         public List<Patient> GetAllPatients()
         {
             var result = _repo.GetAll();
-            if (!result.Any())
+            if (result.Count==0)
             {
                 throw new NoPatientRegisteredException("There are no Patients Registered");
             }

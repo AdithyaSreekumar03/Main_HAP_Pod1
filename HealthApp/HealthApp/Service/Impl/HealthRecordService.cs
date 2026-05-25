@@ -1,4 +1,5 @@
-﻿using HealthApp.Model;
+﻿using HealthApp.Exceptions;
+using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
@@ -35,9 +36,9 @@ namespace HealthApp.Service.Impl
                     r.Patient.PatientId ==
                     patientId)
                 .ToList();
-            if (!result.Any())
+            if (result.Count==0)
             {
-                throw new Exception($"There are no health records of the patient with id {patientId}");
+                throw new NoHealthRecordAvailableException($"There are no health records of the patient with id {patientId}");
             }
             return result;
         }
@@ -55,9 +56,9 @@ namespace HealthApp.Service.Impl
                 .OrderByDescending(r => r.VisitDate)
                 .ToList();
 
-            if (!result.Any()) { 
+            if (result.Count==0) { 
 
-                throw new Exception($"There are no health records involving patient with id {patientId} and doctor with doctor id {doctorId}") ;
+                throw new NoHealthRecordAvailableException($"There are no health records involving patient with patient id {patientId} and doctor with doctor id {doctorId}") ;
         
             }
             return result;

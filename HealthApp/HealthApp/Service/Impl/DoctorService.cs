@@ -19,11 +19,12 @@ namespace HealthApp.Service.Impl
 
         public void AddDoctor(Doctor doctor)
         {
+            var doctors = _repo.GetAll();
 
-            if (_repo.GetAll().Any())
+            if (doctors.Count > 0)
             {
                 doctor.DoctorId =
-                _repo.GetAll().Max(d => d.DoctorId) + 1;
+                    doctors.Max(d => d.DoctorId) + 1;
             }
             else
             {
@@ -39,7 +40,7 @@ namespace HealthApp.Service.Impl
         {
             var result = _repo.GetAll();
 
-            if (!result.Any())
+            if (result.Count==0)
             {
                 throw new NoDoctorsRegisteredException("There are no Doctors registered");
             }
