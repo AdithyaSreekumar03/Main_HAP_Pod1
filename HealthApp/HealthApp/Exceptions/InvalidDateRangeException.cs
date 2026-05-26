@@ -1,8 +1,15 @@
 ﻿
-public class InvalidDateRangeException : Exception
+
+using System;
+
+namespace HealthApp.Exceptions
 {
-    public InvalidDateRangeException(string message)
-        : base(message)
+
+    public class InvalidDateRangeException : Exception
     {
+        public InvalidDateRangeException(string message)
+            : base(message)
+        {
+        }
     }
 }

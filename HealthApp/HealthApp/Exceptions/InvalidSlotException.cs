@@ -1,7 +1,13 @@
 ﻿
-public class InvalidSlotException : Exception
+using System;
+
+namespace HealthApp.Exceptions
 {
-    public InvalidSlotException(string message) : base(message)
+
+    public class InvalidSlotException : Exception
     {
+        public InvalidSlotException(string message) : base(message)
+        {
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using HealthApp.Database;
+﻿using HealthApp.Databases;
 using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using System;
@@ -25,8 +25,7 @@ namespace HealthApp.Repository.Impl
         }
         public Appointment? GetById(int id)
         {
-            return _appointmentDb.Appointments
-                .FirstOrDefault(a => a.AppointmentId == id);
+            return _appointmentDb.Appointments.FirstOrDefault(a => a.AppointmentId == id);
         }
     }
 }

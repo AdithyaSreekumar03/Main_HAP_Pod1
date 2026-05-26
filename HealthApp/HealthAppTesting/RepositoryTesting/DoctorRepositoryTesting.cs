@@ -1,105 +1,94 @@
-﻿using HealthApp.Database;
+﻿using HealthApp.Databases;
 using HealthApp.Model;
 using HealthApp.Repository.Impl;
-using Xunit;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace HealthApp.Tests
+namespace HealthAppTests.Repository_Layer
 {
     public class DoctorRepositoryTests
     {
-        // ✅ Create fresh repo every test
-        private static DoctorRepository CreateRepo(out DoctorDb db)
+        private readonly DoctorDb _db;
+        private readonly DoctorRepository _repo;
+
+        public DoctorRepositoryTests()
         {
-            db = new DoctorDb();
-            db.Doctors = new System.Collections.Generic.List<Doctor>(); // ✅ reset
-            return new DoctorRepository(db);
+            _db = new DoctorDb();
+            _db.Doctors.Clear();
+            _repo = new DoctorRepository(_db);
         }
 
-        // ✅ 1. ADD
         [Fact]
         public void Add_ShouldAddDoctor()
         {
-            var repo = CreateRepo(out var db);
-
             var doctor = new Doctor { DoctorId = 1 };
 
-            repo.Add(doctor);
+            _repo.Add(doctor);
 
-            Assert.Single(db.Doctors);
+            Assert.Single(_db.Doctors);
         }
 
-        // ✅ 2. GET ALL
         [Fact]
         public void GetAll_ShouldReturnDoctors()
         {
-            var repo = CreateRepo(out var db);
+            _db.Doctors.Add(new Doctor());
 
-            db.Doctors.Add(new Doctor());
-
-            var result = repo.GetAll();
+            var result = _repo.GetAll();
 
             Assert.Single(result);
         }
 
-        // ✅ 3. GET BY ID (FOUND)
+        [Fact]
+        public void GetAll_ShouldReturnEmpty_WhenNoDoctors()
+        {
+            var result = _repo.GetAll();
+
+            Assert.Empty(result);
+        }
+
         [Fact]
         public void GetById_ShouldReturnDoctor()
         {
-            var repo = CreateRepo(out var db);
-
             var doctor = new Doctor { DoctorId = 1 };
-            db.Doctors.Add(doctor);
+            _db.Doctors.Add(doctor);
 
-            var result = repo.GetById(1);
+            var result = _repo.GetById(1);
 
             Assert.NotNull(result);
             Assert.Equal(1, result.DoctorId);
         }
 
-        // ✅ 4. GET BY ID (NOT FOUND)
         [Fact]
         public void GetById_ShouldReturnNull_WhenNotFound()
         {
-            var repo = CreateRepo(out var db);
-
-            var result = repo.GetById(99);
+            var result = _repo.GetById(999);
 
             Assert.Null(result);
         }
 
-   
-
-
-
-        
-
-        // ✅ 9. CHANGE STATUS SUCCESS
         [Fact]
-        public void ChangeStatus_ShouldUpdateStatus()
+        public void ChangeDoctorStatus_ShouldUpdateStatus()
         {
-            var repo = CreateRepo(out var db);
-
             var doctor = new Doctor
             {
                 DoctorId = 1,
                 IsActive = true
             };
 
-            db.Doctors.Add(doctor);
+            _db.Doctors.Add(doctor);
 
-            var result = repo.ChangeDoctorStatus(1, false);
+            var result = _repo.ChangeDoctorStatus(1, false);
 
             Assert.NotNull(result);
             Assert.False(result.IsActive);
+
+            Assert.False(_db.Doctors[0].IsActive);
         }
-
-        // ✅ 10. CHANGE STATUS NOT FOUND
         [Fact]
-        public void ChangeStatus_ShouldReturnNull_WhenNotFound()
+        public void ChangeDoctorStatus_ShouldReturnNull_WhenNotFound()
         {
-            var repo = CreateRepo(out var db);
-
-            var result = repo.ChangeDoctorStatus(1, true);
+            var result = _repo.ChangeDoctorStatus(999, true);
 
             Assert.Null(result);
         }

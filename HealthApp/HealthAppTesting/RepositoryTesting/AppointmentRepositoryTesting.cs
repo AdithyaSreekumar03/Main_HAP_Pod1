@@ -1,20 +1,21 @@
-﻿using HealthApp.Database;
+﻿using HealthApp.Databases;
 using HealthApp.Model;
 using HealthApp.Repository.Impl;
 using System;
-using Xunit;
+using System.Collections.Generic;
+using System.Text;
 
-namespace HealthApp.Tests
+namespace HealthAppTests.Repository_Layer
 {
-    public class AppointmentRepositoryTesting
+    public class AppointmentRepositoryTests
     {
         private readonly AppointmentDb _db;
         private readonly AppointmentRepository _repo;
 
-        public AppointmentRepositoryTesting()
+        public AppointmentRepositoryTests()
         {
             _db = new AppointmentDb();
-            _db.Appointments.Clear();   // important
+            _db.Appointments.Clear();
             _repo = new AppointmentRepository(_db);
         }
 

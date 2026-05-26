@@ -3,91 +3,52 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HealthApp.Database
+namespace HealthApp.Databases
 {
     public class PatientDb
     {
-        public List<Patient> Patients { get; set; }
-        public PatientDb()
+        public List<Patient> Patients { get; set; } = new List<Patient>
         {
-            Patients = GetDummyPatients();
-        }
-
-        private List<Patient> GetDummyPatients()
-        {
-            return new List<Patient>
+            new Patient
             {
-                CreatePatient(
-                    1,
-                    "Arun Kumar",
-                    new DateOnly(1998, 5, 12),
-                    GenderType.Male,
-                    "9876543210",
-                    "arun.kumar@gmail.com",
-                    "INS1001"
-                ),
-
-                CreatePatient(
-                    2,
-                    "Priya Sharma",
-                    new DateOnly(1995, 8, 25),
-                    GenderType.Female,
-                    "9123456780",
-                    "priya.sharma@gmail.com",
-                    "INS1002"
-                ),
-
-                CreatePatient(
-                    3,
-                    "Rahul Verma",
-                    new DateOnly(2001, 2, 18),
-                    GenderType.Male,
-                    "9988776655",
-                    "rahul.verma@gmail.com",
-                    "INS1003"
-                ),
-
-                CreatePatient(
-                    4,
-                    "Sneha Reddy",
-                    new DateOnly(1992, 11, 30),
-                    GenderType.Female,
-                    "9012345678",
-                    "sneha.reddy@gmail.com",
-                    "INS1004"
-                ),
-
-                CreatePatient(
-                    5,
-                    "Alex John",
-                    new DateOnly(1988, 7, 14),
-                    GenderType.Other,
-                    "9090909090",
-                    "alex.john@gmail.com",
-                    "INS1005"
-                )
-            };
-        }
-
-        private Patient CreatePatient(
-            int id,
-            string name,
-            DateOnly dob,
-            GenderType gender,
-            string phone,
-            string email,
-            string insuranceId)
-        {
-            return new Patient
+                PatientId = 1,
+                FullName = "Mark David",
+                DateOfBirth = new DateOnly(2001, 5, 10),
+                Gender = GenderType.Male,
+                PhoneNumber = "9876543210",
+                Email = "mark.david@gmail.com",
+                InsuranceId = "INS1005"
+            },
+            new Patient
             {
-                PatientId = id,
-                FullName = name,
-                DateOfBirth = dob,
-                Gender = gender,
-                PhoneNumber = phone,
-                Email = email,
-                InsuranceId = insuranceId
-            };
-        }
+                PatientId = 2,
+                FullName = "Sara Thomas",
+                DateOfBirth = new DateOnly(1991, 3, 15),
+                Gender = GenderType.Female,
+                PhoneNumber = "9123456780",
+                Email = "sara.thomas@gmail.com",
+                InsuranceId = "INS1006"
+            },
+            new Patient
+            {
+                PatientId = 3,
+                FullName = "John Mathew",
+                DateOfBirth = new DateOnly(1996, 8, 20),
+                Gender = GenderType.Male,
+                PhoneNumber = "9988776655",
+                Email = "john.mathew@gmail.com",
+                InsuranceId = "INS1007"
+            },
+            new Patient
+            {
+                PatientId = 4,
+                FullName = "Shilpa Nair",
+                DateOfBirth = new DateOnly(1999, 11, 5),
+                Gender = GenderType.Female,
+                PhoneNumber = "9012345678",
+                Email = "shilpa.nair@gmail.com",
+                InsuranceId = "INS1008"
+            }
+        };
     }
 }

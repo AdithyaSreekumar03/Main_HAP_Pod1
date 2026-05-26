@@ -1,6 +1,5 @@
-﻿using HealthApp.Database;
+﻿using HealthApp.Databases;
 using HealthApp.Exceptions;
-using HealthApp.Menu;
 using HealthApp.Menus;
 using HealthApp.Repository.Impl;
 using HealthApp.Repository.Interface;
@@ -8,6 +7,7 @@ using HealthApp.Service.Impl;
 using HealthApp.Service.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 var services = new ServiceCollection();
 
@@ -30,11 +30,6 @@ services.AddTransient<PatientMenu>();
 services.AddTransient<DoctorMenu>();
 
 var provider = services.BuildServiceProvider();
-
-var patientService = provider.GetRequiredService<IPatientService>();
-var doctorService = provider.GetRequiredService<IDoctorService>();
-var appointmentService = provider.GetRequiredService<IAppointmentService>();
-var healthRecordService = provider.GetRequiredService<IHealthRecordService>();
 
 var patientMenu = provider.GetRequiredService<PatientMenu>();
 var doctorMenu = provider.GetRequiredService<DoctorMenu>();
@@ -70,3 +65,6 @@ while (true)
             break;
     }
 }
+
+[ExcludeFromCodeCoverage]
+public static partial class Program { }

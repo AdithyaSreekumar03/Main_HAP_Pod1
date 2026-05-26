@@ -11,7 +11,6 @@ namespace HealthApp.Service.Interface
         List<Doctor> GetAllDoctors();
         Doctor? GetDoctorById(int id);
         List<Doctor> SearchBySpecialisation(SpecialisationType specialisation);
-       
         string ChangeDoctorStatus(int id, bool isActive);
     }
 }
