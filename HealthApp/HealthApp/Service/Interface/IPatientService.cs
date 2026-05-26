@@ -9,11 +9,11 @@ namespace HealthApp.Service.Interface
     {
         void RegisterPatient(Patient patient);
 
-        List<Patient> GetAllPatients();
+       
 
         Patient? GetPatientById(int id);
 
-        string DeletePatientById(int id);
+       
 
         string UpdatePatientById(int id, Patient patient);
     }

@@ -34,16 +34,6 @@ namespace HealthApp.Service.Impl
             _repo.Add(patient);
         }
 
-        public List<Patient> GetAllPatients()
-        {
-            var result = _repo.GetAll();
-            if (result.Count==0)
-            {
-                throw new NoPatientRegisteredException("There are no Patients Registered");
-            }
-            return result;
-        }
-
         public Patient? GetPatientById(int id)
         {
             var patient = _repo.GetById(id);
@@ -55,18 +45,6 @@ namespace HealthApp.Service.Impl
             }
 
             return patient;
-        }
-        public string DeletePatientById(int id)
-        {
-            var patient = _repo.DeletePatient(id);
-
-            if (patient == null)
-            {
-                throw new PatientNotFoundException(
-                    $"Patient with id {id} not found");
-            }
-
-            return $"Patient with id {id} deleted successfully";
         }
         public string UpdatePatientById(int id, Patient patient)
         {

@@ -36,7 +36,7 @@ namespace HealthApp.Service.Impl
                     r.Patient.PatientId ==
                     patientId)
                 .ToList();
-            if (result.Count==0)
+            if (result.Count == 0)
             {
                 throw new NoHealthRecordAvailableException($"There are no health records of the patient with id {patientId}");
             }
@@ -56,10 +56,11 @@ namespace HealthApp.Service.Impl
                 .OrderByDescending(r => r.VisitDate)
                 .ToList();
 
-            if (result.Count==0) { 
+            if (result.Count == 0)
+            {
 
-                throw new NoHealthRecordAvailableException($"There are no health records involving patient with patient id {patientId} and doctor with doctor id {doctorId}") ;
-        
+                throw new NoHealthRecordAvailableException($"There are no health records involving patient with patient id {patientId} and doctor with doctor id {doctorId}");
+
             }
             return result;
         }

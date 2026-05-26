@@ -1,15 +1,12 @@
 ﻿using HealthApp.Exceptions;
-
 using HealthApp.Model;
-
 using HealthApp.Service.Interface;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-using System.ComponentModel.DataAnnotations;
-
-namespace HealthApp.Menu
-
+namespace HealthApp.Menus
 {
-
     public class DoctorMenu
 
     {
@@ -116,7 +113,7 @@ namespace HealthApp.Menu
                         ViewUpcomingAppointments();
 
                         break;
-                      
+
                     case "7":
 
                         AddHealthRecord();
@@ -205,7 +202,6 @@ namespace HealthApp.Menu
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
-
         private static string ReadValidInput(
             string message,
             Func<string, bool> validator,
@@ -274,37 +270,21 @@ namespace HealthApp.Menu
             }
         }
 
-       
         private void AddHealthRecord()
-
         {
-
             try
-
             {
-
                 Console.Write("Appointment ID: ");
-
                 if (!int.TryParse(Console.ReadLine(), out int id))
-
                 {
-
                     Console.WriteLine(InvalidIdPrompt);
-
                     return;
-
                 }
-
                 var appointment = _appointmentService.GetAppointmentById(id);
-
                 if (appointment == null)
-
                 {
-
                     Console.WriteLine("Appointment not found");
-
                     return;
-
                 }
                 if (appointment.Status == AppointmentStatus.Cancelled)
                 {
@@ -312,361 +292,202 @@ namespace HealthApp.Menu
                         "Cannot add health record for a cancelled appointment.");
                     return;
                 }
-
                 if (appointment.Status == AppointmentStatus.Pending)
                 {
                     Console.WriteLine(
                         "Appointment must be confirmed before adding health record.");
                     return;
                 }
-
                 if (appointment.Status == AppointmentStatus.Completed)
                 {
                     Console.WriteLine(
                         "Health record already added for this appointment.");
                     return;
                 }
-
                 HealthRecord record = new()
-
                 {
-
                     Patient = appointment.Patient,
-
                     Doctor = appointment.Doctor,
-
                     VisitDate = DateTime.Now
-
                 };
-
                 Console.Write("Diagnosis: ");
-
                 record.Diagnosis = Console.ReadLine()!;
-
                 Console.Write("Prescription: ");
-
                 record.Prescription = Console.ReadLine()!;
-
                 Console.Write("Notes: ");
-
                 record.Notes = Console.ReadLine()!;
-
                 _healthService.AddRecord(record);
-
                 appointment.Complete();
-
                 Console.WriteLine("Health Record Added");
-
             }
-
             catch (Exception ex)
-
             {
-
                 Console.WriteLine($"Error: {ex.Message}");
-
             }
-
         }
 
         private void ConfirmAppointment()
-
         {
-
             try
-
             {
-
                 Console.Write("Appointment ID: ");
-
                 if (!int.TryParse(Console.ReadLine(), out int id))
-
                 {
-
                     Console.WriteLine(InvalidIdPrompt);
-
                     return;
-
                 }
-
                 _appointmentService.ConfirmAppointment(id);
-
                 Console.WriteLine("Appointment Confirmed ");
-
             }
-
-            catch(AppointmentNotFoundException ex)
+            catch (AppointmentNotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            
-            
             catch (AppointmentAlreadyConfirmedException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
             catch (AppointmentAlreadyCancelledException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
             catch (AppointmentAlreadyCompletedException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void ChangeDoctorStatus()
-
         {
-
             try
-
             {
-
-                Console.Write("Doctor ID: ");
+                Console.Write($"{DoctorIdPrompt}");
 
                 if (!int.TryParse(Console.ReadLine(), out int id))
-
                 {
-
                     Console.WriteLine(InvalidIdPrompt);
-
                     return;
-
                 }
-
                 Console.Write("Active? (yes/no): ");
-
                 string input = Console.ReadLine()!.ToLower();
-
                 bool isActive = input == "yes";
-
                 string result = _doctorService.ChangeDoctorStatus(id, isActive);
-
                 Console.WriteLine(result);
-
             }
-
             catch (DoctorNotFoundException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void ViewPatientHealthRecord()
-
         {
-
             try
-
             {
-
                 Console.Write("Patient ID: ");
-
                 if (!int.TryParse(Console.ReadLine(), out int id))
-
                 {
-
                     Console.WriteLine(InvalidIdPrompt);
-
                     return;
-
                 }
-
                 var records = _healthService.GetPatientRecords(id);
-
                 foreach (var r in records)
-
                 {
-
                     Console.WriteLine(r.GetSummary());
-
                 }
-
             }
-
             catch (Exception ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void ViewUpcomingAppointments()
-
         {
-
             try
-
             {
-
-                Console.Write("Doctor ID: ");
+                Console.Write($"{DoctorIdPrompt}");
 
                 if (!int.TryParse(Console.ReadLine(), out int id))
-
                 {
-
                     Console.WriteLine(InvalidIdPrompt);
-
                     return;
-
                 }
-
                 var list = _appointmentService
 
                     .GetUpcomingAppointmentsByDoctor(
-
                         id,
-
                         DateTime.Today,
-
                         DateTime.Today.AddDays(30));
-
                 foreach (var a in list)
-
                 {
-
                     Console.WriteLine(a.GetDetails());
-
                 }
-
             }
 
             catch (Exception ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void ViewPendingAppointments()
-
         {
-
             try
-
             {
-
-                Console.Write("Doctor ID: ");
+                Console.Write($"{DoctorIdPrompt}");
 
                 if (!int.TryParse(Console.ReadLine(), out int id))
-
                 {
-
                     Console.WriteLine(InvalidIdPrompt);
-
                     return;
-
                 }
 
                 var list = _appointmentService
-
                     .GetPendingAppointmentsByDoctor(id);
-
                 foreach (var a in list)
-
                 {
-
                     Console.WriteLine(a.GetDetails());
-
                 }
-
             }
-
             catch (AppointmentNotFoundException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void CancelAppointment()
-
         {
-
             try
-
             {
-
                 Console.Write("Appointment ID: ");
-
                 if (!int.TryParse(Console.ReadLine(), out int id))
-
                 {
-
                     Console.WriteLine(InvalidIdPrompt);
-
                     return;
-
                 }
-
                 Console.Write("Reason: ");
-
                 string reason = Console.ReadLine()!;
-
                 _appointmentService.CancelAppointment(id, reason);
-
                 Console.WriteLine("Appointment Cancelled ");
-
             }
-
             catch (AppointmentAlreadyCancelledException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
             catch (AppointmentAlreadyCompletedException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
             catch (AppointmentNotFoundException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
-
         private static void Pause()
-
         {
-
             Console.WriteLine("\nPress any key...");
-
             Console.ReadKey();
-
         }
-
     }
-
 }

@@ -4,6 +4,7 @@ using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace HealthApp.Repository.Impl
@@ -30,20 +31,7 @@ namespace HealthApp.Repository.Impl
             return _patientDb.Patients
                              .FirstOrDefault(pa => pa.PatientId == id);
         }
-        public Patient? DeletePatient(int id)
-        {
-            var patient = _patientDb.Patients
-                                    .FirstOrDefault(p => p.PatientId == id);
 
-            if (patient == null)
-            {
-                return null;
-            }
-
-            _patientDb.Patients.Remove(patient);
-
-            return patient;
-        }
         public Patient? UpdatePatient(int id, Patient patient)
         {
             var pat = _patientDb.Patients

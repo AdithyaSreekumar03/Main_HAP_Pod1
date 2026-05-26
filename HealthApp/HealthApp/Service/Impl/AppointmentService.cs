@@ -1,6 +1,8 @@
 ﻿using HealthApp.Constant;
+
 using HealthApp.Exceptions;
 using HealthApp.Model;
+
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
@@ -133,7 +135,7 @@ namespace HealthApp.Service.Impl
                 TimeSlot = slot
             };
 
-          
+
 
             _repo.Add(appointment);
 
@@ -169,28 +171,40 @@ namespace HealthApp.Service.Impl
             }
         }
 
-        public Appointment? GetAppointmentById(
-            int id)
+        public Appointment GetAppointmentById(int id)
         {
-            return _repo.GetById(id);
+            var appointment = _repo.GetById(id);
+
+            if (appointment == null)
+            {
+                throw new AppointmentNotFoundException(
+                    $"Appointment with id {id} not found");
+            }
+
+            return appointment;
+        }
+
+        public List<Appointment> GetAllAppointments()
+        {
+            var list = _repo.GetAll();
+
+            if (list == null || list.Count == 0)
+            {
+                throw new NoAppointmentsFoundException("No appointments found");
+            }
+
+            return list;
         }
 
         public List<Appointment>
-            GetAllAppointments()
-        {
-            return _repo.GetAll();
-        }
-
-        
-          public List<Appointment>
-    GetAppointmentsByPatient(
-        int patientId)
+  GetAppointmentsByPatient(
+      int patientId)
         {
             return _repo.GetAll()
                 .Where(a =>
                     a.Patient.PatientId == patientId
                     &&
-                    (a.Status == AppointmentStatus.Confirmed || a.Status == AppointmentStatus.Pending || a.Status==AppointmentStatus.Cancelled)
+                    (a.Status == AppointmentStatus.Confirmed || a.Status == AppointmentStatus.Pending || a.Status == AppointmentStatus.Cancelled)
                     &&
                     a.ScheduledDate.Date >= DateTime.Today
                 )
@@ -199,20 +213,30 @@ namespace HealthApp.Service.Impl
                 .ToList();
         }
         public List<Appointment> GetUpcomingAppointmentsByDoctor(
-     int doctorId,
-     DateTime fromDate,
-     DateTime toDate)
+    int doctorId,
+    DateTime fromDate,
+    DateTime toDate)
         {
+            if (fromDate.Date < DateTime.Today)
+            {
+                throw new InvalidDateRangeException("From date cannot be in the past");
+            }
+
+            if (fromDate > toDate)
+            {
+                throw new InvalidDateRangeException("Invalid date range");
+            }
+
             var result = _repo.GetAll()
-    .Where(a =>
-        a.Doctor.DoctorId == doctorId
-        && a.Status == AppointmentStatus.Confirmed
-        && a.ScheduledDate.Date >= fromDate.Date
-        && a.ScheduledDate.Date <= toDate.Date
-        && a.ScheduledDate.Date >= DateTime.Today)
-    .OrderBy(a => a.ScheduledDate)
-    .ThenBy(a => a.TimeSlot)
-    .ToList();
+                .Where(a =>
+                    a.Doctor.DoctorId == doctorId
+                    && a.Status == AppointmentStatus.Confirmed
+                    && a.ScheduledDate.Date >= fromDate.Date
+                    && a.ScheduledDate.Date <= toDate.Date
+                    && a.ScheduledDate.Date >= DateTime.Today)
+                .OrderBy(a => a.ScheduledDate)
+                .ThenBy(a => a.TimeSlot)
+                .ToList();
 
             if (result.Count == 0)
             {
@@ -253,14 +277,14 @@ namespace HealthApp.Service.Impl
                 .Select(a => a.TimeSlot)
                 .ToList();
 
-          
+
             var availableSlots =
                 TimeSlots.Slots
                 .Except(bookedSlots)
                 .ToList();
 
-            
-            if (availableSlots.Count==0)
+
+            if (availableSlots.Count == 0)
             {
                 throw new SlotAlreadyOverException(
                     "No available slots on this day.");
@@ -280,7 +304,7 @@ namespace HealthApp.Service.Impl
                 .OrderBy(a => a.ScheduledDate)
                 .ThenBy(a => a.TimeSlot)
                 .ToList();
-            if (result.Count==0)
+            if (result.Count == 0)
             {
                 throw new AppointmentNotFoundException($"No existing appointments for doctor with id {doctorId}");
             }
@@ -299,12 +323,12 @@ namespace HealthApp.Service.Impl
             }
 
             if (appointment.Status ==
-                AppointmentStatus.Cancelled )
+                AppointmentStatus.Cancelled)
             {
                 throw new AppointmentAlreadyCancelledException(
                     "Cancelled appointment cannot be confirmed.");
             }
-            if(appointment.Status == AppointmentStatus.Completed)
+            if (appointment.Status == AppointmentStatus.Completed)
             {
                 throw new AppointmentAlreadyCompletedException(
                     "The appointment is already completed");

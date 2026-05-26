@@ -7,8 +7,7 @@ using System.Text;
 
 namespace HealthApp.Repository.Impl
 {
-    public class HealthRecordRepository
-         : IHealthRecordRepository
+    public class HealthRecordRepository : IHealthRecordRepository
     {
         private readonly HealthRecordDb _healthRecordDb;
         public HealthRecordRepository(HealthRecordDb healthRecordDb)
@@ -19,7 +18,6 @@ namespace HealthApp.Repository.Impl
         {
             _healthRecordDb.Records.Add(record);
         }
-
         public List<HealthRecord> GetAll()
         {
             return _healthRecordDb.Records;
