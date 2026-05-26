@@ -1,9 +1,0 @@
-z
-oC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\HealthAppTests.AssemblyInfo.csutf-8|
-qC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\HealthAppTests.GlobalUsings.g.csutf-8Œ
-€C:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthAppTests\obj\Debug\net10.0\.NETCoreApp,Version=v10.0.AssemblyAttributes.csutf-8x
-mC:\Users\310507\.nuget\packages\microsoft.net.test.sdk\17.14.1\build\net8.0\Microsoft.NET.Test.Sdk.Program.csutf-8^
-UC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthAppTests\PatientServiceTests.csutf-8a
-XC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthAppTests\PatientRepositoryTests.csutf-8]
-TC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthAppTests\DoctorServiceTests.csutf-8`
-WC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthAppTests\DoctorRepositoryTests.csutf-8

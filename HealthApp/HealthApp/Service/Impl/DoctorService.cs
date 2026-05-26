@@ -19,11 +19,12 @@ namespace HealthApp.Service.Impl
 
         public void AddDoctor(Doctor doctor)
         {
+            var doctors = _repo.GetAll();
 
-            if (_repo.GetAll().Any())
+            if (doctors.Count > 0)
             {
                 doctor.DoctorId =
-                _repo.GetAll().Max(d => d.DoctorId) + 1;
+                    doctors.Max(d => d.DoctorId) + 1;
             }
             else
             {
@@ -39,7 +40,7 @@ namespace HealthApp.Service.Impl
         {
             var result = _repo.GetAll();
 
-            if (!result.Any())
+            if (result.Count == 0)
             {
                 throw new NoDoctorsRegisteredException("There are no Doctors registered");
             }
@@ -58,37 +59,20 @@ namespace HealthApp.Service.Impl
             return doctor;
         }
 
-        public List<Doctor> SearchBySpecialisation(
-     SpecialisationType specialisation)
+        public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
         {
-            return _repo.GetAll()
+            var result = _repo.GetAll()
                 .Where(d => d.Specialisation == specialisation)
                 .ToList();
-        }
-        public string DeleteDoctorById(int id)
-        {
-            var doctor = _repo.DeleteDoctorById(id);
 
-            if (doctor == null)
+            if (result.Count==0)
             {
-                throw new Exceptions.DoctorNotFoundException(
-                    $"Doctor with id {id} not found");
+                throw new DoctorNotFoundException("No doctors found for this specialisation");
             }
 
-            return $"Doctor with id {id} deleted successfully";
+            return result;
         }
-        public string UpdateDoctorById(int id, Doctor doctor)
-        {
-            var updatedDoctor = _repo.UpdateDoctorById(id, doctor);
 
-            if (updatedDoctor == null)
-            {
-                throw new DoctorNotFoundException(
-                    $"Doctor with id {id} not found");
-            }
-
-            return $"Doctor with id {id} updated successfully";
-        }
 
         public string ChangeDoctorStatus(int id, bool isActive)
         {

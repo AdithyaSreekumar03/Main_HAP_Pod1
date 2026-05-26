@@ -19,30 +19,19 @@ namespace HealthApp.Service.Impl
 
         public void RegisterPatient(Patient patient)
         {
+            var patients = _repo.GetAll();
 
-
-            if (_repo.GetAll().Any())
+            if (patients.Count > 0)
             {
                 patient.PatientId =
-                _repo.GetAll().Max(p => p.PatientId) + 1;
+                    patients.Max(p => p.PatientId) + 1;
             }
             else
             {
                 patient.PatientId = 1;
             }
 
-
             _repo.Add(patient);
-        }
-
-        public List<Patient> GetAllPatients()
-        {
-            var result = _repo.GetAll();
-            if (!result.Any())
-            {
-                throw new NoPatientsRegisteredException("There are no Patients Registered");
-            }
-            return result;
         }
 
         public Patient? GetPatientById(int id)
@@ -56,18 +45,6 @@ namespace HealthApp.Service.Impl
             }
 
             return patient;
-        }
-        public string DeletePatientById(int id)
-        {
-            var patient = _repo.DeletePatient(id);
-
-            if (patient == null)
-            {
-                throw new PatientNotFoundException(
-                    $"Patient with id {id} not found");
-            }
-
-            return $"Patient with id {id} deleted successfully";
         }
         public string UpdatePatientById(int id, Patient patient)
         {

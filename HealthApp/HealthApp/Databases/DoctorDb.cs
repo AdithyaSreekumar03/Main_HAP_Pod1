@@ -12,7 +12,7 @@ namespace HealthApp.Databases
             new Doctor
             {
                 DoctorId = 1,
-                FullName = "Dr. Vimal",
+                FullName = "Vimal Rajan",
                 Specialisation = SpecialisationType.Cardiologist,
                 DoctorPhoneNo = "9876543210",
                 DoctorEmail = "vimal@gmail.com",
@@ -23,7 +23,7 @@ namespace HealthApp.Databases
             new Doctor
             {
                 DoctorId = 2,
-                FullName = "Dr. Rahul",
+                FullName = "Rahul Sharma",
                 Specialisation = SpecialisationType.Dermatologist,
                 DoctorPhoneNo = "9123456780",
                 DoctorEmail = "rahul@gmail.com",
@@ -34,7 +34,7 @@ namespace HealthApp.Databases
             new Doctor
             {
                 DoctorId = 3,
-                FullName = "Dr. Kumar",
+                FullName = "Kumaravel Pandian",
                 Specialisation = SpecialisationType.Orthopedic,
                 DoctorPhoneNo = "9988776655",
                 DoctorEmail = "kumar@gmail.com",
@@ -45,7 +45,7 @@ namespace HealthApp.Databases
             new Doctor
             {
                 DoctorId = 4,
-                FullName = "Dr. Muthu",
+                FullName = "Muthu Krishnan",
                 Specialisation = SpecialisationType.Pediatrician,
                 DoctorPhoneNo = "9012345678",
                 DoctorEmail = "muthu@gmail.com",

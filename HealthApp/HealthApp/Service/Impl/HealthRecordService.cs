@@ -4,6 +4,7 @@ using HealthApp.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HealthApp.Exceptions;
 
 namespace HealthApp.Service.Impl
 {
@@ -35,9 +36,9 @@ namespace HealthApp.Service.Impl
                     r.Patient.PatientId ==
                     patientId)
                 .ToList();
-            if (!result.Any())
+            if (result.Count == 0)
             {
-                throw new Exception($"There are no health records of the patient with id {patientId}");
+                throw new NoHealthRecordAvailableException($"There are no health records of the patient with id {patientId}");
             }
             return result;
         }
@@ -55,10 +56,10 @@ namespace HealthApp.Service.Impl
                 .OrderByDescending(r => r.VisitDate)
                 .ToList();
 
-            if (!result.Any())
+            if (result.Count == 0)
             {
 
-                throw new Exception($"There are no health records involving patient with id {patientId} and doctor with doctor id {doctorId}");
+                throw new NoHealthRecordAvailableException($"There are no health records involving patient with patient id {patientId} and doctor with doctor id {doctorId}");
 
             }
             return result;

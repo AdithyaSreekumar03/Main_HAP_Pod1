@@ -25,8 +25,7 @@ namespace HealthApp.Repository.Impl
         }
         public Appointment? GetById(int id)
         {
-            return _appointmentDb.Appointments
-                .FirstOrDefault(a => a.AppointmentId == id);
+            return _appointmentDb.Appointments.FirstOrDefault(a => a.AppointmentId == id);
         }
     }
 }

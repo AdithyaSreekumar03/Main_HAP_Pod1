@@ -255,25 +255,9 @@ namespace HealthApp.Menus
                     break;
                 }
 
-                Console.WriteLine(
-                    "\nAvailable Slots:");
 
-                for (int i = 0;
-                    i < TimeSlots.Slots.Count;
-                    i++)
-                {
-                    Console.WriteLine(
-                        $"{i + 1}. " +
-                        $"{TimeSlots.Slots[i]}");
-                }
 
-                int slotChoice =
-                    int.Parse(
-                        Console.ReadLine()!);
-
-                string slot =
-                    TimeSlots.Slots[
-                        slotChoice - 1];
+                string slot = ReadSlot();
 
                 var appointment =
                     _appointmentService
@@ -317,10 +301,39 @@ namespace HealthApp.Menus
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+            catch (InvalidDateRangeException ex)
+            {
+                Console.WriteLine($"Error:{ex.Message}");
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(
                     $"Unexpected Error: {ex.Message}");
+            }
+        }
+
+        private static string ReadSlot()
+        {
+            Console.WriteLine("\nAvailable Slots:");
+
+            for (int i = 0; i < TimeSlots.Slots.Count; i++)
+            {
+                Console.WriteLine(
+                    $"{i + 1}. {TimeSlots.Slots[i]}");
+            }
+
+            while (true)
+            {
+                Console.Write("Choose Slot: ");
+
+                if (int.TryParse(Console.ReadLine(), out int choice)
+                    && choice >= 1
+                    && choice <= TimeSlots.Slots.Count)
+                {
+                    return TimeSlots.Slots[choice - 1];
+                }
+
+                Console.WriteLine("Invalid Slot Selection");
             }
         }
         private void SearchDoctors()
@@ -334,10 +347,10 @@ namespace HealthApp.Menus
 
             string specInput = Console.ReadLine()!;
 
-            if (!Enum.TryParse<SpecialisationType>(
-                    specInput,
-                    true,
-                    out SpecialisationType specialisation))
+            if (!Enum.TryParse(
+           specInput,
+           true,
+           out SpecialisationType specialisation) || !Enum.IsDefined(typeof(SpecialisationType), specialisation))
             {
                 Console.WriteLine("Invalid Specialisation");
                 return;
@@ -351,7 +364,7 @@ namespace HealthApp.Menus
             {
                 Console.WriteLine(
                     $"ID:{d.DoctorId} " +
-                    $"Dr.{d.FullName}");
+                    $"{d.FullName}");
             }
         }
 
@@ -417,16 +430,24 @@ namespace HealthApp.Menus
                 break;
             }
 
-            Console.Write("Gender (Male/Female/Other): ");
-            string genderInput = Console.ReadLine()!;
-
-            if (!Enum.TryParse(genderInput, true, out GenderType gender))
+            while (true)
             {
-                Console.WriteLine("Invalid Gender. Defaulting to 'Other'");
-                gender = GenderType.Other;
-            }
+                Console.Write("Gender (Male/Female/Other): ");
 
-            patient.Gender = gender;
+                string genderInput = Console.ReadLine()!;
+
+                if (Enum.TryParse(
+                        genderInput,
+                        true,
+                        out GenderType gender)
+                    && Enum.IsDefined(typeof(GenderType), gender))
+                {
+                    patient.Gender = gender;
+                    break;
+                }
+
+                Console.WriteLine("Invalid Gender.");
+            }
 
             while (true)
             {
@@ -453,5 +474,6 @@ namespace HealthApp.Menus
 
             return patient;
         }
+
     }
 }

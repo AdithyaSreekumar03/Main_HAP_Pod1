@@ -9,6 +9,7 @@ using HealthApp.Service.Impl;
 using HealthApp.Service.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 var services = new ServiceCollection();
 
@@ -72,4 +73,5 @@ while (true)
     }
 }
 
-
+[ExcludeFromCodeCoverage]
+public partial class Program { }
