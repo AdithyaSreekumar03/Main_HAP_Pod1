@@ -35,15 +35,14 @@ namespace HealthApp.Models
 
         public string GetDoctorDetailsSummary()
         {
-            Console.WriteLine();
-            Console.WriteLine($"Doctor Name: {FullName}");
-            Console.WriteLine($"Doctor Specialisation: {Specialisation}");
-            Console.WriteLine($"Doctor Phone Number: {DoctorPhoneNo}");
-            Console.WriteLine($"Doctor Email: {DoctorEmail}");
-            Console.WriteLine($"Doctor Years of Experience: {YearsOfExperience}");
-            Console.WriteLine($"Doctor Consultation Fees: {ConsultationFee}");
-            Console.WriteLine();
-            return "Doctor Registered Successfully";
+            return
+                $"Doctor Id: {DoctorId}\n" +
+                $"Doctor Name: {FullName}\n" +
+                $"Doctor Specialisation: {Specialisation}\n" +
+                $"Doctor Phone Number: {DoctorPhoneNo}\n" +
+                $"Doctor Email: {DoctorEmail}\n" +
+                $"Doctor Years of Experience: {YearsOfExperience}\n" +
+                $"Doctor Consultation Fees: {ConsultationFee}\n";
         }
         public bool IsValidEmail()
         {

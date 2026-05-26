@@ -25,9 +25,9 @@ JC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Models\Doctor.csutf
 OC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Models\Appointment.csutf-8W
 NC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Menus\PatientMenu.csutf-8V
 MC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Menus\DoctorMenu.csutf-8i
-`C:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\SlotAlreadyOverException.csutf-8i
-`C:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PatientNotFoundException.csutf-8b
-YC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PastDateException.csutf-8m
+`C:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\SlotAlreadyOverException.csutf-8b
+YC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PastDateException.csutf-8i
+`C:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PatientNotFoundException.csutf-8m
 dC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoPatientRegisteredException.csutf-8q
 hC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoHealthRecordAvailableException.csutf-8m
 dC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoDoctorsRegisteredException.csutf-8m
@@ -43,6 +43,6 @@ lC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\Appointmen
 lC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentAlreadyCancelledException.csutf-8Y
 PC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Databases\PatientDb.csutf-8^
 UC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Databases\HealthRecordDb.csutf-8X
-OC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Databases\DoctorDb.csutf-8]
-TC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Databases\AppointmentDb.csutf-8Y
-PC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Constants\TimeSlots.csutf-8
+OC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Databases\DoctorDb.csutf-8Y
+PC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Constants\TimeSlots.csutf-8]
+TC:\Users\310507\project\Main_HAP_Pod1\HealthApp\HealthApp\Databases\AppointmentDb.csutf-8

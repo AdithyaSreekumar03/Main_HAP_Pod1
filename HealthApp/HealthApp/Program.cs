@@ -40,10 +40,14 @@ var doctorMenu = provider.GetRequiredService<DoctorMenu>();
 while (true)
 {
     Console.Clear();
-    Console.WriteLine("===== HEALTHCARE MANAGEMENT SYSTEM =====");
-    Console.WriteLine("1. Patient Menu");
-    Console.WriteLine("2. Doctor Menu");
-    Console.WriteLine("3. Exit");
+
+    Console.WriteLine("====== HEALTHCARE MANAGEMENT SYSTEM ======");
+    Console.WriteLine("| Option | Description                   |");
+    Console.WriteLine("|--------|-------------------------------|");
+    Console.WriteLine("| 1      | Patient Menu                  |");
+    Console.WriteLine("| 2      | Doctor Menu                   |");
+    Console.WriteLine("| 3      | Exit                          |");
+    Console.WriteLine("==========================================");
 
     Console.Write("\nChoose: ");
     string? choice = Console.ReadLine();

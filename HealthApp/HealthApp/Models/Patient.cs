@@ -14,21 +14,13 @@ namespace HealthApp.Models
     public class Patient
     {
         public int PatientId { get; set; }
-
         public string FullName { get; set; } = string.Empty;
-
         public DateOnly DateOfBirth { get; set; }
-
         public GenderType Gender { get; set; }
-
         public string PhoneNumber { get; set; } = string.Empty;
-
         public string Email { get; set; } = string.Empty;
-
         public string InsuranceId { get; set; } = string.Empty;
-
         public DateTime CreatedDate { get; set; }
-
         public Patient()
         {
             CreatedDate = DateTime.Now;
@@ -79,18 +71,15 @@ namespace HealthApp.Models
         }
         public string GetProfileSummary()
         {
-            Console.WriteLine();
-            Console.WriteLine($"Patient Name: {FullName}");
-            Console.WriteLine($"Patient DOB: {DateOfBirth}");
-            Console.WriteLine($"Patient Gender: {Gender}");
-            Console.WriteLine($"Patient Age: {GetAge()}");
-            Console.WriteLine($"Patient PhoneNo: {PhoneNumber}");
-            Console.WriteLine($"Patient Email: {Email}");
-            Console.WriteLine($"Patient Insurence Id: {InsuranceId}");
-            Console.WriteLine();
-
-            return "Patient Registered Successfully";
-
+            return
+                $"Patient Id: {PatientId}\n" +
+                $"Patient Name: {FullName}\n" +
+                $"Patient DOB: {DateOfBirth}\n" +
+                $"Patient Gender: {Gender}\n" +
+                $"Patient Age: {GetAge()}\n" +
+                $"Patient PhoneNo: {PhoneNumber}\n" +
+                $"Patient Email: {Email}\n" +
+                $"Patient Insurence Id: {InsuranceId}\n";
         }
     }
 }
