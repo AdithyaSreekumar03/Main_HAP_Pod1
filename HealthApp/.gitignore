@@ -1,0 +1,17 @@
+# Ignore Visual Studio workspace files and build artifacts
+.vs/
+**/bin/
+**/obj/
+ 
+# Optional project-specific ignores
+*.user
+*.suo
+*.userosscache
+*.syndicates
+ 
+*.lscache
+
+# SonarQube
+.sonar/
+.sonarqube/
+sonar-project.properties.user

@@ -1,0 +1,19 @@
+﻿using HealthApp.Model;
+using System.Collections.Generic;
+
+namespace HealthApp.Service.Interface
+{
+    public interface IDoctorService
+    {
+        void AddDoctor(Doctor doctor);
+
+        List<Doctor> GetAllDoctors();
+
+        Doctor? GetDoctorById(int id);
+
+        List<Doctor> SearchBySpecialisation(
+            SpecialisationType specialisation);
+
+        string ChangeDoctorStatus(int id, bool isActive);
+    }
+}
