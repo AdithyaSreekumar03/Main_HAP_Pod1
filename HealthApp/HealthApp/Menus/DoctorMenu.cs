@@ -361,7 +361,7 @@ namespace HealthApp.Menus
         {
             try
             {
-                Console.Write("Doctor ID: ");
+                Console.Write($"{DoctorIdPrompt}");
 
                 if (!int.TryParse(Console.ReadLine(), out int id))
                 {
@@ -406,7 +406,7 @@ namespace HealthApp.Menus
         {
             try
             {
-                Console.Write("Doctor ID: ");
+                Console.Write($"{DoctorIdPrompt}");
 
                 if (!int.TryParse(Console.ReadLine(), out int id))
                 {
@@ -435,7 +435,7 @@ namespace HealthApp.Menus
         {
             try
             {
-                Console.Write("Doctor ID: ");
+                Console.Write($"{DoctorIdPrompt}");
 
                 if (!int.TryParse(Console.ReadLine(), out int id))
                 {

@@ -10,10 +10,14 @@
     },
     {
       "key": "sonar.scanner.bootstrapStartTime",
-      "value": "1779761980000"
+      "value": "1779767465000"
     },
     {
       "key": "sonar.projectKey",
+      "value": "HealthApp"
+    },
+    {
+      "key": "sonar.projectName",
       "value": "HealthApp"
     },
     {
@@ -127,6 +131,14 @@
     {
       "key": "sonar.host.url",
       "value": "http://localhost:9000"
+    },
+    {
+      "key": "sonar.cs.vscoveragexml.reportsPaths",
+      "value": "coverage.xml"
+    },
+    {
+      "key": "sonar.exclusions",
+      "value": "**/Databases/**,**/Models/**,**/Constants/**,**/Exceptions/**,**/Menus/**,**/Program.cs,coverage.xml"
     },
     {
       "key": "sonar.visualstudio.enable",

@@ -33,11 +33,6 @@ services.AddTransient<DoctorMenu>();
 
 var provider = services.BuildServiceProvider();
 
-var patientService = provider.GetRequiredService<IPatientService>();
-var doctorService = provider.GetRequiredService<IDoctorService>();
-var appointmentService = provider.GetRequiredService<IAppointmentService>();
-var healthRecordService = provider.GetRequiredService<IHealthRecordService>();
-
 var patientMenu = provider.GetRequiredService<PatientMenu>();
 var doctorMenu = provider.GetRequiredService<DoctorMenu>();
 
@@ -74,4 +69,4 @@ while (true)
 }
 
 [ExcludeFromCodeCoverage]
-public partial class Program { }
+public static partial class Program { }
