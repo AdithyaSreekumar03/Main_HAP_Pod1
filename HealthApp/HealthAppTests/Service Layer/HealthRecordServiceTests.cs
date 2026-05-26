@@ -22,7 +22,6 @@ namespace HealthAppTests.Service_Layer
             _service = new HealthRecordService(_mockRepo.Object);
         }
 
-        // ✅ Helper
         private static HealthRecord GetRecord(int patientId = 1, int doctorId = 1)
         {
             return new HealthRecord
@@ -34,7 +33,6 @@ namespace HealthAppTests.Service_Layer
             };
         }
 
-        // ✅ 1. ADD RECORD
         [Fact]
         public void AddRecord_ShouldAssignIdAndAdd()
         {
@@ -125,7 +123,6 @@ namespace HealthAppTests.Service_Layer
             Assert.Throws<NoHealthRecordAvailableException>(() =>
                 _service.GetHealthRecordsByDoctor(1, 1));
         }
-
     }
 }
 

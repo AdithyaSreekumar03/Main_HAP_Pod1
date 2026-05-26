@@ -12,12 +12,12 @@ using System.Text;
 
 namespace HealthAppTests.Service_Layer
 {
-    public class PatientServiceTesting
+    public class PatientServiceTests
     {
         private readonly Mock<IPatientRepository> _mockRepo;
         private readonly PatientService _service;
 
-        public PatientServiceTesting()        
+        public PatientServiceTests()        
         {            
             _mockRepo = new Mock<IPatientRepository>();
             _service = new PatientService(_mockRepo.Object);

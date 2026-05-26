@@ -12,12 +12,12 @@ using System.Text;
 
 namespace HealthAppTests.Service_Layer
 {
-    public class AppointmentServiceTesting
+    public class AppointmentServiceTests
     {
         private readonly Mock<IAppointmentRepository> _repo;
         private readonly AppointmentService _service;
 
-        public AppointmentServiceTesting()
+        public AppointmentServiceTests()
         {
             _repo = new Mock<IAppointmentRepository>();
             _service = new AppointmentService(_repo.Object);
