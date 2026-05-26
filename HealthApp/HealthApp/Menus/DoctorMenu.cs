@@ -262,23 +262,22 @@ namespace HealthApp.Menus
             }
         }
 
+
         private void AddHealthRecord()
         {
             try
             {
                 int id;
 
-                while (true)
-                {
-                    Console.Write("Appointment ID: ");
+                
+                string input = ReadValidInput(
+                     "Appointment ID: ",
+                      s => int.TryParse(s, out _),
+                      "Invalid ID. Please enter a valid number."
+                );
 
-                    string input = Console.ReadLine()!;
-
-                    if (int.TryParse(input, out id))
-                        break;
-
-                    Console.WriteLine(InvalidIdPrompt);
-                }
+                    id = int.Parse(input);
+                
 
                 var appointment = _appointmentService.GetAppointmentById(id);
 
@@ -290,22 +289,19 @@ namespace HealthApp.Menus
 
                 if (appointment.Status == AppointmentStatus.Cancelled)
                 {
-                    Console.WriteLine(
-                        "Cannot add health record for a cancelled appointment.");
+                    Console.WriteLine("Cannot add health record for a cancelled appointment.");
                     return;
                 }
 
                 if (appointment.Status == AppointmentStatus.Pending)
                 {
-                    Console.WriteLine(
-                        "Appointment must be confirmed before adding health record.");
+                    Console.WriteLine("Appointment must be confirmed before adding health record.");
                     return;
                 }
 
                 if (appointment.Status == AppointmentStatus.Completed)
                 {
-                    Console.WriteLine(
-                        "Health record already added for this appointment.");
+                    Console.WriteLine("Health record already added for this appointment.");
                     return;
                 }
 
@@ -316,41 +312,23 @@ namespace HealthApp.Menus
                     VisitDate = DateTime.Now
                 };
 
-                while (true)
-                {
-                    Console.Write("Diagnosis: ");
+                record.Diagnosis = ReadValidInput(
+                    "Diagnosis: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Diagnosis cannot be empty."
+                );
 
-                    record.Diagnosis = Console.ReadLine()!;
+                record.Prescription = ReadValidInput(
+                    "Prescription: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Prescription cannot be empty."
+                );
 
-                    if (!string.IsNullOrWhiteSpace(record.Diagnosis))
-                        break;
-
-                    Console.WriteLine("Diagnosis cannot be empty.");
-                }
-
-                while (true)
-                {
-                    Console.Write("Prescription: ");
-
-                    record.Prescription = Console.ReadLine()!;
-
-                    if (!string.IsNullOrWhiteSpace(record.Prescription))
-                        break;
-
-                    Console.WriteLine("Prescription cannot be empty.");
-                }
-
-                while (true)
-                {
-                    Console.Write("Notes: ");
-
-                    record.Notes = Console.ReadLine()!;
-
-                    if (!string.IsNullOrWhiteSpace(record.Notes))
-                        break;
-
-                    Console.WriteLine("Notes cannot be empty.");
-                }
+                record.Notes = ReadValidInput(
+                    "Notes: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Notes cannot be empty."
+                );
 
                 _healthService.AddRecord(record);
 
@@ -363,6 +341,7 @@ namespace HealthApp.Menus
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
+
 
         private void ConfirmAppointment()
         {

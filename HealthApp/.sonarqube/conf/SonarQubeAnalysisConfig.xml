@@ -13,7 +13,6 @@
   <SonarQubeHostUrl>http://localhost:9000</SonarQubeHostUrl>
   <SonarQubeVersion>26.1.0.118079</SonarQubeVersion>
   <SonarProjectKey>HealthApp</SonarProjectKey>
-  <SonarProjectName>HealthApp</SonarProjectName>
   <AdditionalConfig>
     <ConfigSetting Id="BuildUri" />
     <ConfigSetting Id="TfsUri" />
@@ -154,8 +153,6 @@
   </ServerSettings>
   <LocalSettings>
     <Property Name="sonar.host.url">http://localhost:9000</Property>
-    <Property Name="sonar.cs.vscoveragexml.reportsPaths">coverage.xml</Property>
-    <Property Name="sonar.exclusions">**/Databases/**,**/Models/**,**/Constants/**,**/Exceptions/**,**/Menus/**,**/Program.cs,coverage.xml</Property>
   </LocalSettings>
   <ScannerOptsSettings />
   <AnalyzersSettings>

@@ -384,7 +384,6 @@ namespace HealthApp.Menus
                     {
                         break;
                     }
-
                     Console.WriteLine("Invalid Specialisation");
                 }
 
@@ -394,7 +393,11 @@ namespace HealthApp.Menus
 
                 foreach (var d in doctors)
                 {
-                    Console.WriteLine(d.GetDoctorDetailsSummary());
+                    Console.WriteLine($"\nID : {d.DoctorId}");
+                    Console.WriteLine($"Name : {d.FullName}");
+                    Console.WriteLine($"Specialisation: {d.Specialisation}");
+                    Console.WriteLine($"Experience : {d.YearsOfExperience}");
+                    Console.WriteLine($"Consultation Fees: {d.ConsultationFee}\n");
                 }
             }
             catch (DoctorNotFoundException ex)
