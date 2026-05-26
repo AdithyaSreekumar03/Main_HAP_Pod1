@@ -67,7 +67,7 @@ namespace HealthApp.Service.Impl
 
             if (result.Count == 0)
             {
-                throw new DoctorNotFoundException("No doctors found for this specialisation");
+                throw new DoctorNotFoundException($"No doctors found for the specialisation {specialisation}");
             }
 
             return result;

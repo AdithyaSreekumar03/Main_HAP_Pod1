@@ -200,7 +200,7 @@ namespace HealthApp.Service.Impl
   GetAppointmentsByPatient(
       int patientId)
         {
-            return _repo.GetAll()
+            var result = _repo.GetAll()
                 .Where(a =>
                     a.Patient.PatientId == patientId
                     &&
@@ -211,6 +211,12 @@ namespace HealthApp.Service.Impl
                 .OrderBy(a => a.ScheduledDate)
                 .ThenBy(a => a.TimeSlot)
                 .ToList();
+            if (result.Count == 0)
+            {
+                throw new AppointmentNotFoundException($"No Appointments found for patient with id {patientId}");
+            }
+
+            return result;
         }
         public List<Appointment> GetUpcomingAppointmentsByDoctor(
     int doctorId,

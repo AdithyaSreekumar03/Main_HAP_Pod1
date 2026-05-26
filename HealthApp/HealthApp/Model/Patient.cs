@@ -81,17 +81,17 @@ namespace HealthApp.Model
 
         public string GetProfileSummary()
         {
-            Console.WriteLine();
-            Console.WriteLine($"Patient Name: {FullName}");
-            Console.WriteLine($"Patient DOB: {DateOfBirth}");
-            Console.WriteLine($"Patient Gender: {Gender}");
-            Console.WriteLine($"Patient Age: {GetAge()}");
-            Console.WriteLine($"Patient PhoneNo: {PhoneNumber}");
-            Console.WriteLine($"Patient Email: {Email}");
-            Console.WriteLine($"Patient Insurence Id: {InsuranceId}");
-            Console.WriteLine();
+            return
+            $"Patient Id: {PatientId}\n"+
+            $"Patient Name: {FullName}\n"+
+            $"Patient DOB: {DateOfBirth}\n"+
+            $"Patient Gender: {Gender}\n"+
+            $"Patient Age: {GetAge()}\n"+
+            $"Patient PhoneNo: {PhoneNumber}\n"+
+            $"Patient Email: {Email}\n"+
+            $"Patient Insurence Id: {InsuranceId}\n";
 
-            return "Patient Registered Successfully";
+           
 
         }
     }
