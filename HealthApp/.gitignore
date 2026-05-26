@@ -14,3 +14,11 @@ obj/
 
 # Rider
 .idea/
+
+# SonarQube
+
+.sonar/
+
+.sonarqube/
+
+sonar-project.properties.user

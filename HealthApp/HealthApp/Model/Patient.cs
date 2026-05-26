@@ -17,7 +17,7 @@ namespace HealthApp.Model
 
         public string FullName { get; set; } = string.Empty;
 
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
         public GenderType Gender { get; set; }
 
@@ -36,12 +36,22 @@ namespace HealthApp.Model
         public bool IsValidEmail()
         {
             string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            return Regex.IsMatch(Email, pattern);
+            return Regex.IsMatch(
+       Email,
+       pattern,
+       RegexOptions.None,
+       TimeSpan.FromSeconds(1)
+   );
         }
         public bool IsValidPhoneNumber()
         {
             string pattern = @"^[0-9]{10}$";
-            return Regex.IsMatch(PhoneNumber, pattern);
+            return Regex.IsMatch(
+       PhoneNumber,
+       pattern,
+       RegexOptions.None,
+       TimeSpan.FromSeconds(1)
+   );
         }
         public bool IsValidName()
         {
@@ -49,14 +59,19 @@ namespace HealthApp.Model
                 return false;
 
             string pattern = @"^[a-zA-Z\s\.\-]{3,50}$";
-            return Regex.IsMatch(FullName, pattern);
+            return Regex.IsMatch(
+      FullName,
+      pattern,
+      RegexOptions.None,
+      TimeSpan.FromSeconds(1)
+  );
         }
 
         public int GetAge()
         {
             int age = DateTime.Today.Year - DateOfBirth.Year;
 
-            if (DateTime.Today < DateOfBirth.AddYears(age))
+            if (DateOnly.FromDateTime(DateTime.Today) < DateOfBirth.AddYears(age))
             {
                 age--;
             }

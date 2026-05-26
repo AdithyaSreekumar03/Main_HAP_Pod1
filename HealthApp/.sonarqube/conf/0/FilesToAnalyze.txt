@@ -9,11 +9,15 @@ C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentA
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentNotFoundException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorNotFoundException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorUnavailableException.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\InvalidDateRangeException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoDoctorsRegisteredException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoPatientsRegisteredException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PastDateException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PatientNotFoundException.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\RecordNotFoundException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\SlotAlreadyOverException.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Menus\DoctorMenu.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Menus\PatientMenu.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Model\Appointment.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Model\Doctor.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Model\HealthRecord.cs

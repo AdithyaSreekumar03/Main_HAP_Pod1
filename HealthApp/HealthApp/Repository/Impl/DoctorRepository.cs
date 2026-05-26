@@ -11,6 +11,7 @@ namespace HealthApp.Repository.Impl
     public class DoctorRepository : IDoctorRepository
     {
         private readonly DoctorDb _doctorDb;
+
         public DoctorRepository(DoctorDb doctorDb)
         {
             _doctorDb = doctorDb;
@@ -28,42 +29,21 @@ namespace HealthApp.Repository.Impl
 
         public Doctor? GetById(int id)
         {
+            return _doctorDb.Doctors
+                .FirstOrDefault(d => d.DoctorId == id);
+        }
+
+        public Doctor? ChangeDoctorStatus(int id, bool isActive)
+        {
             var doctor = _doctorDb.Doctors
                 .FirstOrDefault(d => d.DoctorId == id);
-            if (doctor == null)
-            {
-                throw new DoctorNotFoundException($"Doctor with id {id} not found");
 
+            if (doctor != null)
+            {
+                doctor.IsActive = isActive;
             }
+
             return doctor;
-        }
-        public string DeleteDoctorById(int id)
-        {
-
-            var doctor = _doctorDb.Doctors.FirstOrDefault(p => p.DoctorId == id);
-            if (doctor == null)
-            {
-                throw new Exceptions.DoctorNotFoundException($"Doctor with {id} not found");
-            }
-            _doctorDb.Doctors.Remove(doctor);
-            return $"Doctor with id {id} deleted successfully";
-        }
-        public string UpdateDoctorById(int id, Doctor doctor)
-        {
-            var doc = _doctorDb.Doctors.FirstOrDefault(dc => dc.DoctorId == id);
-            if (doc == null)
-            {
-                throw new DoctorNotFoundException($"Doctor with id {id} not found");
-            }
-            doc.FullName = doctor.FullName;
-            doc.Specialisation = doctor.Specialisation;
-            doc.DoctorPhoneNo = doctor.DoctorPhoneNo;
-            doc.DoctorEmail = doctor.DoctorEmail;
-            doc.YearsOfExperience = doctor.YearsOfExperience;
-            doc.ConsultationFee = doctor.ConsultationFee;
-            return $"Doctor with id {id} updated successfully";
-
-
         }
     }
 }

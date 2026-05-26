@@ -15,7 +15,7 @@ namespace HealthApp.Service.Interface
 
         List<Doctor> SearchBySpecialisation(
             SpecialisationType specialisation);
-        string DeleteDoctorById(int id);
-        string UpdateDoctorById(int id, Doctor doctor);
+
+        string ChangeDoctorStatus(int id, bool isActive);
     }
 }

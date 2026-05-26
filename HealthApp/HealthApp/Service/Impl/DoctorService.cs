@@ -1,4 +1,5 @@
-﻿using HealthApp.Exceptions;
+﻿using HealthApp.Database;
+using HealthApp.Exceptions;
 using HealthApp.Model;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
@@ -11,62 +12,67 @@ namespace HealthApp.Service.Impl
     public class DoctorService : IDoctorService
     {
         private readonly IDoctorRepository _repo;
-
         public DoctorService(IDoctorRepository repo)
         {
             _repo = repo;
-        }
 
+        }// ADD DOCTOR
         public void AddDoctor(Doctor doctor)
         {
-
-            if (_repo.GetAll().Any())
+            var doctors = _repo.GetAll();
+            if (doctors.Count != 0)
             {
-                doctor.DoctorId =
-                _repo.GetAll().Max(d => d.DoctorId) + 1;
-            }
-            else
+                doctor.DoctorId = doctors.Max(d => d.DoctorId) + 1;
+            }else
             {
                 doctor.DoctorId = 1;
-            }
-
+            }
             doctor.IsActive = true;
-
             _repo.Add(doctor);
-        }
 
+        }// GET ALL DOCTORS
         public List<Doctor> GetAllDoctors()
-        {
-            var result = _repo.GetAll();
-
-            if (result == null)
+        {
+            var doctors = _repo.GetAll();
+            if (doctors == null || doctors.Count == 0)
             {
-                throw new NoDoctorsRegisteredException("There are no Doctors registered");
+                throw new NoDoctorsRegisteredException("No doctors found.");
+            }
+        return doctors;
+    }
+
+
+    // GET BY ID
+    public Doctor? GetDoctorById(int id)
+    {
+    var doctor = _repo.GetById(id);
+    if (doctor == null)
+    {
+        throw new DoctorNotFoundException($"Doctor with id {id} not found");
+    }
+    return doctor;
+    }//  SEARCH BY SPECIALISATION
+    public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
+        {
+            var doctors = _repo.GetAll();
+            var result = doctors.Where(d => d.Specialisation == specialisation).ToList();
+            if (result.Count == 0)
+            {
+                throw new DoctorNotFoundException($"No doctors found with specialization {specialisation}");
             }
             return result;
-        }
 
-        public Doctor? GetDoctorById(int id)
+        }//  CHANGE STATUS
+    public string ChangeDoctorStatus(int id, bool isActive)
         {
-            return _repo.GetById(id);
-        }
+            var doctor = _repo.ChangeDoctorStatus(id, isActive);
 
-        public List<Doctor> SearchBySpecialisation(
-     SpecialisationType specialisation)
-        {
-            return _repo.GetAll()
-                .Where(d => d.Specialisation == specialisation)
-                .ToList();
-        }
-        public string DeleteDoctorById(int id)
-        {
-            return _repo.DeleteDoctorById(id);
-        }
-        public string UpdateDoctorById(int id, Doctor doctor)
-        {
+            if (doctor == null)
+            {
+                throw new DoctorNotFoundException($"Doctor with id {id} not found");
+            }
+       return isActive ? $"Doctor with id {id} is now Active" : $"Doctor with id {id} is now Inactive";
 
-
-            return _repo.UpdateDoctorById(id, doctor);
         }
     }
 }

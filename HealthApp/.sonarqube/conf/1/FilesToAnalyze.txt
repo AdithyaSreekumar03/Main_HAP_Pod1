@@ -1,6 +1,11 @@
-﻿C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\DoctorServiceTests.cs
-C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\PatientRepositoryTests.cs
-C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\PatientServiceTests.cs
+﻿C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\RepositoryTesting\AppointmentRepositoryTesting.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\RepositoryTesting\DoctorRepositoryTesting.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\RepositoryTesting\HealthRecordRepositoryTesting.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\RepositoryTesting\PatientRepositoryTesting.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\ServiceTesting\AppointmentServiceTesting.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\ServiceTesting\DoctorServiceTesting.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\ServiceTesting\HealthRecordServiceTesting.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthAppTests\ServiceTesting\PatientServiceTesting.cs
 C:\Users\310676\.nuget\packages\microsoft.net.test.sdk\17.14.1\build\net8.0\Microsoft.NET.Test.Sdk.Program.cs
 C:\Users\310676\.nuget\packages\microsoft.testplatform.testhost\17.14.1\build\net8.0\x64\testhost.exe
 C:\Users\310676\.nuget\packages\microsoft.testplatform.testhost\17.14.1\build\net8.0\x64\testhost.dll
