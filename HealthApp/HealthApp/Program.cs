@@ -1,6 +1,7 @@
 ﻿using HealthApp.Databases;
 using HealthApp.Exceptions;
 using HealthApp.Menus;
+using HealthApp.Models;
 using HealthApp.Repository.Impl;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Impl;
@@ -10,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 var services = new ServiceCollection();
+
 
 services.AddSingleton<PatientDb>();
 services.AddSingleton<DoctorDb>();
@@ -38,10 +40,14 @@ var doctorMenu = provider.GetRequiredService<DoctorMenu>();
 while (true)
 {
     Console.Clear();
-    Console.WriteLine("===== HEALTHCARE MANAGEMENT SYSTEM =====");
-    Console.WriteLine("1. Patient Menu");
-    Console.WriteLine("2. Doctor Menu");
-    Console.WriteLine("3. Exit");
+
+    Console.WriteLine("====== HEALTHCARE MANAGEMENT SYSTEM ======");
+    Console.WriteLine("| Option | Description                   |");
+    Console.WriteLine("|--------|-------------------------------|");
+    Console.WriteLine("| 1      | Patient Menu                  |");
+    Console.WriteLine("| 2      | Doctor Menu                   |");
+    Console.WriteLine("| 3      | Exit                          |");
+    Console.WriteLine("==========================================");
 
     Console.Write("\nChoose: ");
     string? choice = Console.ReadLine();

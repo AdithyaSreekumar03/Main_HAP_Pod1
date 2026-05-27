@@ -1,6 +1,6 @@
 ﻿using HealthApp.Databases;
 using HealthApp.Exceptions;
-using HealthApp.Model;
+using HealthApp.Models;
 using HealthApp.Repository.Interface;
 using System;
 using System.Collections.Generic;

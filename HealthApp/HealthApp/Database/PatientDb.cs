@@ -1,4 +1,4 @@
-﻿using HealthApp.Model;
+﻿using HealthApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,8 +7,7 @@ namespace HealthApp.Databases
 {
     public class PatientDb
     {
-        public List<Patient> Patients { get; set; } = new List<Patient>
-        {
+        public List<Patient> Patients { get; set; } = [
             new Patient
             {
                 PatientId = 1,
@@ -49,6 +48,6 @@ namespace HealthApp.Databases
                 Email = "shilpa.nair@gmail.com",
                 InsuranceId = "INS1008"
             }
-        };
+        ];
     }
 }

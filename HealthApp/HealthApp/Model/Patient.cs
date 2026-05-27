@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace HealthApp.Model
+namespace HealthApp.Models
 {
     public enum GenderType
     {
@@ -14,21 +14,13 @@ namespace HealthApp.Model
     public class Patient
     {
         public int PatientId { get; set; }
-
         public string FullName { get; set; } = string.Empty;
-
         public DateOnly DateOfBirth { get; set; }
-
         public GenderType Gender { get; set; }
-
         public string PhoneNumber { get; set; } = string.Empty;
-
         public string Email { get; set; } = string.Empty;
-
         public string InsuranceId { get; set; } = string.Empty;
-
         public DateTime CreatedDate { get; set; }
-
         public Patient()
         {
             CreatedDate = DateTime.Now;
@@ -36,21 +28,13 @@ namespace HealthApp.Model
         public bool IsValidEmail()
         {
             string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            return Regex.IsMatch(
-       Email,
-       pattern,
-       RegexOptions.None,
-       TimeSpan.FromSeconds(1)
+            return Regex.IsMatch(Email,pattern,RegexOptions.None,TimeSpan.FromSeconds(1)
    );
         }
         public bool IsValidPhoneNumber()
         {
             string pattern = @"^[0-9]{10}$";
-            return Regex.IsMatch(
-       PhoneNumber,
-       pattern,
-       RegexOptions.None,
-       TimeSpan.FromSeconds(1)
+            return Regex.IsMatch(PhoneNumber,pattern,RegexOptions.None,TimeSpan.FromSeconds(1)
    );
         }
         public bool IsValidName()
@@ -59,11 +43,7 @@ namespace HealthApp.Model
                 return false;
 
             string pattern = @"^[a-zA-Z\s\.\-]{3,50}$";
-            return Regex.IsMatch(
-      FullName,
-      pattern,
-      RegexOptions.None,
-      TimeSpan.FromSeconds(1)
+            return Regex.IsMatch(FullName,pattern,RegexOptions.None,TimeSpan.FromSeconds(1)
   );
         }
 
@@ -75,24 +55,19 @@ namespace HealthApp.Model
             {
                 age--;
             }
-
             return age;
         }
-
         public string GetProfileSummary()
         {
-            Console.WriteLine();
-            Console.WriteLine($"Patient Name: {FullName}");
-            Console.WriteLine($"Patient DOB: {DateOfBirth}");
-            Console.WriteLine($"Patient Gender: {Gender}");
-            Console.WriteLine($"Patient Age: {GetAge()}");
-            Console.WriteLine($"Patient PhoneNo: {PhoneNumber}");
-            Console.WriteLine($"Patient Email: {Email}");
-            Console.WriteLine($"Patient Insurence Id: {InsuranceId}");
-            Console.WriteLine();
-
-            return "Patient Registered Successfully";
-
+            return
+                $"Patient Id: {PatientId}\n" +
+                $"Patient Name: {FullName}\n" +
+                $"Patient DOB: {DateOfBirth}\n" +
+                $"Patient Gender: {Gender}\n" +
+                $"Patient Age: {GetAge()}\n" +
+                $"Patient PhoneNo: {PhoneNumber}\n" +
+                $"Patient Email: {Email}\n" +
+                $"Patient Insurence Id: {InsuranceId}\n";
         }
     }
 }

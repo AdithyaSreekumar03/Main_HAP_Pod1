@@ -1,5 +1,5 @@
 ﻿using HealthApp.Exceptions;
-using HealthApp.Model;
+using HealthApp.Models;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
@@ -11,7 +11,6 @@ namespace HealthApp.Service.Impl
     public class DoctorService : IDoctorService
     {
         private readonly IDoctorRepository _repo;
-
         public DoctorService(IDoctorRepository repo)
         {
             _repo = repo;
@@ -23,8 +22,7 @@ namespace HealthApp.Service.Impl
 
             if (doctors.Count > 0)
             {
-                doctor.DoctorId =
-                    doctors.Max(d => d.DoctorId) + 1;
+                doctor.DoctorId =doctors.Max(d => d.DoctorId) + 1;
             }
             else
             {
@@ -61,9 +59,7 @@ namespace HealthApp.Service.Impl
 
         public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
         {
-            var result = _repo.GetAll()
-                .Where(d => d.Specialisation == specialisation)
-                .ToList();
+            var result = _repo.GetAll().Where(d => d.Specialisation == specialisation).ToList();
 
             if (result.Count == 0)
             {
@@ -72,8 +68,6 @@ namespace HealthApp.Service.Impl
 
             return result;
         }
-
-
         public string ChangeDoctorStatus(int id, bool isActive)
         {
             var doctor = _repo.ChangeDoctorStatus(id, isActive);

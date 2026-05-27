@@ -1,5 +1,5 @@
 ﻿using HealthApp.Databases;
-using HealthApp.Model;
+using HealthApp.Models;
 using HealthApp.Repository.Impl;
 using System;
 using System.Collections.Generic;

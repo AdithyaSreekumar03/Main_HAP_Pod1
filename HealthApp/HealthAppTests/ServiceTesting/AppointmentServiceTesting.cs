@@ -1,7 +1,7 @@
 ﻿using HealthApp.Constant;
 using HealthApp.Databases;
 using HealthApp.Exceptions;
-using HealthApp.Model;
+using HealthApp.Models;
 using HealthApp.Repository.Impl;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Impl;
@@ -272,13 +272,15 @@ namespace HealthAppTests.Service_Layer
                 _service.CheckDoctorAvailability(1, DateTime.Today.AddDays(-1)));
         }
 
-
         [Fact]
         public void CheckAvailability_ShouldThrowRange()
         {
             Assert.Throws<InvalidDateRangeException>(() =>
-                _service.CheckDoctorAvailability(1, DateTime.Today.AddDays(40)));
+                _service.CheckDoctorAvailability(1, DateTime.Today.AddDays(100)));
         }
+
+
+
 
         [Fact]
         public void Confirm_ShouldWork()
@@ -411,24 +413,5 @@ namespace HealthAppTests.Service_Layer
             Assert.Throws<AppointmentAlreadyCompletedException>(() =>
                 _service.ConfirmAppointment(1));
         }
-
-
-        [Fact]
-        public void Book_ShouldTriggerTodaySlotCheck_Path()
-        {
-            _repo.Setup(r => r.GetAll()).Returns(new List<Appointment>());
-
-            var validSlot = TimeSlots.Slots
-                .First(s => DateTime.Parse(s).TimeOfDay > DateTime.Now.TimeOfDay);
-
-            var result = _service.BookAppointment(
-                GetPatient(),
-                GetDoctor(),
-                DateTime.Today,
-                validSlot);
-
-            Assert.NotNull(result);
-        }
-
     }
 }

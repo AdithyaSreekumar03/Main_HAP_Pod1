@@ -1,5 +1,5 @@
 ﻿using HealthApp.Exceptions;
-using HealthApp.Model;
+using HealthApp.Models;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
@@ -23,8 +23,7 @@ namespace HealthApp.Service.Impl
 
             if (patients.Count > 0)
             {
-                patient.PatientId =
-                    patients.Max(p => p.PatientId) + 1;
+                patient.PatientId =patients.Max(p => p.PatientId) + 1;
             }
             else
             {
@@ -40,8 +39,7 @@ namespace HealthApp.Service.Impl
 
             if (patient == null)
             {
-                throw new PatientNotFoundException(
-                    $"Patient with id {id} not found");
+                throw new PatientNotFoundException($"Patient with id {id} not found");
             }
 
             return patient;
@@ -52,8 +50,7 @@ namespace HealthApp.Service.Impl
 
             if (updatedPatient == null)
             {
-                throw new PatientNotFoundException(
-                    $"Patient with id {id} not found");
+                throw new PatientNotFoundException($"Patient with id {id} not found");
             }
 
             return $"Patient with id {id} updated successfully";
