@@ -225,8 +225,6 @@ namespace HealthApp.Menus
 
             try
             {
-
-
                 int patientId = ReadInt("Patient ID: ");
 
 
@@ -268,6 +266,11 @@ namespace HealthApp.Menus
                         Console.WriteLine(
                             "Appointment date cannot be in the past.");
                         continue;
+                    }
+
+                    if (date.Date > DateTime.Today.AddDays(90))
+                    {
+                        Console.WriteLine("Appointments can only be booked for next 90 days");
                     }
 
                     break;
