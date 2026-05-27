@@ -65,7 +65,10 @@ namespace HealthApp.Service.Impl
                 }
             }
 
+<<<<<<< HEAD
+=======
             // Same patient booking same doctor again on same date
+>>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
             bool sameDoctorBooked =
             _repo.GetAll().Any(a =>
                 a.Patient.PatientId == patient.PatientId
