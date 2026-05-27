@@ -250,10 +250,7 @@ namespace HealthApp.Menus
                             out date))
                     {
                         Console.WriteLine("Invalid date format. Use dd-MM-yyyy");
-<<<<<<< HEAD
                         continue;
-=======
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
                     }
 
 
@@ -324,36 +321,7 @@ namespace HealthApp.Menus
             {
                 Console.WriteLine($"Error:{ex.Message}");
             }
-<<<<<<< HEAD
   
-        }
-
-        private static string ReadSlot()
-        {
-            Console.WriteLine("\nAvailable Slots:");
-
-            for (int i = 0; i < TimeSlots.Slots.Count; i++)
-=======
-            catch (Exception ex)
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
-            {
-                Console.WriteLine(
-                    $"{i + 1}. {TimeSlots.Slots[i]}");
-            }
-
-            while (true)
-            {
-                Console.Write("Choose Slot: ");
-
-                if (int.TryParse(Console.ReadLine(), out int choice)
-                    && choice >= 1
-                    && choice <= TimeSlots.Slots.Count)
-                {
-                    return TimeSlots.Slots[choice - 1];
-                }
-
-                Console.WriteLine("Invalid Slot Selection");
-            }
         }
 
         private static string ReadSlot()
@@ -430,17 +398,7 @@ namespace HealthApp.Menus
                     Console.WriteLine($"Consultation Fees: {d.ConsultationFee}\n");
                 }
             }
-<<<<<<< HEAD
             catch (DoctorNotFoundException ex)
-=======
-
-            string specInput = Console.ReadLine()!;
-
-            if (!Enum.TryParse(
-            specInput,
-            true,
-            out SpecialisationType specialisation) || !Enum.IsDefined(specialisation))
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
             {
                 Console.WriteLine(ex.Message);
             }
@@ -477,11 +435,7 @@ namespace HealthApp.Menus
                 value => new Patient { FullName = value }.IsValidName(),
                 "Invalid Name");
 
-<<<<<<< HEAD
             patient.DateOfBirth = ReadDOB(); 
-=======
-            patient.DateOfBirth = ReadDOB(); // ✅ separated
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
 
             patient.Gender = ReadGender();
 
@@ -527,52 +481,6 @@ namespace HealthApp.Menus
 
                 return dob;
             }
-<<<<<<< HEAD
-=======
-        }
-
-        private static GenderType ReadGender()
-        {
-            while (true)
-            {
-                Console.Write("Gender (Male/Female/Other): ");
-
-                string? input = Console.ReadLine();
-
-                if (Enum.TryParse(input, true, out GenderType gender) &&
-                    Enum.IsDefined(gender))
-                {
-                    return gender;
-                }
-
-                Console.WriteLine("Invalid Gender.");
-            }
-        }
-
-
-        private static string ReadValidInput(
-            string message,
-            Func<string, bool> validator,
-            string errorMessage)
-        {
-            while (true)
-            {
-                Console.Write(message);
-
-                string? input = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    Console.WriteLine("Input cannot be empty.");
-                    continue;
-                }
-
-                if (validator(input))
-                    return input;
-
-                Console.WriteLine(errorMessage);
-            }
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
         }
 
         private static GenderType ReadGender()
@@ -617,7 +525,18 @@ namespace HealthApp.Menus
                 Console.WriteLine(errorMessage);
             }
         }
-        
+        private static int ReadInt(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                if (int.TryParse(Console.ReadLine(), out int value))
+                    return value;
+
+                Console.WriteLine("Invalid Id. Try again.");
+
+            }
+        }
 
     }
 }

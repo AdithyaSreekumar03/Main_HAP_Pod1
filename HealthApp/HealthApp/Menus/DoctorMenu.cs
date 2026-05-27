@@ -43,12 +43,11 @@ namespace HealthApp.Menus
         {
 
             while (true)
-                 
+
             {
 
                 Console.Clear();
 
-<<<<<<< HEAD
                 Console.WriteLine(" ============= DOCTOR MENU =============");
                 Console.WriteLine("| Option | Description                  |");
                 Console.WriteLine("|--------|------------------------------|");
@@ -62,28 +61,6 @@ namespace HealthApp.Menus
                 Console.WriteLine("| 8      | View Patient Health Record   |");
                 Console.WriteLine("| 0      | Exit to Main Menu            |");
                 Console.WriteLine(" =======================================");
-=======
-                Console.WriteLine("===== DOCTOR MENU =====");
-
-                Console.WriteLine("1. Add Doctor");
-
-                Console.WriteLine("2. Make Active / Inactive");
-
-                Console.WriteLine("3. View Pending Appointments");
-
-                Console.WriteLine("4. Confirm the Appointment");
-
-                Console.WriteLine("5. Cancel the Appointment");
-
-                Console.WriteLine("6. View Upcoming Appointments");
-
-                Console.WriteLine("7. Add Health Record");
-
-                Console.WriteLine("8. View Patient Health Record");
-
-                Console.WriteLine("0. Exit to Main Menu");
-
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
                 Console.Write("\nChoose: ");
 
                 var choice = Console.ReadLine();
@@ -186,13 +163,7 @@ namespace HealthApp.Menus
 
                     Specialisation = ReadSpecialisation(),
 
-<<<<<<< HEAD
                     YearsOfExperience = ReadInt("Experience: ", "Invalid Experience", 0, 50),
-=======
-                    YearsOfExperience = ReadInt(
-                        "Experience: ",
-                        "Invalid Experience"),
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
 
                     DoctorEmail = ReadValidInput(
                         "Email: ",
@@ -243,28 +214,17 @@ namespace HealthApp.Menus
             }
         }
 
-<<<<<<< HEAD
         private static int ReadInt(string message, string errorMessage, int min = int.MinValue, int max = int.MaxValue)
-=======
-        private static int ReadInt(string message, string errorMessage)
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
         {
             while (true)
             {
                 Console.Write(message);
 
-<<<<<<< HEAD
                 if (int.TryParse(Console.ReadLine(), out int value)
                     && value >= min && value <= max)
                     return value;
 
                 Console.WriteLine($"{errorMessage}. Enter value between {min} and {max}");
-=======
-                if (int.TryParse(Console.ReadLine(), out int value))
-                    return value;
-
-                Console.WriteLine(errorMessage);
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
             }
         }
 
@@ -309,7 +269,6 @@ namespace HealthApp.Menus
         {
             try
             {
-<<<<<<< HEAD
                 int id;
 
 
@@ -329,26 +288,6 @@ namespace HealthApp.Menus
                         "Cannot add health record for a cancelled appointment.");
                     return;
                 }
-=======
-                Console.Write("Appointment ID: ");
-                if (!int.TryParse(Console.ReadLine(), out int id))
-                {
-                    Console.WriteLine(InvalidIdPrompt);
-                    return;
-                }
-                var appointment = _appointmentService.GetAppointmentById(id);
-                if (appointment == null)
-                {
-                    Console.WriteLine("Appointment not found");
-                    return;
-                }
-                if (appointment.Status == AppointmentStatus.Cancelled)
-                {
-                    Console.WriteLine(
-                        "Cannot add health record for a cancelled appointment.");
-                    return;
-                }
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
                 if (appointment.Status == AppointmentStatus.Pending)
                 {
                     Console.WriteLine(
@@ -367,7 +306,6 @@ namespace HealthApp.Menus
                     Doctor = appointment.Doctor,
                     VisitDate = DateTime.Now
                 };
-<<<<<<< HEAD
 
                 record.Diagnosis = ReadValidInput(
                     "Diagnosis: ",
@@ -387,20 +325,10 @@ namespace HealthApp.Menus
                     "Notes cannot be empty."
                 );
 
-=======
-                Console.Write("Diagnosis: ");
-                record.Diagnosis = Console.ReadLine()!;
-                Console.Write("Prescription: ");
-                record.Prescription = Console.ReadLine()!;
-                Console.Write("Notes: ");
-                record.Notes = Console.ReadLine()!;
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
                 _healthService.AddRecord(record);
-                appointment.Complete();
-<<<<<<< HEAD
 
-=======
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
+                appointment.Complete();
+
                 Console.WriteLine("Health Record Added");
             }
             catch (Exception ex)
@@ -415,7 +343,6 @@ namespace HealthApp.Menus
         {
             try
             {
-<<<<<<< HEAD
                 int id;
                 while (true)
                 {
@@ -427,15 +354,10 @@ namespace HealthApp.Menus
                         break;
 
                     Console.WriteLine(InvalidIdPrompt);
-=======
-                Console.Write("Appointment ID: ");
-                if (!int.TryParse(Console.ReadLine(), out int id))
-                {
-                    Console.WriteLine(InvalidIdPrompt);
-                    return;
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
                 }
+
                 _appointmentService.ConfirmAppointment(id);
+
                 Console.WriteLine("Appointment Confirmed ");
             }
             catch (AppointmentNotFoundException ex)
@@ -454,6 +376,7 @@ namespace HealthApp.Menus
             {
                 Console.WriteLine(ex.Message);
             }
+
         }
 
         private void ChangeDoctorStatus()
@@ -467,11 +390,7 @@ namespace HealthApp.Menus
                     Console.WriteLine(InvalidIdPrompt);
                     return;
                 }
-<<<<<<< HEAD
                 Console.Write("Active - (yes/no): ");
-=======
-                Console.Write("Active? (yes/no): ");
->>>>>>> dac60939d2c38f01977edc5d4e79df730b30c9d5
                 string input = Console.ReadLine()!.ToLower();
                 bool isActive = input == "yes";
                 string result = _doctorService.ChangeDoctorStatus(id, isActive);
