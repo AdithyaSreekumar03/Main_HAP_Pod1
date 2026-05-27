@@ -23,6 +23,7 @@ namespace HealthApp.Model
         public string GetSummary()
         {
             return
+                $"Health Record ID: {RecordId}\n" +
                 $"Date: {VisitDate}\n" +
                 $"Patient: {Patient.FullName}\n" +
                 $"Doctor: Dr. {Doctor.FullName}\n" +

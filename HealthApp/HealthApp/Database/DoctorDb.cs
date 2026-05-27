@@ -12,61 +12,46 @@ namespace HealthApp.Database
             new Doctor
             {
                 DoctorId = 1,
-                FullName = "Rajesh Kumar",
+                FullName = "Vimal Rajan",
                 Specialisation = SpecialisationType.Cardiologist,
                 DoctorPhoneNo = "9876543210",
-                DoctorEmail = "rajesh.kumar@gmail.com",
+                DoctorEmail = "vimal@gmail.com",
                 YearsOfExperience = 12,
-                ConsultationFee = 800,
+                ConsultationFee = 800m,
                 IsActive = true
             },
-
             new Doctor
             {
                 DoctorId = 2,
-                FullName = "Priya Sharma",
+                FullName = "Rahul Sharma",
                 Specialisation = SpecialisationType.Dermatologist,
                 DoctorPhoneNo = "9123456780",
-                DoctorEmail = "priya.sharma@gmail.com",
+                DoctorEmail = "rahul@gmail.com",
                 YearsOfExperience = 8,
-                ConsultationFee = 600,
-                IsActive = true
+                ConsultationFee = 600m,
+                IsActive = false
             },
-
             new Doctor
             {
                 DoctorId = 3,
-                FullName = "Arun Reddy",
-                Specialisation = SpecialisationType.Neurologist,
+                FullName = "Kumaravel Pandian",
+                Specialisation = SpecialisationType.Orthopedic,
                 DoctorPhoneNo = "9988776655",
-                DoctorEmail = "arun.reddy@gmail.com",
+                DoctorEmail = "kumar@gmail.com",
                 YearsOfExperience = 15,
-                ConsultationFee = 1200,
+                ConsultationFee = 1000m,
                 IsActive = true
             },
-
             new Doctor
             {
                 DoctorId = 4,
-                FullName = "Sneha Patel",
+                FullName = "Muthu Krishnan",
                 Specialisation = SpecialisationType.Pediatrician,
                 DoctorPhoneNo = "9012345678",
-                DoctorEmail = "sneha.patel@gmail.com",
+                DoctorEmail = "muthu@gmail.com",
                 YearsOfExperience = 6,
-                ConsultationFee = 500,
+                ConsultationFee = 500m,
                 IsActive = true
-            },
-
-            new Doctor
-            {
-                DoctorId = 5,
-                FullName = "John Alex",
-                Specialisation = SpecialisationType.Orthopedic,
-                DoctorPhoneNo = "9090909090",
-                DoctorEmail = "john.alex@gmail.com",
-                YearsOfExperience = 10,
-                ConsultationFee = 900,
-                IsActive = false
             }
         };
     }

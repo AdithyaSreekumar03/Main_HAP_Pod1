@@ -5,6 +5,7 @@ using HealthApp.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
 
 namespace HealthApp.Menus
@@ -33,16 +34,21 @@ namespace HealthApp.Menus
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("===== PATIENT MENU =====");
 
-                Console.WriteLine("1. Register Patient");
-                Console.WriteLine("2. Update Profile");
-                Console.WriteLine("3. Search Doctors by Specialization");
-                Console.WriteLine("4. Book Appointment");
-                Console.WriteLine("5. Cancel Appointment");
-                Console.WriteLine("6. View Upcoming Appointments");
-                Console.WriteLine("7. View Health History");
-                Console.WriteLine("0. Exit to Main Menu");
+                Console.WriteLine(" ================ PATIENT MENU =================");
+                Console.WriteLine("| Option | Description                          |");
+                Console.WriteLine("|--------|--------------------------------------|");
+                Console.WriteLine("| 1      | Register Patient                     |");
+                Console.WriteLine("| 2      | Update Profile                       |");
+                Console.WriteLine("| 3      | Search Doctors by Specialization     |");
+                Console.WriteLine("| 4      | Book Appointment                     |");
+                Console.WriteLine("| 5      | Cancel Appointment                   |");
+                Console.WriteLine("| 6      | View Upcoming Appointments           |");
+                Console.WriteLine("| 7      | View Health History                  |");
+                Console.WriteLine("| 8      | Check Doctor Availability            |");
+                Console.WriteLine("| 0      | Exit to Main Menu                    |");
+                Console.WriteLine(" ===============================================");
+
 
                 Console.Write("\nChoose: ");
                 var choice = Console.ReadLine();
@@ -77,6 +83,10 @@ namespace HealthApp.Menus
                         ViewHealthHistory();
                         break;
 
+                    case "8":
+                        CheckDoctorAvailability();
+                        break;
+
                     case "0":
                         return;
 
@@ -107,7 +117,7 @@ namespace HealthApp.Menus
             }
         }
 
-        private void Pause()
+        private static void Pause()
         {
             Console.WriteLine("\nPress any key...");
             Console.ReadKey();
@@ -118,13 +128,11 @@ namespace HealthApp.Menus
         {
             try
             {
-                Console.Write("Patient ID: ");
-
-                int pId = int.Parse(Console.ReadLine()!);
+                int pId = ReadInt("Patient ID: ");
 
                 var records = _healthService.GetPatientRecords(pId);
 
-                if (!records.Any())
+                if (records.Count == 0)
                 {
                     Console.WriteLine("No health records found.");
                     return;
@@ -135,26 +143,27 @@ namespace HealthApp.Menus
                     Console.WriteLine(r.GetSummary());
                 }
             }
-            catch (Exception ex)
+            catch (RecordNotFoundException ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine(ex.Message);
             }
+
+
         }
 
         private void ViewAppointments()
         {
             try
             {
-                Console.Write("Patient ID: ");
 
-                int pid =
-                    int.Parse(Console.ReadLine()!);
+                int pid = ReadInt("Patient ID: ");
+
 
                 var appointments =
                     _appointmentService
                     .GetAppointmentsByPatient(pid);
 
-                if (!appointments.Any())
+                if (appointments.Count == 0)
                 {
                     Console.WriteLine(
                         "No upcoming appointments found.");
@@ -170,20 +179,21 @@ namespace HealthApp.Menus
                     }
                 }
             }
-            catch (Exception ex)
+            catch (AppointmentNotFoundException ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine(ex.Message);
             }
         }
+
+
 
         private void CancelAppointment()
         {
             try
             {
-                Console.Write("Appointment ID: ");
 
-                int appointmentId =
-                    int.Parse(Console.ReadLine()!);
+                int appointmentId = ReadInt("Appointment ID: ");
+
 
                 Console.Write("Reason: ");
 
@@ -197,11 +207,22 @@ namespace HealthApp.Menus
 
                 Console.WriteLine(
                     "Appointment Cancelled.");
+
             }
-            catch (Exception ex)
+            catch (AppointmentNotFoundException ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine(ex.Message);
             }
+            catch (AppointmentAlreadyCancelledException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (AppointmentAlreadyCompletedException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
         }
         private void BookAppointment()
         {
@@ -209,19 +230,21 @@ namespace HealthApp.Menus
 
             try
             {
-                Console.Write("Patient ID: ");
 
-                int patientId =
-                    int.Parse(Console.ReadLine()!);
+
+                int patientId = ReadInt("Patient ID: ");
+
 
                 var selectedPatient =
                     _patientService
                     .GetPatientById(patientId);
 
-                Console.Write("Doctor ID: ");
 
-                int doctorId =
-                    int.Parse(Console.ReadLine()!);
+                Console.WriteLine("\nSearch Doctors by Specialization: \n");
+                SearchDoctors();
+
+
+                int doctorId = ReadInt("Doctor ID: ");
 
                 var selectedDoctor =
                     _doctorService
@@ -236,14 +259,14 @@ namespace HealthApp.Menus
                     if (!DateTime.TryParseExact(
                             input,
                             "dd-MM-yyyy",
-                            null,
-                            System.Globalization.DateTimeStyles.None,
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
                             out date))
                     {
-                        Console.WriteLine(
-                            "Invalid date format. Use dd-MM-yyyy");
+                        Console.WriteLine("Invalid date format. Use dd-MM-yyyy");
                         continue;
                     }
+
 
                     if (date.Date < DateTime.Today)
                     {
@@ -251,9 +274,15 @@ namespace HealthApp.Menus
                             "Appointment date cannot be in the past.");
                         continue;
                     }
+                    if (date.Date > DateTime.Today.AddDays(30))
+                    {
+                        Console.WriteLine("Appointments can only be booked within next 30 days");
+                    }
 
                     break;
                 }
+
+
 
                 string slot = ReadSlot();
 
@@ -303,12 +332,9 @@ namespace HealthApp.Menus
             {
                 Console.WriteLine($"Error:{ex.Message}");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(
-                    $"Unexpected Error: {ex.Message}");
-            }
+
         }
+
         private static string ReadSlot()
         {
             Console.WriteLine("\nAvailable Slots:");
@@ -337,22 +363,37 @@ namespace HealthApp.Menus
         {
             try
             {
-                Console.WriteLine("Select Specialisation:");
+                SpecialisationType specialisation;
 
-                foreach (var item in Enum.GetValues<SpecialisationType>())
+                while (true)
                 {
-                    Console.WriteLine($"{(int)item}. {item}");
-                }
+                    Console.WriteLine("Select Specialisation:");
 
-                string specInput = Console.ReadLine()!;
+                    foreach (var item in Enum.GetValues<SpecialisationType>())
+                    {
+                        Console.WriteLine($"{(int)item}. {item}");
+                    }
 
-                if (!Enum.TryParse<SpecialisationType>(
+                    Console.Write("Choose: ");
+
+                    string specInput = Console.ReadLine()!;
+
+                    if (int.TryParse(specInput, out int value)
+                        && Enum.IsDefined(typeof(SpecialisationType), value))
+                    {
+                        specialisation = (SpecialisationType)value;
+                        break;
+                    }
+
+                    if (Enum.TryParse(
                         specInput,
                         true,
-                        out SpecialisationType specialisation))
-                {
+                        out specialisation)
+                        && Enum.IsDefined(specialisation))
+                    {
+                        break;
+                    }
                     Console.WriteLine("Invalid Specialisation");
-                    return;
                 }
 
                 var doctors =
@@ -361,14 +402,16 @@ namespace HealthApp.Menus
 
                 foreach (var d in doctors)
                 {
-                    Console.WriteLine(
-                        $"ID:{d.DoctorId} " +
-                        $"Dr.{d.FullName}");
+                    Console.WriteLine($"\nID : {d.DoctorId}");
+                    Console.WriteLine($"Name : {d.FullName}");
+                    Console.WriteLine($"Specialisation: {d.Specialisation}");
+                    Console.WriteLine($"Experience : {d.YearsOfExperience}");
+                    Console.WriteLine($"Consultation Fees: {d.ConsultationFee}\n");
                 }
             }
-            catch(DoctorNotFoundException ex) 
+            catch (DoctorNotFoundException ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -376,8 +419,8 @@ namespace HealthApp.Menus
         {
             try
             {
-                Console.Write("Enter Patient ID to Update: ");
-                int updateId = int.Parse(Console.ReadLine()!);
+
+                int updateId = ReadInt("Enter Patient ID to Update: ");
 
                 Patient updatedPatient = CollectPatientDetails();
 
@@ -395,29 +438,117 @@ namespace HealthApp.Menus
             }
         }
 
-        private Patient CollectPatientDetails()
+        private static Patient CollectPatientDetails()
         {
             Patient patient = new();
 
-            while (true)
+            patient.FullName = ReadValidInput(
+                "Name: ",
+                value => new Patient { FullName = value }.IsValidName(),
+                "Invalid Name");
+
+            patient.DateOfBirth = ReadDOB();
+
+            patient.Gender = ReadGender();
+
+            patient.PhoneNumber = ReadValidInput(
+                "Phone: ",
+                value => new Patient { PhoneNumber = value }.IsValidPhoneNumber(),
+                "Invalid Phone Number.");
+
+            patient.Email = ReadValidInput(
+                "Email: ",
+                value => new Patient { Email = value }.IsValidEmail(),
+                "Invalid Email.");
+
+            Console.Write("Insurance ID: ");
+            patient.InsuranceId = Console.ReadLine() ?? string.Empty;
+
+            return patient;
+        }
+        private void CheckDoctorAvailability()
+        {
+            try
             {
-                Console.Write("Name: ");
-                patient.FullName = Console.ReadLine()!;
+                Console.WriteLine("\n--- Check Doctor Availability ---\n");
 
-                if (patient.IsValidName()) break;
+                // Search doctor first
+                SearchDoctors();
 
-                Console.WriteLine("Invalid Name.");
+                int doctorId = ReadInt("Doctor ID: ");
+
+                // Validate doctor exists
+                var doctor = _doctorService.GetDoctorById(doctorId);
+                if (doctor == null)
+                {
+                    throw new DoctorNotFoundException(
+                        $"Doctor with id {doctorId} not found");
+                }
+
+
+                DateTime date;
+
+                while (true)
+                {
+                    Console.Write("Enter Date (dd-MM-yyyy): ");
+
+                    string input = Console.ReadLine()!;
+
+                    if (!DateTime.TryParseExact(
+                            input,
+                            "dd-MM-yyyy",
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out date))
+                    {
+                        Console.WriteLine("Invalid date format.");
+                        continue;
+                    }
+
+                    break;
+                }
+
+                var availableSlots =
+                    _appointmentService.CheckDoctorAvailability(
+                        doctorId,
+                        date);
+
+                Console.WriteLine($"\nAvailable Slots for Dr. {doctor.FullName} on {date:dd-MM-yyyy}\n");
+
+                foreach (var slot in availableSlots)
+                {
+                    Console.WriteLine(slot);
+                }
             }
-
+            catch (DoctorNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (PastDateException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (InvalidDateRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (SlotAlreadyOverException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        private static DateOnly ReadDOB()
+        {
             while (true)
             {
                 Console.Write("DOB (dd-MM-yyyy): ");
-                string dobInput = Console.ReadLine()!;
+
+                string? input = Console.ReadLine();
 
                 if (!DateOnly.TryParseExact(
-                        dobInput,
+                        input,
                         "dd-MM-yyyy",
-                        null,
+                        System.Globalization.CultureInfo.InvariantCulture,
                         System.Globalization.DateTimeStyles.None,
                         out DateOnly dob))
                 {
@@ -430,45 +561,64 @@ namespace HealthApp.Menus
                     Console.WriteLine("DOB cannot be future.");
                     continue;
                 }
-                patient.DateOfBirth = dob;
-                break;
+
+                return dob;
             }
+        }
 
-            Console.Write("Gender (Male/Female/Other): ");
-            string genderInput = Console.ReadLine()!;
-
-            if (!Enum.TryParse(genderInput, true, out GenderType gender))
-            {
-                Console.WriteLine("Invalid Gender. Defaulting to 'Other'");
-                gender = GenderType.Other;
-            }
-
-            patient.Gender = gender;
-
+        private static GenderType ReadGender()
+        {
             while (true)
             {
-                Console.Write("Phone: ");
-                patient.PhoneNumber = Console.ReadLine()!;
+                Console.Write("Gender (Male/Female/Other): ");
 
-                if (patient.IsValidPhoneNumber()) break;
+                string? input = Console.ReadLine();
 
-                Console.WriteLine("Invalid Phone Number.");
+                if (Enum.TryParse(input, true, out GenderType gender) &&
+                    Enum.IsDefined(gender))
+                {
+                    return gender;
+                }
+
+                Console.WriteLine("Invalid Gender.");
             }
+        }
 
+
+        private static string ReadValidInput(
+            string message,
+            Func<string, bool> validator,
+            string errorMessage)
+        {
             while (true)
             {
-                Console.Write("Email: ");
-                patient.Email = Console.ReadLine()!;
+                Console.Write(message);
 
-                if (patient.IsValidEmail()) break;
+                string? input = Console.ReadLine();
 
-                Console.WriteLine("Invalid Email.");
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Input cannot be empty.");
+                    continue;
+                }
+
+                if (validator(input))
+                    return input;
+
+                Console.WriteLine(errorMessage);
             }
+        }
+        private static int ReadInt(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                if (int.TryParse(Console.ReadLine(), out int value))
+                    return value;
 
-            Console.Write("Insurance ID: ");
-            patient.InsuranceId = Console.ReadLine()!;
+                Console.WriteLine("Invalid Id. Try again.");
 
-            return patient;
+            }
         }
 
     }

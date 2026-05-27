@@ -6,12 +6,16 @@ C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Database\PatientDb.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\ApplicationConflictException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentAlreadyCancelledException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentAlreadyCompletedException.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentAlreadyConfirmedException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\AppointmentNotFoundException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorNotFoundException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\DoctorUnavailableException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\InvalidDateRangeException.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\InvalidSlotException.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoAppointmentsFoundException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoDoctorsRegisteredException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NoPatientsRegisteredException.cs
+C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\NotValidSpecialisationException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PastDateException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\PatientNotFoundException.cs
 C:\Users\310676\VSCODE\Main_HAP_Pod1\HealthApp\HealthApp\Exceptions\RecordNotFoundException.cs

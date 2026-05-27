@@ -2,19 +2,20 @@
 using HealthApp.Model;
 using HealthApp.Repository.Impl;
 using System;
-using Xunit;
+using System.Collections.Generic;
+using System.Text;
 
 namespace HealthAppTests.RepositoryTesting
 {
-    public class HealthRecordRepositoryTesting
+    public class HealthRecordRepositoryTests
     {
         private readonly HealthRecordDb _db;
         private readonly HealthRecordRepository _repo;
 
-        public HealthRecordRepositoryTesting()
+        public HealthRecordRepositoryTests()
         {
             _db = new HealthRecordDb();
-            _db.Records.Clear(); //   IMPORTANT
+            _db.Records.Clear();
             _repo = new HealthRecordRepository(_db);
         }
 

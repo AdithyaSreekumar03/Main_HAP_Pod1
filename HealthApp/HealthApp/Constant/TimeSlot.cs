@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HealthApp.Constant
 {
-    public class TimeSlot
+    public static class TimeSlot
     {
         public static readonly List<string> Slots =
         [

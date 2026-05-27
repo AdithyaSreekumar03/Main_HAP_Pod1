@@ -169,18 +169,30 @@ namespace HealthApp.Service.Impl
             }
         }
 
-        public Appointment? GetAppointmentById(
-            int id)
+        public Appointment GetAppointmentById(int id)
         {
-            return _repo.GetById(id);
+            var appointment = _repo.GetById(id);
+
+            if (appointment == null)
+            {
+                throw new AppointmentNotFoundException(
+                    $"Appointment with id {id} not found");
+            }
+
+            return appointment;
         }
 
-        public List<Appointment>
-            GetAllAppointments()
+        public List<Appointment> GetAllAppointments()
         {
-            return _repo.GetAll();
-        }
+            var list = _repo.GetAll();
 
+            if (list == null || list.Count == 0)
+            {
+                throw new NoAppointmentsFoundException("No appointments found");
+            }
+
+            return list;
+        }
 
         public List<Appointment>
   GetAppointmentsByPatient(
@@ -199,20 +211,30 @@ namespace HealthApp.Service.Impl
                 .ToList();
         }
         public List<Appointment> GetUpcomingAppointmentsByDoctor(
-     int doctorId,
-     DateTime fromDate,
-     DateTime toDate)
+    int doctorId,
+    DateTime fromDate,
+    DateTime toDate)
         {
+            if (fromDate.Date < DateTime.Today)
+            {
+                throw new InvalidDateRangeException("From date cannot be in the past");
+            }
+
+            if (fromDate > toDate)
+            {
+                throw new InvalidDateRangeException("Invalid date range");
+            }
+
             var result = _repo.GetAll()
-    .Where(a =>
-        a.Doctor.DoctorId == doctorId
-        && a.Status == AppointmentStatus.Confirmed
-        && a.ScheduledDate.Date >= fromDate.Date
-        && a.ScheduledDate.Date <= toDate.Date
-        && a.ScheduledDate.Date >= DateTime.Today)
-    .OrderBy(a => a.ScheduledDate)
-    .ThenBy(a => a.TimeSlot)
-    .ToList();
+                .Where(a =>
+                    a.Doctor.DoctorId == doctorId
+                    && a.Status == AppointmentStatus.Confirmed
+                    && a.ScheduledDate.Date >= fromDate.Date
+                    && a.ScheduledDate.Date <= toDate.Date
+                    && a.ScheduledDate.Date >= DateTime.Today)
+                .OrderBy(a => a.ScheduledDate)
+                .ThenBy(a => a.TimeSlot)
+                .ToList();
 
             if (result.Count == 0)
             {
