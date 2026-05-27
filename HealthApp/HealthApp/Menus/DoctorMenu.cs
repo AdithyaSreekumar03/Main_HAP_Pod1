@@ -1,6 +1,6 @@
-﻿
-using HealthApp.Exceptions;
+﻿using HealthApp.Exceptions;
 using HealthApp.Model;
+
 using HealthApp.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -49,25 +49,21 @@ namespace HealthApp.Menus
 
                 Console.Clear();
 
-                Console.WriteLine("===== DOCTOR MENU =====");
 
-                Console.WriteLine("1. Add Doctor");
+                Console.WriteLine(" ============= DOCTOR MENU =============");
+                Console.WriteLine("| Option | Description                  |");
+                Console.WriteLine("|--------|------------------------------|");
+                Console.WriteLine("| 1      | Add Doctor                   |");
+                Console.WriteLine("| 2      | Set Active / Inactive        |");
+                Console.WriteLine("| 3      | View Pending Appointments    |");
+                Console.WriteLine("| 4      | Confirm Appointment          |");
+                Console.WriteLine("| 5      | Cancel Appointment           |");
+                Console.WriteLine("| 6      | View Upcoming Appointments   |");
+                Console.WriteLine("| 7      | Add Health Record            |");
+                Console.WriteLine("| 8      | View Patient Health Record   |");
+                Console.WriteLine("| 0      | Exit to Main Menu            |");
+                Console.WriteLine(" =======================================");
 
-                Console.WriteLine("2. Make Active / Inactive");
-
-                Console.WriteLine("3. View Pending Appointments");
-
-                Console.WriteLine("4. Confirm Appointment");
-
-                Console.WriteLine("5. Cancel Appointment");
-
-                Console.WriteLine("6. View Upcoming Appointments");
-
-                Console.WriteLine("7. Add Health Record");
-
-                Console.WriteLine("8. View Patient Health Record");
-
-                Console.WriteLine("0. Exit to Main Menu");
 
                 Console.Write("\nChoose: ");
 
@@ -140,15 +136,10 @@ namespace HealthApp.Menus
                         Console.WriteLine("Invalid Choice.");
 
                         break;
-
                 }
-
                 Pause();
-
             }
-
         }
-
         private void AddDoctor()
         {
             try
@@ -170,7 +161,7 @@ namespace HealthApp.Menus
 
                     YearsOfExperience = ReadInt(
                         "Experience: ",
-                        "Invalid Experience",0,50),
+                        "Invalid Experience", 0, 50),
 
                     DoctorEmail = ReadValidInput(
                         "Email: ",
@@ -228,10 +219,10 @@ namespace HealthApp.Menus
             {
                 Console.Write(message);
 
-                if (int.TryParse(Console.ReadLine(), out int value) && value>= min && value<=max)
+                if (int.TryParse(Console.ReadLine(), out int value) && value >= min && value <= max)
                     return value;
 
-                Console.WriteLine($"{errorMessage}. Enter value between {min} and {max}" );
+                Console.WriteLine($"{errorMessage}. Enter value between {min} and {max}");
             }
         }
 
@@ -272,24 +263,22 @@ namespace HealthApp.Menus
             }
         }
 
+
         private void AddHealthRecord()
         {
             try
             {
                 int id;
 
-                // Keep asking until valid appointment ID is entered
-                while (true)
-                {
-                    Console.Write("Appointment ID: ");
 
-                    string input = Console.ReadLine()!;
+                string input = ReadValidInput(
+                     "Appointment ID: ",
+                      s => int.TryParse(s, out _),
+                      "Invalid ID. Please enter a valid number."
+                );
 
-                    if (int.TryParse(input, out id))
-                        break;
+                id = int.Parse(input);
 
-                    Console.WriteLine(InvalidIdPrompt);
-                }
 
                 var appointment = _appointmentService.GetAppointmentById(id);
 
@@ -301,22 +290,19 @@ namespace HealthApp.Menus
 
                 if (appointment.Status == AppointmentStatus.Cancelled)
                 {
-                    Console.WriteLine(
-                        "Cannot add health record for a cancelled appointment.");
+                    Console.WriteLine("Cannot add health record for a cancelled appointment.");
                     return;
                 }
 
                 if (appointment.Status == AppointmentStatus.Pending)
                 {
-                    Console.WriteLine(
-                        "Appointment must be confirmed before adding health record.");
+                    Console.WriteLine("Appointment must be confirmed before adding health record.");
                     return;
                 }
 
                 if (appointment.Status == AppointmentStatus.Completed)
                 {
-                    Console.WriteLine(
-                        "Health record already added for this appointment.");
+                    Console.WriteLine("Health record already added for this appointment.");
                     return;
                 }
 
@@ -327,44 +313,23 @@ namespace HealthApp.Menus
                     VisitDate = DateTime.Now
                 };
 
-                // Diagnosis validation
-                while (true)
-                {
-                    Console.Write("Diagnosis: ");
+                record.Diagnosis = ReadValidInput(
+                    "Diagnosis: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Diagnosis cannot be empty."
+                );
 
-                    record.Diagnosis = Console.ReadLine()!;
+                record.Prescription = ReadValidInput(
+                    "Prescription: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Prescription cannot be empty."
+                );
 
-                    if (!string.IsNullOrWhiteSpace(record.Diagnosis))
-                        break;
-
-                    Console.WriteLine("Diagnosis cannot be empty.");
-                }
-
-                // Prescription validation
-                while (true)
-                {
-                    Console.Write("Prescription: ");
-
-                    record.Prescription = Console.ReadLine()!;
-
-                    if (!string.IsNullOrWhiteSpace(record.Prescription))
-                        break;
-
-                    Console.WriteLine("Prescription cannot be empty.");
-                }
-
-                // Notes validation
-                while (true)
-                {
-                    Console.Write("Notes: ");
-
-                    record.Notes = Console.ReadLine()!;
-
-                    if (!string.IsNullOrWhiteSpace(record.Notes))
-                        break;
-
-                    Console.WriteLine("Notes cannot be empty.");
-                }
+                record.Notes = ReadValidInput(
+                    "Notes: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Notes cannot be empty."
+                );
 
                 _healthService.AddRecord(record);
 
@@ -378,13 +343,12 @@ namespace HealthApp.Menus
             }
         }
 
+
         private void ConfirmAppointment()
         {
             try
             {
                 int id;
-
-                // Keep asking until valid appointment ID is entered
                 while (true)
                 {
                     Console.Write("Appointment ID: ");
@@ -424,8 +388,6 @@ namespace HealthApp.Menus
             try
             {
                 int id;
-
-                // Keep asking until valid doctor ID is entered
                 while (true)
                 {
                     Console.Write(DoctorIdPrompt);
@@ -440,7 +402,6 @@ namespace HealthApp.Menus
 
                 bool isActive;
 
-                // Keep asking until valid yes/no is entered
                 while (true)
                 {
                     Console.Write("Active? (yes/no): ");
@@ -479,8 +440,6 @@ namespace HealthApp.Menus
             try
             {
                 int id;
-
-                // Keep asking until valid patient ID is entered
                 while (true)
                 {
                     Console.Write("Patient ID: ");
@@ -512,7 +471,6 @@ namespace HealthApp.Menus
             {
                 int id;
 
-                // Keep asking until valid doctor ID is entered
                 while (true)
                 {
                     Console.Write(DoctorIdPrompt);
@@ -548,7 +506,6 @@ namespace HealthApp.Menus
             {
                 int id;
 
-                // Keep asking until valid doctor ID is entered
                 while (true)
                 {
                     Console.Write(DoctorIdPrompt);
@@ -582,7 +539,6 @@ namespace HealthApp.Menus
             {
                 int id;
 
-                // Keep asking until valid appointment ID is entered
                 while (true)
                 {
                     Console.Write("Appointment ID: ");
@@ -597,7 +553,6 @@ namespace HealthApp.Menus
 
                 string reason;
 
-                // Keep asking until valid reason is entered
                 while (true)
                 {
                     Console.Write("Reason: ");

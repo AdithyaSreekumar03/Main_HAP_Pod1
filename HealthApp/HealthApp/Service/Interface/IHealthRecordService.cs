@@ -12,8 +12,6 @@ namespace HealthApp.Service.Interface
         List<HealthRecord> GetPatientRecords(
             int patientId);
 
-        List<HealthRecord> GetHealthRecordsByDoctor(
-    int doctorId,
-    int patientId);
+        List<HealthRecord> GetHealthRecordsByDoctor(int doctorId, int patientId);
     }
 }
