@@ -45,6 +45,7 @@ namespace HealthApp.Menus
                 Console.WriteLine("| 5      | Cancel Appointment                   |");
                 Console.WriteLine("| 6      | View Upcoming Appointments           |");
                 Console.WriteLine("| 7      | View Health History                  |");
+                Console.WriteLine("| 8      | Check Doctor Availability            |");
                 Console.WriteLine("| 0      | Exit to Main Menu                    |");
                 Console.WriteLine(" ===============================================");
 
@@ -80,6 +81,10 @@ namespace HealthApp.Menus
 
                     case "7":
                         ViewHealthHistory();
+                        break;
+
+                    case "8":
+                        CheckDoctorAvailability();
                         break;
 
                     case "0":
@@ -225,6 +230,8 @@ namespace HealthApp.Menus
 
             try
             {
+
+
                 int patientId = ReadInt("Patient ID: ");
 
 
@@ -267,10 +274,9 @@ namespace HealthApp.Menus
                             "Appointment date cannot be in the past.");
                         continue;
                     }
-
-                    if (date.Date > DateTime.Today.AddDays(90))
+                    if (date.Date > DateTime.Today.AddDays(30))
                     {
-                        Console.WriteLine("Appointments can only be booked for next 90 days");
+                        Console.WriteLine("Appointments can only be booked within next 30 days");
                     }
 
                     break;
@@ -441,7 +447,7 @@ namespace HealthApp.Menus
                 value => new Patient { FullName = value }.IsValidName(),
                 "Invalid Name");
 
-            patient.DateOfBirth = ReadDOB(); 
+            patient.DateOfBirth = ReadDOB();
 
             patient.Gender = ReadGender();
 
@@ -459,6 +465,77 @@ namespace HealthApp.Menus
             patient.InsuranceId = Console.ReadLine() ?? string.Empty;
 
             return patient;
+        }
+        private void CheckDoctorAvailability()
+        {
+            try
+            {
+                Console.WriteLine("\n--- Check Doctor Availability ---\n");
+
+                // Search doctor first
+                SearchDoctors();
+
+                int doctorId = ReadInt("Doctor ID: ");
+
+                // Validate doctor exists
+                var doctor = _doctorService.GetDoctorById(doctorId);
+                if (doctor == null)
+                {
+                    throw new DoctorNotFoundException(
+                        $"Doctor with id {doctorId} not found");
+                }
+
+
+                DateTime date;
+
+                while (true)
+                {
+                    Console.Write("Enter Date (dd-MM-yyyy): ");
+
+                    string input = Console.ReadLine()!;
+
+                    if (!DateTime.TryParseExact(
+                            input,
+                            "dd-MM-yyyy",
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out date))
+                    {
+                        Console.WriteLine("Invalid date format.");
+                        continue;
+                    }
+
+                    break;
+                }
+
+                var availableSlots =
+                    _appointmentService.CheckDoctorAvailability(
+                        doctorId,
+                        date);
+
+                Console.WriteLine($"\nAvailable Slots for Dr. {doctor.FullName} on {date:dd-MM-yyyy}\n");
+
+                foreach (var slot in availableSlots)
+                {
+                    Console.WriteLine(slot);
+                }
+            }
+            catch (DoctorNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (PastDateException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (InvalidDateRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (SlotAlreadyOverException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         private static DateOnly ReadDOB()
         {
