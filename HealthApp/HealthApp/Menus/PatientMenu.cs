@@ -34,6 +34,7 @@ namespace HealthApp.Menus
             while (true)
             {
                 Console.Clear();
+
                 Console.WriteLine(" ================ PATIENT MENU =================");
                 Console.WriteLine("| Option | Description                          |");
                 Console.WriteLine("|--------|--------------------------------------|");
@@ -44,8 +45,11 @@ namespace HealthApp.Menus
                 Console.WriteLine("| 5      | Cancel Appointment                   |");
                 Console.WriteLine("| 6      | View Upcoming Appointments           |");
                 Console.WriteLine("| 7      | View Health History                  |");
+                Console.WriteLine("| 8      | Check Doctor Availability            |");
                 Console.WriteLine("| 0      | Exit to Main Menu                    |");
                 Console.WriteLine(" ===============================================");
+
+
                 Console.Write("\nChoose: ");
                 var choice = Console.ReadLine();
 
@@ -54,7 +58,6 @@ namespace HealthApp.Menus
                     case "1":
                         RegisterPatient();
                         break;
-
 
                     case "2":
                         UpdatePatient();
@@ -80,11 +83,15 @@ namespace HealthApp.Menus
                         ViewHealthHistory();
                         break;
 
+                    case "8":
+                        CheckDoctorAvailability();
+                        break;
+
                     case "0":
                         return;
 
                     default:
-                        Console.WriteLine("Invalid Choice Please try again.");
+                        Console.WriteLine("Invalid Choice. Please try again.");
                         break;
                 }
                 Pause();
@@ -121,9 +128,7 @@ namespace HealthApp.Menus
         {
             try
             {
-                Console.Write("Patient ID: ");
-
-                int pId = int.Parse(Console.ReadLine()!);
+                int pId = ReadInt("Patient ID: ");
 
                 var records = _healthService.GetPatientRecords(pId);
 
@@ -138,20 +143,21 @@ namespace HealthApp.Menus
                     Console.WriteLine(r.GetSummary());
                 }
             }
-            catch (Exception ex)
+            catch (NoHealthRecordAvailableException ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine(ex.Message);
             }
+
+
         }
 
         private void ViewAppointments()
         {
             try
             {
-                Console.Write("Patient ID: ");
 
-                int pid =
-                    int.Parse(Console.ReadLine()!);
+                int pid = ReadInt("Patient ID: ");
+
 
                 var appointments =
                     _appointmentService
@@ -173,20 +179,21 @@ namespace HealthApp.Menus
                     }
                 }
             }
-            catch (Exception ex)
+            catch (AppointmentNotFoundException ex)
             {
-                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine(ex.Message);
             }
         }
+
+
 
         private void CancelAppointment()
         {
             try
             {
-                Console.Write("Appointment ID: ");
 
-                int appointmentId =
-                    int.Parse(Console.ReadLine()!);
+                int appointmentId = ReadInt("Appointment ID: ");
+
 
                 Console.Write("Reason: ");
 
@@ -200,37 +207,44 @@ namespace HealthApp.Menus
 
                 Console.WriteLine(
                     "Appointment Cancelled.");
+
             }
             catch (AppointmentNotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
-
+            }
+            catch (AppointmentAlreadyCancelledException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (AppointmentAlreadyCompletedException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
 
 
-        } 
+        }
         private void BookAppointment()
         {
             DateTime date;
 
             try
             {
-                Console.Write("Patient ID: ");
 
-                int patientId =
-                    int.Parse(Console.ReadLine()!);
+
+                int patientId = ReadInt("Patient ID: ");
+
 
                 var selectedPatient =
                     _patientService
                     .GetPatientById(patientId);
 
+
                 Console.WriteLine("\nSearch Doctors by Specialization: \n");
                 SearchDoctors();
 
-                Console.Write("Doctor ID: ");
 
-                int doctorId =
-                    int.Parse(Console.ReadLine()!);
+                int doctorId = ReadInt("Doctor ID: ");
 
                 var selectedDoctor =
                     _doctorService
@@ -260,13 +274,10 @@ namespace HealthApp.Menus
                             "Appointment date cannot be in the past.");
                         continue;
                     }
-
-                    if (date.Date > DateTime.Today.AddDays(90))
+                    if (date.Date > DateTime.Today.AddDays(30))
                     {
-                        Console.WriteLine("Appointments can only be booked within next 90 days.");
-                        continue;
+                        Console.WriteLine("Appointments can only be booked within next 30 days");
                     }
-
 
                     break;
                 }
@@ -321,7 +332,7 @@ namespace HealthApp.Menus
             {
                 Console.WriteLine($"Error:{ex.Message}");
             }
-  
+
         }
 
         private static string ReadSlot()
@@ -403,12 +414,13 @@ namespace HealthApp.Menus
                 Console.WriteLine(ex.Message);
             }
         }
+
         private void UpdatePatient()
         {
             try
             {
-                Console.Write("Enter Patient ID to Update: ");
-                int updateId = int.Parse(Console.ReadLine()!);
+
+                int updateId = ReadInt("Enter Patient ID to Update: ");
 
                 Patient updatedPatient = CollectPatientDetails();
 
@@ -435,7 +447,7 @@ namespace HealthApp.Menus
                 value => new Patient { FullName = value }.IsValidName(),
                 "Invalid Name");
 
-            patient.DateOfBirth = ReadDOB(); 
+            patient.DateOfBirth = ReadDOB();
 
             patient.Gender = ReadGender();
 
@@ -453,6 +465,77 @@ namespace HealthApp.Menus
             patient.InsuranceId = Console.ReadLine() ?? string.Empty;
 
             return patient;
+        }
+        private void CheckDoctorAvailability()
+        {
+            try
+            {
+                Console.WriteLine("\n--- Check Doctor Availability ---\n");
+
+                // Search doctor first
+                SearchDoctors();
+
+                int doctorId = ReadInt("Doctor ID: ");
+
+                // Validate doctor exists
+                var doctor = _doctorService.GetDoctorById(doctorId);
+                if (doctor == null)
+                {
+                    throw new DoctorNotFoundException(
+                        $"Doctor with id {doctorId} not found");
+                }
+
+
+                DateTime date;
+
+                while (true)
+                {
+                    Console.Write("Enter Date (dd-MM-yyyy): ");
+
+                    string input = Console.ReadLine()!;
+
+                    if (!DateTime.TryParseExact(
+                            input,
+                            "dd-MM-yyyy",
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out date))
+                    {
+                        Console.WriteLine("Invalid date format.");
+                        continue;
+                    }
+
+                    break;
+                }
+
+                var availableSlots =
+                    _appointmentService.CheckDoctorAvailability(
+                        doctorId,
+                        date);
+
+                Console.WriteLine($"\nAvailable Slots for Dr. {doctor.FullName} on {date:dd-MM-yyyy}\n");
+
+                foreach (var slot in availableSlots)
+                {
+                    Console.WriteLine(slot);
+                }
+            }
+            catch (DoctorNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (PastDateException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (InvalidDateRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (SlotAlreadyOverException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         private static DateOnly ReadDOB()
         {
