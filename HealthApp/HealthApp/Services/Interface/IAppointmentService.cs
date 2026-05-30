@@ -1,6 +1,8 @@
 ﻿using HealthApp.Model;
+
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace HealthApp.Service.Interface
 {
@@ -17,19 +19,10 @@ namespace HealthApp.Service.Interface
             string reason);
 
         Appointment? GetAppointmentById(int id);
-
         List<Appointment> GetAllAppointments();
-
         List<Appointment> GetAppointmentsByPatient(int patientId);
-
-        List<string> CheckDoctorAvailability(
-            int doctorId,
-            DateTime date);
-
-        List<Appointment> GetUpcomingAppointmentsByDoctor(
-            int doctorId,
-            DateTime fromDate,
-            DateTime toDate);
+        List<string> CheckDoctorAvailability(int doctorId, DateTime date);
+        List<Appointment> GetUpcomingAppointmentsByDoctor(int doctorId, DateTime fromDate, DateTime toDate);
 
         List<Appointment> GetPendingAppointmentsByDoctor(int doctorId);
 

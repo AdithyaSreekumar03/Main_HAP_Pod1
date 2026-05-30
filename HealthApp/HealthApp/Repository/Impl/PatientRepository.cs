@@ -1,58 +1,56 @@
-﻿using HealthApp.Database;
+﻿using HealthApp.Databases;
+using HealthApp.Exceptions;
 using HealthApp.Model;
+
 using HealthApp.Repository.Interface;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Numerics;
+using System.Text;
 
 namespace HealthApp.Repository.Impl
 {
     public class PatientRepository : IPatientRepository
     {
-        private readonly PatientDb _db;
-
-        public PatientRepository(PatientDb db)
+        private readonly PatientDb _patientDb;
+        public PatientRepository(PatientDb patientDb)
         {
-            _db = db;
+            _patientDb = patientDb;
         }
-
         public void Add(Patient patient)
         {
-            _db.Patients.Add(patient);
+            _patientDb.Patients.Add(patient);
         }
 
         public List<Patient> GetAll()
         {
-            return _db.Patients;
+            return _patientDb.Patients;
         }
 
         public Patient? GetById(int id)
         {
-            return _db.Patients.FirstOrDefault(p => p.PatientId == id);
+            return _patientDb.Patients
+                             .FirstOrDefault(pa => pa.PatientId == id);
         }
 
-        public Patient? UpdatePatientById(int id, Patient updated)
+        public Patient? UpdatePatient(int id, Patient patient)
         {
-            var existing = _db.Patients.FirstOrDefault(p => p.PatientId == id);
+            var pat = _patientDb.Patients
+                                .FirstOrDefault(pa => pa.PatientId == id);
 
-            if (existing == null)
+            if (pat == null)
+            {
                 return null;
+            }
 
-            existing.FullName = updated.FullName;
-            existing.Email = updated.Email;
-            existing.PhoneNumber = updated.PhoneNumber;
+            pat.FullName = patient.FullName;
+            pat.DateOfBirth = patient.DateOfBirth;
+            pat.Gender = patient.Gender;
+            pat.PhoneNumber = patient.PhoneNumber;
+            pat.Email = patient.Email;
+            pat.InsuranceId = patient.InsuranceId;
 
-            return existing;
-        }
-
-        public Patient? DeletePatientById(int id)
-        {
-            var patient = _db.Patients.FirstOrDefault(p => p.PatientId == id);
-
-            if (patient == null)
-                return null;
-
-            _db.Patients.Remove(patient);
-            return patient;
+            return pat;
         }
     }
 }

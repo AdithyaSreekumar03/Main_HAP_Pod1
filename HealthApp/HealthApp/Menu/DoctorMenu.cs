@@ -1,15 +1,13 @@
 ﻿using HealthApp.Exceptions;
-
 using HealthApp.Model;
 
 using HealthApp.Service.Interface;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-using System.ComponentModel.DataAnnotations;
-
-namespace HealthApp.Menu
-
+namespace HealthApp.Menus
 {
-
     public class DoctorMenu
 
     {
@@ -20,7 +18,7 @@ namespace HealthApp.Menu
 
         private readonly IHealthRecordService _healthService;
 
-        
+        private const string DoctorIdPrompt = "Doctor ID: ";
         private const string InvalidIdPrompt = "Invalid ID";
 
         public DoctorMenu(
@@ -51,25 +49,21 @@ namespace HealthApp.Menu
 
                 Console.Clear();
 
-                Console.WriteLine("===== DOCTOR MENU =====");
 
-                Console.WriteLine("1. Add Doctor");
+                Console.WriteLine(" ============= DOCTOR MENU =============");
+                Console.WriteLine("| Option | Description                  |");
+                Console.WriteLine("|--------|------------------------------|");
+                Console.WriteLine("| 1      | Add Doctor                   |");
+                Console.WriteLine("| 2      | Set Active / Inactive        |");
+                Console.WriteLine("| 3      | View Pending Appointments    |");
+                Console.WriteLine("| 4      | Confirm Appointment          |");
+                Console.WriteLine("| 5      | Cancel Appointment           |");
+                Console.WriteLine("| 6      | View Upcoming Appointments   |");
+                Console.WriteLine("| 7      | Add Health Record            |");
+                Console.WriteLine("| 8      | View Patient Health Record   |");
+                Console.WriteLine("| 0      | Exit to Main Menu            |");
+                Console.WriteLine(" =======================================");
 
-                Console.WriteLine("2. Make Active / Inactive");
-
-                Console.WriteLine("3. View Pending Appointments");
-
-                Console.WriteLine("4. Confirm Appointment");
-
-                Console.WriteLine("5. Cancel Appointment");
-
-                Console.WriteLine("6. View Upcoming Appointments");
-
-                Console.WriteLine("7. Add Health Record");
-
-                Console.WriteLine("8. View Patient Health Record");
-
-                Console.WriteLine("0. Exit to Main Menu");
 
                 Console.Write("\nChoose: ");
 
@@ -142,15 +136,10 @@ namespace HealthApp.Menu
                         Console.WriteLine("Invalid Choice.");
 
                         break;
-
                 }
-
                 Pause();
-
             }
-
         }
-
         private void AddDoctor()
         {
             try
@@ -172,7 +161,7 @@ namespace HealthApp.Menu
 
                     YearsOfExperience = ReadInt(
                         "Experience: ",
-                        "Invalid Experience"),
+                        "Invalid Experience", 0, 50),
 
                     DoctorEmail = ReadValidInput(
                         "Email: ",
@@ -205,7 +194,6 @@ namespace HealthApp.Menu
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
-
         private static string ReadValidInput(
             string message,
             Func<string, bool> validator,
@@ -224,16 +212,17 @@ namespace HealthApp.Menu
             }
         }
 
-        private static int ReadInt(string message, string errorMessage)
+        private static int ReadInt(string message, string errorMessage, int min = int.MinValue, int max = int.MaxValue
+            )
         {
             while (true)
             {
                 Console.Write(message);
 
-                if (int.TryParse(Console.ReadLine(), out int value))
+                if (int.TryParse(Console.ReadLine(), out int value) && value >= min && value <= max)
                     return value;
 
-                Console.WriteLine(errorMessage);
+                Console.WriteLine($"{errorMessage}. Enter value between {min} and {max}");
             }
         }
 
@@ -276,397 +265,327 @@ namespace HealthApp.Menu
 
 
         private void AddHealthRecord()
-
         {
-
             try
-
             {
+                int id;
 
-                Console.Write("Appointment ID: ");
 
-                if (!int.TryParse(Console.ReadLine(), out int id))
+                string input = ReadValidInput(
+                     "Appointment ID: ",
+                      s => int.TryParse(s, out _),
+                      "Invalid ID. Please enter a valid number."
+                );
 
-                {
+                id = int.Parse(input);
 
-                    Console.WriteLine(InvalidIdPrompt);
-
-                    return;
-
-                }
 
                 var appointment = _appointmentService.GetAppointmentById(id);
 
                 if (appointment == null)
-
                 {
-
                     Console.WriteLine("Appointment not found");
-
                     return;
-
                 }
+
                 if (appointment.Status == AppointmentStatus.Cancelled)
                 {
-                    Console.WriteLine(
-                        "Cannot add health record for a cancelled appointment.");
+                    Console.WriteLine("Cannot add health record for a cancelled appointment.");
                     return;
                 }
 
                 if (appointment.Status == AppointmentStatus.Pending)
                 {
-                    Console.WriteLine(
-                        "Appointment must be confirmed before adding health record.");
+                    Console.WriteLine("Appointment must be confirmed before adding health record.");
                     return;
                 }
 
                 if (appointment.Status == AppointmentStatus.Completed)
                 {
-                    Console.WriteLine(
-                        "Health record already added for this appointment.");
+                    Console.WriteLine("Health record already added for this appointment.");
                     return;
                 }
 
                 HealthRecord record = new()
-
                 {
-
                     Patient = appointment.Patient,
-
                     Doctor = appointment.Doctor,
-
                     VisitDate = DateTime.Now
-
                 };
 
-                Console.Write("Diagnosis: ");
+                record.Diagnosis = ReadValidInput(
+                    "Diagnosis: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Diagnosis cannot be empty."
+                );
 
-                record.Diagnosis = Console.ReadLine()!;
+                record.Prescription = ReadValidInput(
+                    "Prescription: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Prescription cannot be empty."
+                );
 
-                Console.Write("Prescription: ");
-
-                record.Prescription = Console.ReadLine()!;
-
-                Console.Write("Notes: ");
-
-                record.Notes = Console.ReadLine()!;
+                record.Notes = ReadValidInput(
+                    "Notes: ",
+                    s => !string.IsNullOrWhiteSpace(s),
+                    "Notes cannot be empty."
+                );
 
                 _healthService.AddRecord(record);
 
                 appointment.Complete();
 
                 Console.WriteLine("Health Record Added");
-
             }
-
             catch (Exception ex)
-
             {
-
                 Console.WriteLine($"Error: {ex.Message}");
-
             }
-
         }
 
+
         private void ConfirmAppointment()
-
         {
-
             try
-
             {
-
-                Console.Write("Appointment ID: ");
-
-                if (!int.TryParse(Console.ReadLine(), out int id))
-
+                int id;
+                while (true)
                 {
+                    Console.Write("Appointment ID: ");
+
+                    string input = Console.ReadLine()!;
+
+                    if (int.TryParse(input, out id))
+                        break;
 
                     Console.WriteLine(InvalidIdPrompt);
-
-                    return;
-
                 }
 
                 _appointmentService.ConfirmAppointment(id);
 
                 Console.WriteLine("Appointment Confirmed ");
-
             }
-
             catch (AppointmentNotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
-
             catch (AppointmentAlreadyConfirmedException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
             catch (AppointmentAlreadyCancelledException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
             catch (AppointmentAlreadyCompletedException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void ChangeDoctorStatus()
-
         {
-
             try
-
             {
-
-                Console.Write("Doctor ID: ");
-
-                if (!int.TryParse(Console.ReadLine(), out int id))
-
+                int id;
+                while (true)
                 {
+                    Console.Write(DoctorIdPrompt);
+
+                    string doctorInput = Console.ReadLine()!;
+
+                    if (int.TryParse(doctorInput, out id))
+                        break;
 
                     Console.WriteLine(InvalidIdPrompt);
-
-                    return;
-
                 }
 
-                Console.Write("Active? (yes/no): ");
+                bool isActive;
 
-                string input = Console.ReadLine()!.ToLower();
+                while (true)
+                {
+                    Console.Write("Active? (yes/no): ");
 
-                bool isActive = input == "yes";
+                    string input = Console.ReadLine()!
+                        .Trim()
+                        .ToLower();
+
+                    if (input == "yes")
+                    {
+                        isActive = true;
+                        break;
+                    }
+
+                    if (input == "no")
+                    {
+                        isActive = false;
+                        break;
+                    }
+
+                    Console.WriteLine("Please enter only yes or no.");
+                }
 
                 string result = _doctorService.ChangeDoctorStatus(id, isActive);
 
                 Console.WriteLine(result);
-
             }
-
             catch (DoctorNotFoundException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void ViewPatientHealthRecord()
-
         {
-
             try
-
             {
-
-                Console.Write("Patient ID: ");
-
-                if (!int.TryParse(Console.ReadLine(), out int id))
-
+                int id;
+                while (true)
                 {
+                    Console.Write("Patient ID: ");
+
+                    string input = Console.ReadLine()!;
+
+                    if (int.TryParse(input, out id))
+                        break;
 
                     Console.WriteLine(InvalidIdPrompt);
-
-                    return;
-
                 }
 
                 var records = _healthService.GetPatientRecords(id);
 
                 foreach (var r in records)
-
                 {
-
                     Console.WriteLine(r.GetSummary());
-
                 }
-
             }
-
-            catch (Exception ex)
-
+            catch (NoHealthRecordAvailableException ex)
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void ViewUpcomingAppointments()
-
         {
-
             try
-
             {
+                int id;
 
-                Console.Write("Doctor ID: ");
-
-                if (!int.TryParse(Console.ReadLine(), out int id))
-
+                while (true)
                 {
+                    Console.Write(DoctorIdPrompt);
+
+                    string input = Console.ReadLine()!;
+
+                    if (int.TryParse(input, out id))
+                        break;
 
                     Console.WriteLine(InvalidIdPrompt);
-
-                    return;
-
                 }
 
                 var list = _appointmentService
-
                     .GetUpcomingAppointmentsByDoctor(
-
                         id,
-
                         DateTime.Today,
-
                         DateTime.Today.AddDays(30));
 
                 foreach (var a in list)
-
                 {
-
                     Console.WriteLine(a.GetDetails());
-
                 }
-
             }
-
             catch (Exception ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
 
         private void ViewPendingAppointments()
-
         {
-
             try
-
             {
+                int id;
 
-                Console.Write("Doctor ID: ");
-
-                if (!int.TryParse(Console.ReadLine(), out int id))
-
+                while (true)
                 {
+                    Console.Write(DoctorIdPrompt);
+
+                    string input = Console.ReadLine()!;
+
+                    if (int.TryParse(input, out id))
+                        break;
 
                     Console.WriteLine(InvalidIdPrompt);
-
-                    return;
-
                 }
 
                 var list = _appointmentService
-
                     .GetPendingAppointmentsByDoctor(id);
 
                 foreach (var a in list)
-
                 {
-
                     Console.WriteLine(a.GetDetails());
-
                 }
-
             }
-
             catch (AppointmentNotFoundException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
 
         }
 
         private void CancelAppointment()
-
         {
-
             try
-
             {
+                int id;
 
-                Console.Write("Appointment ID: ");
-
-                if (!int.TryParse(Console.ReadLine(), out int id))
-
+                while (true)
                 {
+                    Console.Write("Appointment ID: ");
+
+                    string input = Console.ReadLine()!;
+
+                    if (int.TryParse(input, out id))
+                        break;
 
                     Console.WriteLine(InvalidIdPrompt);
-
-                    return;
-
                 }
 
-                Console.Write("Reason: ");
+                string reason;
 
-                string reason = Console.ReadLine()!;
+                while (true)
+                {
+                    Console.Write("Reason: ");
+
+                    reason = Console.ReadLine()!;
+
+                    if (!string.IsNullOrWhiteSpace(reason))
+                        break;
+
+                    Console.WriteLine("Reason cannot be empty.");
+                }
 
                 _appointmentService.CancelAppointment(id, reason);
 
                 Console.WriteLine("Appointment Cancelled ");
-
             }
-
             catch (AppointmentAlreadyCancelledException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
             catch (AppointmentAlreadyCompletedException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
             catch (AppointmentNotFoundException ex)
-
             {
-
                 Console.WriteLine(ex.Message);
-
             }
-
         }
-
         private static void Pause()
-
         {
-
             Console.WriteLine("\nPress any key...");
-
             Console.ReadKey();
-
         }
-
     }
-
 }

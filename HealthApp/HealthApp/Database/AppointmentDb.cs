@@ -1,9 +1,10 @@
 ﻿using HealthApp.Model;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HealthApp.Database
+namespace HealthApp.Databases
 {
     public class AppointmentDb
     {

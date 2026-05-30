@@ -1,26 +1,28 @@
-﻿using HealthApp.Exceptions;
+﻿using HealthApp.Databases;
+using HealthApp.Exceptions;
 using HealthApp.Model;
+using HealthApp.Repository.Impl;
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Impl;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Xunit;
 
-namespace HealthApp.Tests
+namespace HealthAppTests.Service_Layer
 {
-    public class HealthRecordServiceTesting
+    public class HealthRecordServiceTests
     {
         private readonly Mock<IHealthRecordRepository> _mockRepo;
         private readonly HealthRecordService _service;
 
-        public HealthRecordServiceTesting()
+        public HealthRecordServiceTests()
         {
             _mockRepo = new Mock<IHealthRecordRepository>();
             _service = new HealthRecordService(_mockRepo.Object);
         }
 
-        // ✅ Helper
         private static HealthRecord GetRecord(int patientId = 1, int doctorId = 1)
         {
             return new HealthRecord
@@ -32,12 +34,10 @@ namespace HealthApp.Tests
             };
         }
 
-        // ✅ 1. ADD RECORD
         [Fact]
         public void AddRecord_ShouldAssignIdAndAdd()
         {
-            _mockRepo.Setup(r => r.GetAll())
-                     .Returns(new List<HealthRecord>());
+            _mockRepo.Setup(r => r.GetAll()).Returns(new List<HealthRecord>());
 
             var record = GetRecord();
 
@@ -47,16 +47,15 @@ namespace HealthApp.Tests
             _mockRepo.Verify(r => r.Add(record), Times.Once);
         }
 
-        // ✅ 2. GET PATIENT RECORDS (SUCCESS)
         [Fact]
         public void GetPatientRecords_ShouldReturnMatchingRecords()
         {
             var records = new List<HealthRecord>
-            {
-                GetRecord(1),
-                GetRecord(2),
-                GetRecord(1)
-            };
+        {
+            GetRecord(1),
+            GetRecord(2),
+            GetRecord(1)
+        };
 
             _mockRepo.Setup(r => r.GetAll()).Returns(records);
 
@@ -65,27 +64,25 @@ namespace HealthApp.Tests
             Assert.Equal(2, result.Count);
         }
 
-        // ✅ 3. GET PATIENT RECORDS (EXCEPTION)
         [Fact]
         public void GetPatientRecords_ShouldThrowException_WhenNoMatch()
         {
             _mockRepo.Setup(r => r.GetAll())
                      .Returns(new List<HealthRecord>());
 
-            Assert.Throws<RecordNotFoundException>(() =>
+            Assert.Throws<NoHealthRecordAvailableException>(() =>
                 _service.GetPatientRecords(1));
         }
 
-        // ✅ 4. GET RECORDS BY DOCTOR (SUCCESS)
         [Fact]
         public void GetHealthRecordsByDoctor_ShouldReturnFilteredRecords()
         {
             var records = new List<HealthRecord>
-            {
-                GetRecord(1, 1),
-                GetRecord(1, 2),
-                GetRecord(1, 1)
-            };
+        {
+            GetRecord(1, 1),
+            GetRecord(1, 2),
+            GetRecord(1, 1)
+        };
 
             _mockRepo.Setup(r => r.GetAll()).Returns(records);
 
@@ -94,7 +91,6 @@ namespace HealthApp.Tests
             Assert.Equal(2, result.Count);
         }
 
-        // ✅ 5. GET RECORDS BY DOCTOR (SORTING ✅ IMPORTANT)
         [Fact]
         public void GetHealthRecordsByDoctor_ShouldBeSortedDescending()
         {
@@ -113,18 +109,19 @@ namespace HealthApp.Tests
             var result = _service.GetHealthRecordsByDoctor(1, 1);
 
             Assert.Equal(3, result.Count);
+
             Assert.True(result[0].VisitDate >= result[1].VisitDate);
             Assert.True(result[1].VisitDate >= result[2].VisitDate);
         }
 
-        // ✅ 6. GET RECORDS BY DOCTOR (EXCEPTION)
+
         [Fact]
-        public void GetHealthRecordsByDoctor_ShouldThrowException_WhenNoMatch()
+        public void GetHealthRecordsByDoctor_ShouldThrowException_WhenNoRecordsFound()
         {
             _mockRepo.Setup(r => r.GetAll())
                      .Returns(new List<HealthRecord>());
 
-            Assert.Throws<RecordNotFoundException>(() =>
+            Assert.Throws<NoHealthRecordAvailableException>(() =>
                 _service.GetHealthRecordsByDoctor(1, 1));
         }
     }

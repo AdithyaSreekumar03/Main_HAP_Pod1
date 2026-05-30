@@ -36,6 +36,7 @@ namespace HealthApp.Model
         public string GetDoctorDetailsSummary()
         {
             Console.WriteLine();
+            Console.WriteLine($"Doctor Id: {DoctorId}");
             Console.WriteLine($"Doctor Name: {FullName}");
             Console.WriteLine($"Doctor Specialisation: {Specialisation}");
             Console.WriteLine($"Doctor Phone Number: {DoctorPhoneNo}");

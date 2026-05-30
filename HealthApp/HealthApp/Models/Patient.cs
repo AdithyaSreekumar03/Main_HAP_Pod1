@@ -82,6 +82,7 @@ namespace HealthApp.Model
         public string GetProfileSummary()
         {
             Console.WriteLine();
+            Console.WriteLine($"Patient ID: {PatientId}");
             Console.WriteLine($"Patient Name: {FullName}");
             Console.WriteLine($"Patient DOB: {DateOfBirth}");
             Console.WriteLine($"Patient Gender: {Gender}");

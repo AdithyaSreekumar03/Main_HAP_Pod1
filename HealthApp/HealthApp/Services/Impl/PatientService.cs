@@ -1,9 +1,11 @@
 ﻿using HealthApp.Exceptions;
 using HealthApp.Model;
+
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
 namespace HealthApp.Service.Impl
 {
@@ -16,77 +18,46 @@ namespace HealthApp.Service.Impl
             _repo = repo;
         }
 
-        // ✅ REGISTER
         public void RegisterPatient(Patient patient)
         {
             var patients = _repo.GetAll();
 
-            int newId;
-
-            if (patients.Any())
+            if (patients.Count > 0)
             {
-                newId = patients.Max(p => p.PatientId) + 1;
+                patient.PatientId =
+                    patients.Max(p => p.PatientId) + 1;
             }
             else
             {
-                newId = 1;
+                patient.PatientId = 1;
             }
-
-            patient.PatientId = newId;
 
             _repo.Add(patient);
         }
 
-        // ✅ GET BY ID
-        public Patient GetPatientById(int id)
+        public Patient? GetPatientById(int id)
         {
             var patient = _repo.GetById(id);
 
             if (patient == null)
             {
-                throw new PatientNotFoundException("Patient not found");
+                throw new PatientNotFoundException(
+                    $"Patient with id {id} not found");
             }
 
             return patient;
         }
-
-        // ✅ GET ALL
-        public List<Patient> GetAllPatients()
+        public string UpdatePatientById(int id, Patient patient)
         {
-            var list = _repo.GetAll();
+            var updatedPatient = _repo.UpdatePatient(id, patient);
 
-            if (!list.Any())
+            if (updatedPatient == null)
             {
-                throw new PatientNotFoundException("No patients found");
+                throw new PatientNotFoundException(
+                    $"Patient with id {id} not found");
             }
 
-            return list;
-        }
-
-        // ✅ UPDATE
-        public string UpdatePatientById(int id, Patient updated)
-        {
-            var result = _repo.UpdatePatientById(id, updated);
-
-            if (result == null)
-            {
-                throw new PatientNotFoundException("Patient not found");
-            }
-
-            return "Patient updated successfully";
-        }
-
-        // ✅ ✅ DELETE (FINAL FIX)
-        public string DeletePatientById(int id)
-        {
-            var result = _repo.DeletePatientById(id);
-
-            if (result == null)
-            {
-                throw new PatientNotFoundException("Patient not found");
-            }
-
-            return "Patient deleted successfully";
+            return $"Patient with id {id} updated successfully";
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using HealthApp.Exceptions;
 using HealthApp.Model;
+
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
 namespace HealthApp.Service.Impl
 {
@@ -16,14 +18,14 @@ namespace HealthApp.Service.Impl
             _repo = repo;
         }
 
-        // ✅ ADD DOCTOR
         public void AddDoctor(Doctor doctor)
         {
             var doctors = _repo.GetAll();
 
-            if (doctors.Count != 0)
+            if (doctors.Count > 0)
             {
-                doctor.DoctorId = doctors.Max(d => d.DoctorId) + 1;
+                doctor.DoctorId =
+                    doctors.Max(d => d.DoctorId) + 1;
             }
             else
             {
@@ -35,51 +37,44 @@ namespace HealthApp.Service.Impl
             _repo.Add(doctor);
         }
 
-        // ✅ GET ALL DOCTORS
         public List<Doctor> GetAllDoctors()
         {
-            var doctors = _repo.GetAll();
+            var result = _repo.GetAll();
 
-            if (doctors == null || doctors.Count == 0)
+            if (result.Count == 0)
             {
-                throw new NoDoctorsRegisteredException("No doctors found.");
+                throw new NoDoctorsRegisteredException("There are no Doctors registered");
             }
-
-            return doctors;
+            return result;
         }
 
-        // ✅ GET BY ID
         public Doctor? GetDoctorById(int id)
         {
-            var doctor = _repo.GetById(id);
 
+            var doctor = _repo.GetById(id);
             if (doctor == null)
             {
                 throw new DoctorNotFoundException($"Doctor with id {id} not found");
-            }
 
+            }
             return doctor;
         }
 
-        // ✅ SEARCH BY SPECIALISATION
         public List<Doctor> SearchBySpecialisation(SpecialisationType specialisation)
         {
-            var doctors = _repo.GetAll();
-
-            var result = doctors
+            var result = _repo.GetAll()
                 .Where(d => d.Specialisation == specialisation)
                 .ToList();
 
             if (result.Count == 0)
             {
-                throw new DoctorNotFoundException(
-                    $"No doctors found with specialization {specialisation}");
+                throw new DoctorNotFoundException("No doctors found for this specialisation");
             }
 
             return result;
         }
 
-        // ✅ CHANGE STATUS
+
         public string ChangeDoctorStatus(int id, bool isActive)
         {
             var doctor = _repo.ChangeDoctorStatus(id, isActive);

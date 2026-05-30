@@ -1,10 +1,12 @@
-﻿using HealthApp.Database;
+﻿using HealthApp.Databases;
 using HealthApp.Model;
 using HealthApp.Repository.Impl;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using Xunit;
 
-namespace HealthApp.Tests
+namespace HealthAppTests.Repository_Layer
 {
     public class PatientRepositoryTests
     {
@@ -14,15 +16,10 @@ namespace HealthApp.Tests
         public PatientRepositoryTests()
         {
             _db = new PatientDb();
-
-            // ✅ Ensure list is initialized properly
-            _db.Patients = new List<Patient>();
-
-            // ✅ Pass the SAME db instance to repo
+            _db.Patients.Clear();
             _repo = new PatientRepository(_db);
         }
 
-        // ✅ 1. ADD
         [Fact]
         public void Add_ShouldAddPatient()
         {
@@ -33,7 +30,6 @@ namespace HealthApp.Tests
             Assert.Single(_db.Patients);
         }
 
-        // ✅ 2. GET ALL (WITH DATA)
         [Fact]
         public void GetAll_ShouldReturnPatients()
         {
@@ -45,7 +41,6 @@ namespace HealthApp.Tests
             Assert.Equal(2, result.Count);
         }
 
-        // ✅ 3. GET ALL (EMPTY)
         [Fact]
         public void GetAll_ShouldReturnEmpty_WhenNoData()
         {
@@ -54,7 +49,6 @@ namespace HealthApp.Tests
             Assert.Empty(result);
         }
 
-        // ✅ 4. GET BY ID (FOUND)
         [Fact]
         public void GetById_ShouldReturnPatient()
         {
@@ -64,10 +58,9 @@ namespace HealthApp.Tests
             var result = _repo.GetById(1);
 
             Assert.NotNull(result);
-            Assert.Equal(1, result!.PatientId);
+            Assert.Equal(1, result.PatientId);
         }
 
-        // ✅ 5. GET BY ID (NOT FOUND)
         [Fact]
         public void GetById_ShouldReturnNull_WhenNotFound()
         {
@@ -76,15 +69,13 @@ namespace HealthApp.Tests
             Assert.Null(result);
         }
 
-        // ✅ 6. UPDATE (SUCCESS)
         [Fact]
         public void UpdatePatient_ShouldUpdatePatient()
         {
             var existing = new Patient
             {
                 PatientId = 1,
-                FullName = "Old Name",
-                Email = "old@email.com"
+                FullName = "Old Name"
             };
 
             _db.Patients.Add(existing);
@@ -95,18 +86,17 @@ namespace HealthApp.Tests
                 Email = "new@email.com"
             };
 
-            var result = _repo.UpdatePatientById(1, updated);
+            var result = _repo.UpdatePatient(1, updated);
 
             Assert.NotNull(result);
-            Assert.Equal("New Name", result!.FullName);
+            Assert.Equal("New Name", result.FullName);
             Assert.Equal("new@email.com", result.Email);
         }
 
-        // ✅ 7. UPDATE (NOT FOUND)
         [Fact]
         public void UpdatePatient_ShouldReturnNull_WhenNotFound()
         {
-            var result = _repo.UpdatePatientById(99, new Patient());
+            var result = _repo.UpdatePatient(99, new Patient());
 
             Assert.Null(result);
         }

@@ -1,20 +1,26 @@
 ﻿using HealthApp.Exceptions;
 using HealthApp.Model;
+
 using HealthApp.Repository.Interface;
 using HealthApp.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 namespace HealthApp.Service.Impl
 {
-    public class HealthRecordService : IHealthRecordService
+    public class HealthRecordService
+      : IHealthRecordService
     {
-        private readonly IHealthRecordRepository _repo;
+        private readonly IHealthRecordRepository
+            _repo;
 
-        public HealthRecordService(IHealthRecordRepository repo)
+        public HealthRecordService(
+            IHealthRecordRepository repo)
         {
             _repo = repo;
         }
+
         public void AddRecord(HealthRecord record)
         {
             record.RecordId =
@@ -22,27 +28,39 @@ namespace HealthApp.Service.Impl
 
             _repo.Add(record);
         }
-        public List<HealthRecord> GetPatientRecords(int patientId)
+
+        public List<HealthRecord>
+            GetPatientRecords(int patientId)
         {
-            var result = _repo.GetAll().Where(r =>
+            var result = _repo.GetAll()
+                .Where(r =>
                     r.Patient.PatientId ==
-                    patientId).ToList();
+                    patientId)
+                .ToList();
             if (result.Count == 0)
             {
-                throw new RecordNotFoundException($"There are no health records of the patient with id {patientId}");
+                throw new NoHealthRecordAvailableException($"There are no health records of the patient with id {patientId}");
             }
             return result;
         }
-        public List<HealthRecord> GetHealthRecordsByDoctor(int doctorId,
+
+        public List<HealthRecord>
+    GetHealthRecordsByDoctor(
+        int doctorId,
         int patientId)
         {
-            var result = _repo.GetAll().Where(r =>
-                    r.Doctor.DoctorId == doctorId &&
-                    r.Patient.PatientId == patientId).OrderByDescending(r => r.VisitDate).ToList();
+            var result = _repo.GetAll()
+                .Where(r =>
+                    r.Doctor.DoctorId == doctorId
+                    &&
+                    r.Patient.PatientId == patientId)
+                .OrderByDescending(r => r.VisitDate)
+                .ToList();
 
             if (result.Count == 0)
             {
-                throw new RecordNotFoundException($"There are no health records involving patient with id {patientId} and doctor with doctor id {doctorId}");
+
+                throw new NoHealthRecordAvailableException($"There are no health records involving patient with patient id {patientId} and doctor with doctor id {doctorId}");
 
             }
             return result;

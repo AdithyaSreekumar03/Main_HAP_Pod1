@@ -1,6 +1,7 @@
-﻿using HealthApp.Database;
+﻿using HealthApp.Constant;
+using HealthApp.Database;
+using HealthApp.Databases;
 using HealthApp.Exceptions;
-using HealthApp.Menu;
 using HealthApp.Menus;
 using HealthApp.Repository.Impl;
 using HealthApp.Repository.Interface;
@@ -9,7 +10,6 @@ using HealthApp.Service.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
-using HealthApp.Service.Impl;
 
 var services = new ServiceCollection();
 
@@ -33,11 +33,6 @@ services.AddTransient<DoctorMenu>();
 
 var provider = services.BuildServiceProvider();
 
-var patientService = provider.GetRequiredService<IPatientService>();
-var doctorService = provider.GetRequiredService<IDoctorService>();
-var appointmentService = provider.GetRequiredService<IAppointmentService>();
-var healthRecordService = provider.GetRequiredService<IHealthRecordService>();
-
 var patientMenu = provider.GetRequiredService<PatientMenu>();
 var doctorMenu = provider.GetRequiredService<DoctorMenu>();
 
@@ -45,10 +40,14 @@ var doctorMenu = provider.GetRequiredService<DoctorMenu>();
 while (true)
 {
     Console.Clear();
-    Console.WriteLine("===== HEALTHCARE MANAGEMENT SYSTEM =====");
-    Console.WriteLine("1. Patient Menu");
-    Console.WriteLine("2. Doctor Menu");
-    Console.WriteLine("3. Exit");
+
+    Console.WriteLine("====== HEALTHCARE MANAGEMENT SYSTEM ======");
+    Console.WriteLine("| Option | Description                   |");
+    Console.WriteLine("|--------|-------------------------------|");
+    Console.WriteLine("| 1      | Patient Menu                  |");
+    Console.WriteLine("| 2      | Doctor Menu                   |");
+    Console.WriteLine("| 3      | Exit                          |");
+    Console.WriteLine("==========================================");
 
     Console.Write("\nChoose: ");
     string? choice = Console.ReadLine();

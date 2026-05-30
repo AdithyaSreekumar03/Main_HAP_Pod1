@@ -1,16 +1,16 @@
 ﻿using HealthApp.Model;
 
-public interface IPatientRepository
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace HealthApp.Repository.Interface
 {
-    void Add(Patient patient);
-
-    List<Patient> GetAll();
-
-    Patient? GetById(int id);
-
-    Patient? UpdatePatientById(int id, Patient patient);
-
-    Patient? DeletePatientById(int id);
+    public interface IPatientRepository
+    {
+        void Add(Patient patient);
+        List<Patient> GetAll();
+        Patient? GetById(int id);
+        Patient? UpdatePatient(int id, Patient patient);
+    }
 }
-
-
